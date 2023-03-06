@@ -1,0 +1,23 @@
+describe ssp;
+
+insert into ssp
+  (SSPCodi, SSPNome)
+values
+  (1,'SSP-RJ');
+  
+Select * from ssp;  
+
+insert into ssp
+values
+  (2,'SSP-RS');
+  
+insert into ssp
+values
+  ('SSP-MG',3);  
+  -- errado precisa estar no ordem certa
+  
+insert into ssp
+  (SSPNome, SSPCodi)
+values
+  ('SSP-MG',3);
+  
