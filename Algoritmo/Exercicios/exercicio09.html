@@ -1,0 +1,35 @@
+<meta charset="utf-8">
+
+<!-- <script>
+
+let num
+
+ num = String(prompt("Digite um numero de 3 digitos: "));
+
+ document.write(num[2] + num[1] + num[0]);
+
+</script> -->
+
+ <!-- ------------------------------------------------- -->
+
+<!-- Algoritmo Prof -->
+
+ <script>
+    let valor, unidade
+    let dezena, centena
+    let invertido
+
+    valor = parseInt(prompt("Informe um valor de 3 digitos: "));
+
+    centena = parseInt(valor / 100);
+    unidade = valor % 10;
+    dezena = parseInt(valor % 100 / 10);
+
+    invertido = (unidade * 100) + (dezena * 10) + centena;
+
+    document.write("<h1>" + valor + "invertido = " + invertido+ "</h1>");
+
+ </script>
+
+
+

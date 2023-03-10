@@ -1,0 +1,14 @@
+<meta charset="utf-8s">
+
+<script>
+
+    let x, y
+
+    x = parseFloat(prompt("Digite o valor de x: "));
+
+    y = Math.sqrt(1 + Math.pow((Math.pow(x, 4) - 1) / (2 * x * x), 2)) - x * x /2;
+
+    document.write("<h1>y = " + y.toFixed(4) + "</h1>");
+    console.log("O valor de y é: " + y.toFixed(4));
+
+</script>
