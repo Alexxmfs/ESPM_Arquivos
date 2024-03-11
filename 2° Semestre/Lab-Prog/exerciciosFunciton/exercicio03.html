@@ -1,0 +1,27 @@
+<script>
+  function calcularTermo(i, n) {
+    if (i % 2 == 0) {
+      return i / (n - i + 1);
+    } else {
+      return (n - i + 1) / i;
+    }
+  }
+
+  function calcularExpressao(n) {
+    let resultado = 0;
+
+    for (let i = 1; i <= n; i++) {
+      resultado = resultado + calcularTermo(i, n);
+    }
+
+    return resultado;
+  }
+
+  function main() {
+    let n = 5;
+    let valorExpressao = calcularExpressao(n);
+    console.log("O valor da expressão para n = " + n + " é: " + valorExpressao);
+  }
+
+  main();
+</script>

@@ -1,0 +1,61 @@
+<meta charset="utf-8">
+
+<script>
+//   let qtdSalas;
+//   let totalAluno = 0;
+//   let alunoAcimaMedia = 0;
+//   let mediaSala = 0;
+//   let porcen;
+
+//   qtdSalas = parseInt(prompt("Digite a quantidade de salas: "));
+
+//   for (let i = 0; i < qtdSalas; i++) {
+//     let numAlunos = parseInt(prompt("Digite o número de alunos na sala "));
+//     totalAluno = totalAluno + numAlunos;
+
+//     for (let j = 1; j <= numAlunos; j++) {
+//       let notaAluno = parseInt(prompt("Digite a média final do alunos: "));
+//       mediaSala = mediaSala + notaAluno;
+
+//       if (notaAluno > mediaSala) {
+//         alunoAcimaMedia++;
+//       }
+//     }
+//   porcen = (alunoAcimaMedia / totalAluno) * 100;
+//   }
+
+
+
+//   console.log("Porcentagem de alunos acima da média: " + porcen.toFixed(2) + "%");
+
+
+
+//Prof
+
+let media;
+let qtdAluno, qtdSala;
+let mediaSala, porcentagem, acimaMedia;
+
+qtdSala = parseInt(prompt("Quantidade de salas: "));
+
+for(let i = 1; i <= qtdSala; i++){
+    qtdAluno = parseInt(prompt("Quantidade de alunos da sala " + i));
+    media = new Array(qtdAluno);
+    mediaSala = 0;
+    acimaMedia = 0;
+
+    for(let j = 0; j < qtdAluno; j++){
+        media[j] = parseInt(prompt("Média do aluno(a) " + (j + 1)));
+        mediaSala += media[j];
+    }
+    mediaSala /= qtdAluno;
+    for(let j = 0; j < qtdAluno; j++){
+        if(media[j] > mediaSala){
+            acimaMedia++
+        }
+    }
+    porcentagem = (mediaSala / media) * 100;
+    alert("Média =  " + porcentagem.toFixed(3) + "%");
+}
+
+</script>

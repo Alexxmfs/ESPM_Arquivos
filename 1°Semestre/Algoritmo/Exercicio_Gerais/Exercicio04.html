@@ -1,0 +1,28 @@
+<meta charset="utf-8" />
+
+<script>
+  let x;
+  let cos = 0;
+  let fat = 1;
+  let termo;
+  let exp = 0;
+  let sinal = 1;
+
+  termo = Number(prompt("Total de termos"));
+
+  x = Number(prompt("valor de x"));
+
+  for (let i = 0; i <= termo; i++) {
+    fat = 1;
+    for (let j = 1; j <= exp; j++) {
+      fat = fat * j;
+    }
+
+    cos = cos + Math.pow(x, exp) / fat * sinal;
+    exp = exp + 2 // exp += 2
+    sinal = sinal * -1;
+
+}
+
+    alert("cos(" + x + ") = " + cos.toFixed(4));
+</script>

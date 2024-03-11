@@ -1,0 +1,31 @@
+<meta charset="utf-8" />
+
+<script>
+    let nome, producaoAnoAtual, producaoAnoAnterior, diferenca, bonus;
+
+    nome = prompt("Digite o nome do empregado: ");
+
+    producaoAnoAnterior = parseInt(prompt("Digite a produção do ano anterior: "));
+    
+    producaoAnoAtual = parseInt(prompt("Digite a produção do ano atual: "));
+
+    diferenca = producaoAnoAtual - producaoAnoAnterior;
+
+    if(diferenca > 0){
+        if(diferenca <= 1000){
+            bonus = 25;
+            document.write(nome + " <Center><h2>ganhara um bonus de R$ " + bonus + "</h2></Center>");
+        } else if(diferenca <= 3000){
+            bonus = 50;
+            document.write(nome + " <Center><h2>ganhara um bonus de R$ " + bonus + "</h2></Center>");
+        } else if(diferenca <= 6000){
+            bonus = 100;
+            document.write(nome + " <Center><h2>ganhara um bonus de R$ " + bonus + "</h2></Center>");
+        } else {
+            bonus = 200;
+            document.write(nome + " <Center><h2>ganhara um bonus de R$ " + bonus + "</h2></Center>");
+        } 
+    } else { 
+        document.write (nome + " <Center><h2>não ganhará bonus esse ano</h2></Center>")
+    } 
+</script>

@@ -1,0 +1,23 @@
+<meta charset="utf-8"/>
+
+<script>
+
+    //Prof
+
+    let valor;
+
+    valor = parseInt(prompt("Informe um valor inteiro e positivo"));
+    if(valor <= 0){
+        alert("Valor inválido");
+    } else {
+        Divisor();
+    }
+
+    function Divisor(){
+            for(let cont = 1; cont <= valor; cont++) {
+               if(valor % cont == 0){
+                console.log(cont);
+                }
+            }
+        }
+</script>

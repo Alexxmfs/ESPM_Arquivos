@@ -1,0 +1,97 @@
+<script>
+    
+    // class Produto {
+    //   constructor(codigo, nome, preco) {
+    //     this.codigo = codigo;
+    //     this.nome = nome;
+    //     this.preco = preco;
+    //     this.baixas = [0, 0, 0, 0]; 
+    //   }
+    
+    //   registrarBaixa(semana, quantidade) {
+    //     this.baixas[semana - 1] += quantidade;
+    //   }
+    
+    //   calcularTotalVendido() {
+    //     return this.baixas.reduce((total, quantidade) => total + quantidade, 0);
+    //   }
+    // }
+    
+    // function gerarNumeroAleatorio() {
+    // return Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+    // }
+    
+    // let produtos = [];
+    // const nomesProdutos = ["coca-cola", "chocolate", "pipoca", "sorvete"];
+    
+    // for (let i = 0; i < nomesProdutos.length; i++) {
+    //   let codigo = gerarNumeroAleatorio();
+    //   let nome = nomesProdutos[i];
+    //   let preco = gerarNumeroAleatorio(1, 100);
+    //   let produto = new Produto(codigo, nome, preco);
+    
+    //   for (let semana = 1; semana <= 4; semana++) {
+    //     let quantidade = gerarNumeroAleatorio(0, 100);
+    //     produto.registrarBaixa(semana, quantidade);
+    //   }
+    
+    //   produtos.push(produto);
+    // }
+    
+    // let produtoMaisVendido = produtos[0];
+    // for (let produto of produtos) {
+    //   if (produto.calcularTotalVendido() > produtoMaisVendido.calcularTotalVendido()) {
+    //     produtoMaisVendido = produto;
+    //   }
+    // }
+    
+    // console.log("Produto mais vendido: " + produtoMaisVendido.nome);
+    // console.log("Quantidade vendida: " + produtoMaisVendido.calcularTotalVendido() + " unidades");
+
+
+    // Sellmini
+    // criaço do TAD (tipo abstrato de dados)
+    class Produto {
+        constructor(codigo, nome, preco, baixa){
+            this.codigo = codigo;
+            this.nome = nome;
+            this.preco = preco;
+            this.baixa = baixa;
+        }
+    }
+
+        //inserção de alguns podutos em 
+        let lista = [];
+        let nome, codigo, preco
+
+        // geração de 3 objetos do tipo Produto --> a
+        for(let i = 0; i < 3; i++){
+            codigo = Math.floor(Math.random() * 9000 + 1000);
+            nome = prompt("Produto: ");
+            preco = Number(prompt("Preço: "));
+            let baixa = []; // ou let baix = new array(4)
+            for(let j = 0; j < 4; j++){
+                baixa.push(Math.floor(Math.random() * 101));    
+            }
+            lista.push(new Produto(codigo, nome, preco, baixa));
+        }
+
+        // produto com a maior venda --> b
+        let aux, maior = 0;
+        let index = 0;
+        
+        for(let i = 0; i < lista.length; i++){
+            aux = 0;
+            for(let j = 0; j < lista[i].baixa.length; j++){
+                aux += lista[i].baixa[j];
+            }
+            if(aux > maior){
+                maior = aux;
+                index = i;
+            }
+        }
+
+        console.log("Produto mais vendido --> " + lista[index].nome);
+        console.log("Total de itens vendidos --> " + maior);
+    </script>
+    

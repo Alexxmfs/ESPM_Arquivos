@@ -1,0 +1,21 @@
+# docker compose up -d --build --force-recreate
+version: '3.8'
+name: espm
+
+services:
+
+  db:
+    container_name: db
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=espm
+      - POSTGRES_PASSWORD=espm
+      - POSTGRES_DB=espm
+    networks:
+      - private-network
+
+networks:
+  private-network:
+    driver: bridge

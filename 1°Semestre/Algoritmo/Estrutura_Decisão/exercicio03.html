@@ -1,0 +1,24 @@
+<script>
+    
+    let p1x, p2x, p1y, p2y;
+    let distancia1, distancia2;
+
+    p1x = parseInt(prompt("Coordenada x do primero ponto"));
+
+    p1y = parseInt(prompt("Coordenada y do primero ponto"));
+
+    p2x = parseInt(prompt("Coordenada x do primero ponto"));
+
+    p2y = parseInt(prompt("Coordenada y do primero ponto"));
+
+    distancia1 = Math.sqrt(p1x * p1x + p1y * p1y);
+
+    distancia2 = Math.sqrt(p2x * p2x + p2y * p2y);
+
+    if(distancia1 < distancia2) {
+        alert("O primeiro ponto esta mais proximo da origem")
+    } else {
+        alert("O segundo ponto esta mais proximo da origem");
+    }
+
+</script>

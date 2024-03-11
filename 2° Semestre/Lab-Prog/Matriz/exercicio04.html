@@ -1,0 +1,157 @@
+<!-- 4 Uma empresa de vendas conta com 5 vendedores em seu quadro de funcionários.
+Esses vendedores são responsáveis por divulgar e vender os produtos da empresa
+para comerciantes da região. Foi solicitado a você que implementasse um programa
+em JavaScript para emitir alguns relatórios (impressão no vídeo) sobre as vendas
+realizadas no segundo semestre de 2022. Inicialmente o seu programa deverá
+armazenar o nome de cada um dos vendedores e também o valor total das vendas
+de cada vendedor em cada mês do primeiro semestre. O seu programa deverá
+imprimir no vídeo as seguintes informações:
+a) Total de vendas de cada vendedor no segundo semestre de 2022.
+b) Total de vendas por mês.
+c) Nome do vendedor que teve o maior total de vendas.
+d) Nome do vendedor com o menor total de vendas. -->
+
+
+<script>
+
+    let mes = ["Janeiro",  "Fevereiro", "Março", "Abril", "Maio", "Junho"];
+    let nome = new Array(5);
+    let venda = new Array(nome.length);
+    let maiorVenda = 0;
+    let linhaMaiorVenda = 0;
+    let linhaMenorVenda = 0;
+    let menorVenda = Infinity;
+
+    // entrada de dados
+    for(let i = 0; i < nome.length; i++){
+        nome[i] = prompt("Nome do vendedor");
+        venda[i] = new Array(6);
+        for(let j = 0; j < venda[i].length; j++){
+            venda[i][j] = parseInt(Math.random() * 10);
+        }
+    }
+
+    console.table(venda);
+
+    // soma das vendas por vendedor --> item a
+    console.log("total de vendas por vendedor")
+    let soma;
+    for(let i = 0; i < venda.length; i++){
+        soma = 0;
+        for(let j = 0;  j < venda[i].length; j++){
+            soma += venda[i][j];
+        }
+        console.log(nome[i] + " --> R$" + soma.toFixed(2));
+    
+
+    // descobrir a maior venda
+    if(soma > maiorVenda){
+        maiorVenda = soma;
+        linhaMaiorVenda = i
+    }
+
+    if(soma < menorVenda){
+        menorVenda = soma;
+        linhaMenorVenda = i;
+    }
+}
+    // soma das vendas por mês --> item b
+    console.log("\ntotal de vendas por mês");
+    for(let j = 0; j < mes.length; j++){
+        soma = 0;
+        for(let i = 0; i < venda.length; i++){
+            soma = soma + venda[i][j];
+        }
+        console.log(mes[j] + "--> R$" + soma.toFixed(2));
+    }
+
+    // impressão do vendedor com a maior venda
+    console.log("\nVendedor com a maior venda -->" + nome[linhaMaiorVenda]);
+    console.log("\nVendedor com a menor venda -->" + nome[linhaMenorVenda]);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+// Definir um objeto para armazenar as informações dos vendedores
+const vendedores = [
+    { nome: "Vendedor 1", vendas: [1000, 1500, 2000, 2500, 1800, 2200] },
+    { nome: "Vendedor 2", vendas: [1200, 1700, 2100, 2600, 1900, 2300] },
+    { nome: "Vendedor 3", vendas: [1100, 1600, 1900, 2400, 1700, 2100] },
+    { nome: "Vendedor 4", vendas: [1300, 1800, 2200, 2700, 2000, 2400] },
+    { nome: "Vendedor 5", vendas: [1400, 1900, 2300, 2800, 2100, 2500] },
+];
+
+// Função para calcular o total de vendas de cada vendedor no segundo semestre
+function calcularTotalVendasSemestre(vendedor) {
+    return vendedor.vendas.reduce((total, venda) => total + venda, 0);
+}
+
+// Função para calcular o total de vendas por mês
+function calcularTotalVendasPorMes(mes) {
+    let total = 0;
+    for (const vendedor of vendedores) {
+        total += vendedor.vendas[mes - 1]; // O índice do array começa em 0
+    }
+    return total;
+}
+
+// Função para encontrar o vendedor com o maior total de vendas
+function encontrarVendedorComMaiorVendas() {
+    let maiorVendas = 0;
+    let nomeVendedor = "";
+    for (const vendedor of vendedores) {
+        const totalVendas = calcularTotalVendasSemestre(vendedor);
+        if (totalVendas > maiorVendas) {
+            maiorVendas = totalVendas;
+            nomeVendedor = vendedor.nome;
+        }
+    }
+    return nomeVendedor;
+}
+
+// Função para encontrar o vendedor com o menor total de vendas
+function encontrarVendedorComMenorVendas() {
+    let menorVendas = Infinity;
+    let nomeVendedor = "";
+    for (const vendedor of vendedores) {
+        const totalVendas = calcularTotalVendasSemestre(vendedor);
+        if (totalVendas < menorVendas) {
+            menorVendas = totalVendas;
+            nomeVendedor = vendedor.nome;
+        }
+    }
+    return nomeVendedor;
+}
+
+// Imprimir as informações solicitadas
+console.log("a) Total de vendas de cada vendedor no segundo semestre de 2022:");
+for (const vendedor of vendedores) {
+    const totalSemestre = calcularTotalVendasSemestre(vendedor);
+    console.log(`${vendedor.nome}: ${totalSemestre}`);
+}
+
+console.log("\nb) Total de vendas por mês:");
+for (let mes = 1; mes <= 6; mes++) {
+    const totalMensal = calcularTotalVendasPorMes(mes);
+    console.log(`Mês ${mes}: ${totalMensal}`);
+}
+
+console.log("\nc) Nome do vendedor que teve o maior total de vendas:");
+const vendedorMaiorVendas = encontrarVendedorComMaiorVendas();
+console.log(vendedorMaiorVendas);
+
+console.log("\nd) Nome do vendedor com o menor total de vendas:");
+const vendedorMenorVendas = encontrarVendedorComMenorVendas();
+console.log(vendedorMenorVendas); -->

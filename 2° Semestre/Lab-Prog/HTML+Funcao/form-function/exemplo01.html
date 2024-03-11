@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>HTML+JS</title>
+</head>
+<body>
+    <!-- <form> -->
+    <label for="nome">Nome</label>
+    <p></p>
+    <input type="text" id="nome" placeholder="Digite seu nome" />
+    <p></p>
+    <label for="password">Senha</label>
+    <p></p>
+    <input type="password" placeholder="Digite sua senha" />
+    <p></p>
+    <label for="nascimento">Data de Nascimento</label>
+    <p></p>
+    <input type="date" />
+    <p></p>
+    <!-- <input type="button">Clique Aqui -->
+    <p></p>
+    <button onclick='imprimir()'>Clique Aqui</button>
+    <p id="msg"></p>
+<!-- </form> -->
+    <script>
+        function imprimir(){
+            let nome = document.getElementById("nome").value;
+            let msg = document.getElementById("msg");
+            msg.innerHTML = "Bem Vindo(a) " + nome;
+        }
+    </script>
+</body>
+</html>

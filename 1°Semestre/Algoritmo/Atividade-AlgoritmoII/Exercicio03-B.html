@@ -1,0 +1,70 @@
+<meta charset="utf-8">
+
+<script>
+    // 3B)
+	let alunos = parseInt(prompt("Quantos alunos foram entrevistados"));
+	let x = new Array(alunos);
+	let s = new Array();
+
+	for (let i = 0; i < x.length; i++) {
+		x[i] = prompt("O aluno é a favor da estação de bike? (s ou n)");
+	}
+	for (let y = 0, i = 0; y <= x.length; ) {
+		if (x[i] == "s") {
+			s[y] = x[i];
+			i++;
+			y++;
+		} else {
+			y++;
+		}
+	}
+	let favor = (s.length * 100) / x.length;
+	let contra = ((x.length - s.length) * 100) / x.length;
+	document.write("<Center><h3>A porcentagem de alunos a favor das bicicletas são: " + favor + "</h3></Center>");
+	document.write("<Center><h3>A porcentagem de alunos contra das bicicletas são: " + contra + "</h3></Center>");
+
+
+
+
+
+
+    // let porcentAlunoAFavor;
+    // let porcentAlunoContra;
+    // let qtdAluno;
+    // let alunosAFavor = 0;
+    // let alunosContra = 0;
+    // let alunosAFavorArray = [];
+	// let alunosContraArray = [];
+    // let resposta;
+    // let totalAlunos;
+
+    // qtdAluno = parseInt(prompt("Digite a quantidade de alunos pesquisados:" ));
+
+	
+	// for (let i = 0; i < qtdAluno; i++) {
+
+	// 	 resposta = prompt("O aluno é contra ou a favor da criação da estação de bicicletas? (contra/favor)");
+
+	// 	if (resposta.toLowerCase() == "favor") {
+	// 		alunosAFavor++;
+	// 		alunosAFavorArray.push("Aluno" + i + 1);
+	// 	} else if (resposta.toLowerCase() == "contra") {
+	// 		alunosContra++;
+	// 		alunosContraArray.push("Aluno" + i + 1);
+	// 	}
+	// }
+
+    // totalAlunos = qtdAluno;
+
+    // porcentAlunoAFavor = (alunosAFavor / totalAlunos) * 100;
+
+    // porcentAlunoContra = (alunosContra / totalAlunos) * 100;
+
+	// document.write("Resultado da pesquisa: " + alunosAFavor + " aluno(s) são a favor da criação da estação de bicicletas<br>");
+
+	// document.write("Alunos a favor: " + alunosAFavorArray.length + "<br>");
+	// document.write("Alunos contra: " + alunosContraArray.length + "<br>");
+
+    // document.write("Porcentagem de alunos a favor: " + porcentAlunoAFavor.toFixed(2) + "%<br>");
+    // document.write("Porcentagem de alunos contra: " + porcentAlunoContra.toFixed(2) + "%<br>");
+</script>

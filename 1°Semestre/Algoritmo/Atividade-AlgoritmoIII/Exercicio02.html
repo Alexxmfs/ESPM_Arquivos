@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+
+<script>
+
+    let vendas = [];
+    let qtdMeses;
+    let valorVenda;
+    let media;
+    let soma = 0;
+    let somaDesvioQuadrado = 0;
+    let desvio;
+
+    qtdMeses = parseInt(prompt("Digite a quantidade de meses: "));
+
+    // Pegando os valores das vendas mensais
+    for(let i = 0; i < qtdMeses; i++) {
+        venda = parseFloat(prompt("Digite o valor da venda de cada mês: "));
+        vendas.push(venda);
+    };
+
+    // media das vendas
+    for(let i = 0; i < vendas.length; i++){
+        soma = soma + vendas[i];
+    };
+
+    media = soma / vendas.length;
+
+    // Calculando o desvio das vendas
+    for(let i = 0; i < vendas.length; i++){
+        somaDesvioQuadrado = somaDesvioQuadrado + Math.pow(vendas[i] - media, 2);
+    }
+
+    desvio = Math.sqrt(somaDesvioQuadrado / vendas.length);
+
+    document.write("<Center><h2>O Desvio Padrão é: " + desvio.toFixed(2)+ "</h2></Center>");
+
+</script>

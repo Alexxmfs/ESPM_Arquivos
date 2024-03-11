@@ -1,0 +1,92 @@
+<script>
+    // Função para preencher um vetor com valores aleatórios
+// function preencherVetor(vetor, tamanho) {
+//   for (let i = 0; i < tamanho; i++) {
+//     vetor[i] = Math.floor(Math.random() * 100); // Gera números aleatórios de 0 a 99
+//   }
+// }
+
+// // Função para imprimir os dados de um vetor
+// function imprimirVetor(vetor) {
+//   console.log(vetor.join(', ')); // Imprime os elementos do vetor separados por vírgula e espaço
+// }
+
+// // Função para inverter os valores de um vetor
+// function inverterVetor(vetor) {
+//   const meio = Math.floor(vetor.length / 2);
+//   for (let i = 0; i < meio; i++) {
+//     const temp = vetor[i];
+//     vetor[i] = vetor[vetor.length - 1 - i];
+//     vetor[vetor.length - 1 - i] = temp;
+//   }
+// }
+
+// // Criação do vetor e execução das operações
+// const tamanhoVetor = 10;
+// const vetor = new Array(tamanhoVetor);
+
+// preencherVetor(vetor, tamanhoVetor);
+
+// console.log('Vetor original:');
+// imprimirVetor(vetor);
+
+// inverterVetor(vetor);
+
+// console.log('Vetor invertido:');
+// imprimirVetor(vetor);
+
+
+
+
+
+
+
+
+
+
+
+
+function preencherVetor(vetor, tamanho){
+    for(let i = 0; i < tamanho; i++){
+        vetor[i] = Math.floor(Math.random() * 100);
+    }
+}
+
+function imprimir(vetor){
+    console.log(vetor);
+}
+
+function inverterVetor(vetor){
+    let meio = Math.floor(vetor.length / 2);
+    for(let i = 0; i < meio; i++){
+        let aux = vetor[i];
+        vetor[i] = vetor[vetor.length - 1 - i];
+        vetor[vetor.length - 1 -i] = aux;
+    }
+}
+
+let tamanhoVetor = 10;
+let vetor = new Array(tamanhoVetor);
+
+preencherVetor(vetor, tamanhoVetor);
+
+console.log('Vetor original: ');
+imprimir(vetor);
+
+inverterVetor(vetor);
+
+console.log('Vetor invertido: ');
+imprimir(vetor);
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

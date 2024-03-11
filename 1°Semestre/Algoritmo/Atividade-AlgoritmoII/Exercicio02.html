@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+
+<script>
+
+	let valor;
+    let maiorFator = 0;
+
+    valor = parseInt(prompt("Digite um valor inteiro positivo: "));
+
+    if(valor <= 0){
+        document.write("<Center><h3>Digite um numero inteiro e positivo</h3></Center>");
+    } else{
+
+        for(let i = 2; i <= valor; i++){
+            while(valor % i == 0){
+                maiorFator = i;
+                valor = valor / i;
+    }
+}
+
+if(maiorFator == 0){
+        document.write("<Center><h3>O valor" + valor + "não possui fatores primos.</h3></Center>");
+    } else {
+        document.write("<Center><h3>O maior fator primo é: " + maiorFator + "</h3></Center>");
+    }
+}
+
+</script>

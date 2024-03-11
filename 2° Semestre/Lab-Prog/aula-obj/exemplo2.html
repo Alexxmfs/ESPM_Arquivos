@@ -1,0 +1,23 @@
+<script>
+    
+    class Aluno {
+        
+        // codificação do construtor
+        constructor(ra, nome, nota1, nota2){
+            this.ra = ra;
+            this.nome = nome;
+            this.nota1 = nota1;
+            this.nota2 = nota2;
+        };
+
+        // função --> método
+        calcularMedia() {
+            return (this.nota1 + this.nota2) / 2;   
+        }
+    }
+
+    let a = new Aluno(123, "Surian", 10, 10);
+
+    console.log(a);
+    console.log(a.calcularMedia());
+</script>

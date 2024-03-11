@@ -1,0 +1,51 @@
+Categoria de dispositivos intermidiários?
+roteadores, switches, hubs, sem fio, segurança, wan
+
+Dispositivos finais: 7 tipos diferentes
+
+Dispositivos intermediarios: 6 tipos diferentes
+
+Dispositivos finais que não são computadores de mesa (desktops): 10
+
+Tipos de conexões de meio:
+
+cabo de cobre direto
+conexões sem fio (wireless)
+coaxial
+serial
+
+Cliente Servidor
+As aplicações ficam no servidor (arquitetura de hardware diferenciada) e acessiveis 
+
+Funções de dispositivo intermediarios - 
+- Interconectar dispositivos finais ou intermediários
+- detectar error no transporte dos dados
+- determinar o melhor caminho entre dois pontos na rede
+- repetur o sinal de uma rede sem fio
+
+Escolha do tipo de meio
+- finaceiro
+- largura de banca
+- interferência (ruido)
+- qualidade na transsmisão (Qos)
+
+LAN - área de rede de área local
+- geograficamente os dispositivos estão próximos (raio de 10km)
+- a interconectados por IP's privados (não roteáveis)
+- alta disponibilidade e performance
+
+- Gerenciada e controlada por um mesmo administrador de rede
+
+
+WAN - rede de área de longa distancia 
+- geograficamente dispositivos de um raio acima de 10km
+- latência maior (atraso)
+- largura de banda menor
+- menor performance
+
+Na topologia temos 2 WANS (duas nuvens) e 3 LANS (Home Office, Branch e Central)
+
+Definição de internet: rede de redes, malha de roteadores, a mairo de todas as redes
+
+Conexão de internet residencia: dsl, dial up, celular, rádio, satélite.
+

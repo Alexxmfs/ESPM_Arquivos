@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+
+<script>
+let comprimento, largura, madeira, gaveta, superficie
+let madeira$, gaveta$, superficie$
+comprimento = parseFloat(prompt("Insira o comprimento da escrivaninha em cm"))
+largura = parseFloat(prompt("Insira a largura da escrivaninha em cm"))
+madeira = prompt("Insira a madeira da escrivaninha dentre as opções: Mogmo, Carvalho e Pinho")
+gaveta = parseInt(prompt("Insira quantas gavetas terá a escrivaninha"))
+madeira = madeira.toLowerCase()
+superficie = comprimento * largura
+
+if (superficie > 1000){
+    superficie$ = 1400
+} else {
+    superficie$ = 1200
+}
+if (madeira == "mogmo"){
+    madeira$ = 200
+}
+if (madeira == "carvalho"){
+    madeira$ = 300
+}
+if (madeira == "pinho"){
+    madeira$ = 0
+}
+if (gaveta != 0) {
+    gaveta$ = gaveta * 50
+}
+document.write ("<h1><Center>A escrivaninha custará: R$" + (superficie$ + madeira$ + gaveta$ + "</h1></Center>"))
+</script>

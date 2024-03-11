@@ -1,0 +1,45 @@
+.limitador{
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container-1{
+    background-color: #FAF7FB;
+    padding: 10px;
+}
+
+.img-logo{
+    width: 50px;
+    height: 50px;
+    padding-top: 9px;
+    padding-right: 10px;
+}
+
+.logo{
+    display: flex;
+}
+
+.titulo-deva{
+    color: #1a1a24;
+    margin-bottom: 20px;
+    font-weight: 900;
+}
+
+.titulo-1{
+    color: #1a1a24;
+    max-width: 420px;
+    font-size: 3rem;
+}
+
+.desc-1{
+    max-width: 450px;
+}
+
+.button-1{
+    background-color: #a84efc;
+    color: #FFF;
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 8px;
+}

@@ -1,0 +1,87 @@
+<meta charset="utf-8">
+
+<script>
+
+    let dadosTrafego = [];
+    let continuar = true;
+    let volume;
+    let soma = 0;
+    let media;
+    let maxVolume = 0;
+    let horariosPico = [];
+    let horarios = '';
+
+    while (continuar) {
+    let opcoes = parseInt(prompt("Escolha uma opção:\n 1. Inserir dados de tráfego\n 2. Calcular a média de tráfego\n 3. Identificar horário de pico\n 4. Sair"));
+
+  switch(opcoes) {
+    case 1:
+      dadosTrafego = [];
+      for(let i = 0; i < 24; i++) {
+        volume = parseInt(prompt(`Informe o volume de tráfego na hora ${i}:`));
+        while (volume < 0 || volume == '') {
+          volume = parseInt(prompt(`Entrada inválida. Informe o volume de tráfego na hora ${i}:`));
+        }
+        dadosTrafego.push(volume);
+      }
+      break;
+
+    case 2:
+      soma = 0;
+      for(let i = 0; i < dadosTrafego.length; i++) {
+        soma = soma + dadosTrafego[i];
+      }
+      
+      media = soma / dadosTrafego.length;
+
+      alert("média de trafego: " + media);
+      break;
+
+    case 3:
+      maxVolume = 0;
+      horarios = '';
+      for(let i = 0; i < dadosTrafego.length; i++) {
+
+        if(dadosTrafego[i] > maxVolume) {
+          maxVolume = dadosTrafego[i];
+          horariosPico = [i];
+        }
+
+        else if(dadosTrafego[i] == maxVolume) {
+          horariosPico.push(i);
+        }
+        
+        while(volume < 0 || volume == '') {
+
+        volume = parseInt(prompt("Entrada inválida. Informe o volume de tráfego na hora " + i + ":"));
+
+    }
+
+      }
+
+      if(horariosPico.length == 0) {
+        alert("Não ha horario de pico");
+      }
+
+       else {
+        for(let i = 0; i < horariosPico.length; i++) {
+          horarios = horarios + horariosPico[i];
+          if (i != horariosPico.length - 1) {
+            horarios = horarios + ', ';
+          }
+        }
+        alert("Os horários de pico é: " + horarios + " horas");
+      }
+      break;
+
+    case 4:
+      continuar = false;
+      break;
+
+    default:
+      alert("Opção invalida. Escolha novamente");
+      break;
+  }
+}
+
+</script>

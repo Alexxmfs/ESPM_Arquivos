@@ -1,0 +1,36 @@
+<meta charset="utf-8">
+
+<script>
+    //     let primeiroValor;
+    //     let segundoValor;
+    //     let contador = 1;
+
+    // do{
+    //   primeiroValor = parseInt(prompt("Digite o primeiro valor:"));
+    //   segundoValor = parseInt(prompt("Digite o segundo valor:"));
+
+    //   if(segundoValor > primeiroValor){
+    //       console.log(contador++);
+    //   }
+    //   contador++
+    // } while(contador <= segundoValor);
+
+
+  // Prof
+
+    let valor1, valor2
+
+    valor1 = parseInt(prompt("Informe o primeiro valor: "));
+    valor2 = parseInt(prompt("Informe o primeiro valor: "));
+
+    if(valor1 > 0 && valor2 > 0 && valor2 > valor1) {
+      while(valor1 <= valor2) {
+        document.write(valor1 + "<br>")
+        valor1 = valor1 + 1;
+    }
+  } 
+  else {
+    document.write("Valor Invalido" + "<br>")
+  }
+
+</script>

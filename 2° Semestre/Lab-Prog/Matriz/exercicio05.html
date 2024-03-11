@@ -1,0 +1,54 @@
+<script>
+  // let ordemMatriz = 5;
+  // let matriz = [];
+
+  // for (let i = 0; i < ordemMatriz; i++) {
+  //   matriz[i] = new Array(ordemMatriz);
+  //   for (let j = 0; j < ordemMatriz; j++) {
+  //     matriz[i][j] = Math.round(Math.random() * 30);
+  //   }
+  // }
+
+  // console.log("Matriz Original:");
+  // console.table(matriz);
+
+  // for (let i = 0; i < ordemMatriz; i++) {
+  //   let aux = matriz[i][i];
+  //   matriz[i][i] = matriz[i][ordemMatriz - 1 - i];
+  //   matriz[i][ordemMatriz - 1 - i] = aux;
+  // }
+
+  // console.log("\nMatriz com Diagonais Trocadas:");
+  // console.table(matriz);
+
+
+
+  //Sellmini
+  let m = new Array(3);
+
+  for(let i = 0; i < m.length; i++){
+    m[i] = new Array(3);
+    for(let j = 0; j < m[i].length; j++){
+      m[i][j] = parseInt(Math.random() * 11);
+    }
+  }
+
+  console.table(m);
+
+  let j = m.length - 1, aux;
+  for(let i = 0; i < m.length; i++){
+    aux = m[i][i];
+    m[i][i] = m[i][j];
+    m[i][j] = aux;
+    j--;
+  };
+
+  console.log();
+  console.table(m);
+
+</script>
+
+
+
+
+

@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+
+<script>
+
+    let lado1;
+    let lado2;
+    let lado3;
+
+    lado1 =parseFloat(prompt("Digite o lado1: "));
+
+    lado2 =parseFloat(prompt("Digite o lado2: "));
+    
+    lado3 =parseFloat(prompt("Digite o lado3: "));
+
+    if(lado1 < lado2 + lado3 && lado2 < lado1 + lado3 && lado3 < lado2 + lado1) {
+        document.write("<h1>O valores informados são um triangulo" + "</h1>");
+    } else {
+        document.write("<h1>Os valores informados não são um trinagulo" + "</h1>");
+    }
+
+    // utilizando ou
+    // verificar se não é um triangulo
+    if(lado1 >= lado2 + lado3 || lado2 >= lado1 + lado3 || lado3 >= lado1 + lado2){
+        document.write("<h1>Os valores informados não são um trinagulo" + "</h1>");
+    } else {
+        document.write("<h1>O valores informados são um triangulo" + "</h1>");
+    }
+
+</script>

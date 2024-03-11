@@ -1,0 +1,39 @@
+<script>
+  let numAlunos = parseInt(prompt("Digite o número de alunos:"));
+
+  let alunos = [];
+
+  for (let i = 0; i < numAlunos; i++) {
+    let nome = prompt("Digite o nome do Aluno " + (i + 1) + ":");
+    let prova1 = parseFloat(prompt("Digite a nota da Prova 1 para " + nome));
+    let prova2 = parseFloat(prompt("Digite a nota da Prova 2 para "+ nome + ":"));
+    let trabalho = parseFloat(prompt("Digite a nota do Trabalho para " + nome + ":"));
+
+    let aluno = [nome, prova1, prova2, trabalho];
+    alunos[i] = aluno;
+  }
+
+  for (let i = 0; i < numAlunos; i++) {
+    let nome = alunos[i][0];
+    let prova1 = alunos[i][1];
+    let prova2 = alunos[i][2];
+    let trabalho = alunos[i][3];
+
+    let pesoProva1 = 0.3;
+    let pesoProva2 = 0.5;
+    let pesoTrabalho = 0.2;
+    let situacao;
+
+    let media = prova1 * pesoProva1 + prova2 * pesoProva2 + trabalho * pesoTrabalho;
+
+    if (media >= 7) {
+      situacao = "Aprovado";
+    } else {
+      situacao = "Reprovado";
+    }
+
+    console.log("Nome: " + nome);
+    console.log("Média: " + media.toFixed(2));
+    console.log("Situação: " +situacao);
+  }
+</script>

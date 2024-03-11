@@ -1,0 +1,42 @@
+<meta charset="utf-8" />
+
+<script>
+	  let contagem = 0;
+	  let ant = 0,
+	    novo = 1,
+	    agr = 0,
+	    i = 2,
+	    soma = 0;
+	  // Fazer fibonacci
+	  let fibonacci = new Array(33);
+	  fibonacci[0] = 1;
+	  fibonacci[1] = 1;
+	  let par = new Array(11);
+
+	  while (contagem < 3000000) {
+	    agr = ant + novo;
+	    ant = novo;
+	    novo = agr;
+	    contagem = ant + novo;
+	    fibonacci[i] = contagem;
+	    i++;
+	  }
+	  // pegar só os numeros pares
+	  i = 0;
+	  x = 0;
+	  while (fibonacci[i] < 4000000)
+	    if (fibonacci[i] % 2 == 0) {
+	      par[x] = fibonacci[i];
+	      i++;
+	      x++;
+	    } else {
+	      i++;
+	    }
+
+	  // Somar os pares
+      for(x = 0; x < par.length; x++){
+        soma = soma + par[x];
+      }
+
+      document.write("<Center><h3>`A soma dos termos de Fibonacci é " + soma + "</h3></Center>");
+</script>

@@ -1,0 +1,89 @@
+use carloca;
+
+SELECT * FROM loc_depto;
+
+SELECT * FROM loc_funcionario;
+
+SELECT Nm_Func, Nm_Depto 
+FROM loc_Funcionario
+INNER JOIN loc_depto on loc_Funcionario.cd_depto = Loc_depto.Cd_Depto;
+
+SELECT Nm_Func, Nm_Cargo
+FROM loc_funcionario
+INNER JOIN loc_cargo on loc_funcionario.Cd_Cargo = loc_cargo.Cd_Cargo;
+
+SELECT Nm_Depto, Nm_Func 'Nome do Departamento'
+FROM Loc_Funcionario f
+INNER JOIN Loc_Depto d ON f.cd_depto = d.cd_depto;
+
+SELECT Nm_Func, Nm_Depto, Nm_Cargo
+FROM loc_funcionario f
+INNER JOIN loc_depto d ON f.cd_depto = d.cd_depto
+INNER JOIN loc_cargo c ON f.Cd_Cargo = c.Cd_Cargo;  
+
+SELECT Nm_Func, Vl_Salario, Nm_Depto, Vl_Orc_Depto, Nm_Cargo
+FROM loc_funcionario f
+INNER JOIN loc_depto d ON f.cd_depto = d.cd_depto
+INNER JOIN loc_cargo c ON f.Cd_Cargo = c.Cd_Cargo; 
+
+SELECT Nm_Func, Vl_Salario, Nm_Depto, Vl_Orc_Depto, Nm_Cargo
+FROM loc_funcionario f
+INNER JOIN loc_depto d ON f.cd_depto = d.cd_depto
+INNER JOIN loc_cargo c ON f.Cd_Cargo = c.Cd_Cargo
+WHERE Vl_Salario > 10000 AND Vl_Orc_Depto > 20000;
+
+SELECT Nm_Func, Vl_Salario, Nm_Depto, Vl_Orc_Depto, Nm_Cargo, c.cd_cargo
+FROM loc_funcionario f
+INNER JOIN loc_depto d ON f.cd_depto = d.cd_depto
+INNER JOIN loc_cargo c ON f.Cd_Cargo = c.Cd_Cargo
+WHERE Vl_Salario > 10000 AND Vl_Orc_Depto > 20000
+ORDER BY f.Vl_Salario;
+
+SELECT Nr_Placa, Nm_Modelo, Nm_Fabricante, Nm_Tp_Combustivelcol, Nm_Proprietario, Desc_Cor
+FROM loc_veiculo v
+INNER JOIN loc_modelo m ON v.cd_Modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Modelo = f.cd_Fabricante
+INNER JOIN loc_tp_combustivel t ON v.Tp_Combustivel = t.cd_Tp_Combustivel
+INNER JOIN loc_proprietario p ON v.cd_proprietario = p.cd_proprietario
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_cor
+ORDER BY Nm_Fabricante, Nm_Modelo;
+
+SELECT * FROM loc_tp_combustivel;
+
+SELECT * from loc_funcionario;
+
+# puxando cd_gerente que é um atributo da tabela SELFJOIN
+-- Funcionario e seus chefes
+-- Self Join
+SELECT f.Nm_Func, g.Nm_Func
+FROM loc_funcionario f
+INNER JOIN loc_funcionario g ON f.cd_Gerente = g.cd_func
+ORDER BY f.Nm_Func;
+
+-- Funcionario e seus chefes
+-- LEFT Join, mesmo que não tenha chefe
+SELECT f.Nm_Func, g.Nm_Func
+FROM loc_funcionario f
+LEFT JOIN loc_funcionario g ON f.cd_Gerente = g.cd_func
+ORDER BY f.Nm_Func;
+
+-- Funcionario e seus chefes, apenas de quem não tem chefe
+-- LEFT Join, mesmo que não tenha chefe
+SELECT f.Nm_Func, g.Nm_Func
+FROM loc_funcionario f
+LEFT JOIN loc_funcionario g ON f.cd_Gerente = g.cd_func
+WHERE g.Nm_Func is null
+ORDER BY f.Nm_Func;
+
+-- Gerentes e seus subordinados
+-- Right Join, mesmo que não tenha subordinado
+SELECT g.Nm_Func, f.Nm_Func
+FROM loc_funcionario f
+RIGHT JOIN loc_funcionario g ON f.cd_Gerente = g.cd_func
+ORDER BY f.Nm_Func;
+
+SELECT f.Nm_Func, g.Nm_Func
+FROM loc_funcionario f
+RIGHT JOIN loc_funcionario g ON f.cd_Gerente = g.cd_func
+WHERE f.Nm_Func is null
+ORDER BY f.Nm_Func;

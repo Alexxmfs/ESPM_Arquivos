@@ -1,0 +1,20 @@
+<meta charset = "utf-8" />
+
+<script>
+  let x = 0, y = 0, m = 0;
+  x = parseFloat(prompt("Insira o valor de x:"));
+  m = ((x * x * x - 2) / 5)
+  if (m > 0){
+    m = m
+  } else {
+    m = m * -1
+  }
+  m = Math.sqrt(m);
+
+  y = x / (x * x - 4) + m + (1 / (x * x));
+
+  if (y == "Infinity" || y == "-Infinity" || y != Number(y)){
+document.write ("<Center><h2>Não é possivel realizar o calculo, insira um valor válido.</h2></Center>");
+  } else {
+  document.write ("<Center><h2>O valor de y é igual a: " + y.toFixed(3)) + "</h2></Center>"};
+</script>

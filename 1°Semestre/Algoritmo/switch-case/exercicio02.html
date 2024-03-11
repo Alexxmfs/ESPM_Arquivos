@@ -1,0 +1,47 @@
+<meta charset="utf-8" />
+<script>
+  //Escreva um programa que calcule o valor que deve ser pago por um produto
+  //considerando o preço normal de etiqueta e a escolha da condição de pagamento.
+  //Utilize os códigos da tabela a seguir para ler qual a condição de
+  //pagamento escolhida e efetuar o cálculo adequado.
+
+  //1 À vista em dinheiro ou cheque, recebe 10% de desconto
+  //2 À vista no cartão de crédito, recebe 5% de desconto
+  //3 Em duas vezes, preço normal da etiqueta sem jutos
+  //4 Em três vezes, preço normal da etiqueta mais juros de 10%
+
+  let valor, caso;
+
+  valor = parseFloat(prompt("Insira o valor do produto"));
+  caso = parseFloat(prompt("Insira a condição de pagamento"));
+
+  if(formaPagamento < 1 || formaPagamento > 4)
+  {
+    alert("Forma de pagamento");
+  }  
+  else{
+  switch (caso) {
+    case 1:
+      valor = valor * 0.9;
+      document.write("<h1>O valor pago será: " + valor.toFixed(2) + "</h1>");
+      break;
+
+    case 2:
+      valor = valor * 0.95;
+      document.write("<h1>o valor pago será: " + valor.toFixed(2) + "</h1>");
+      break;
+
+    case 3:
+      valor = valor / 2;
+      document.write("<h1>o valor pago será duas parcelas de: " + valor.toFixed(2) + "</h1>");
+      break;
+
+    case 4:
+      valor = (valor * 1.1) / 3;
+      document.write("<h1>o valor pago será 3 parcelas de: " + valor.toFixed(2) + "</h1>");
+      break;
+  }
+}
+</script>
+
+

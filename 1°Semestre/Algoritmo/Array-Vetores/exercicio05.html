@@ -1,0 +1,26 @@
+<script>
+  let dia = [
+    "Domingo",
+    "Segunda",
+    "Terça",
+    "Quarta",
+    "Quinta",
+    "Sexta",
+    "Sabado"];
+
+  let temperatura = new Array(7);
+  let media = 0;
+
+  for (let i = 0; i < temperatura.length; i++) {
+    temperatura[i] = Number(prompt("Temperatura a do (a) " + dia[i]));
+  }
+
+  for(let i = 0; i < dia.length; i++){
+    document.write("<h3>" + dia[i] + "</h3>");
+    for(let j = 1; j <= temperatura[i]; j++){
+        document.write("-");
+    }
+    document.write("<br>");
+  }
+
+</script>

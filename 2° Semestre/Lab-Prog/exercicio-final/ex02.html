@@ -1,0 +1,38 @@
+<script>
+    // Escreva um programa em JavaScript para processar uma lista de objetos representando algumas
+    // pessoas. O programa deverá calcular a média de idade das pessoas armazenadas na lista.
+//     let pessoas = [
+//     {nome: 'alex', idade: 5},
+//     {nome: 'chico', idade: 10},
+//     {nome: 'felix', idade: 15},
+//     {nome: 'Luffy', idade: 25},
+// ];
+
+// function media(lista){
+//     let soma = 0;
+//     for(let elemento of lista){
+//         soma += elemento.idade;
+//     }
+//     return soma / lista.length;
+// }
+
+// console.log(media(pessoas));
+
+
+// Sellmini
+    let x = [
+    {nome: 'alex', idade: 5},
+    {nome: 'chico', idade: 10},
+    {nome: 'felix', idade: 15},
+    {nome: 'Luffy', idade: 25},
+];
+
+    function calcularMedia(lista){
+        let soma = lista.reduce((total, pessoa) => total += pessoa.idade, 0);
+        return soma / lista.length
+    };
+
+    let media = calcularMedia(x);
+    console.log(`A média é: ${media}`);
+
+</script>

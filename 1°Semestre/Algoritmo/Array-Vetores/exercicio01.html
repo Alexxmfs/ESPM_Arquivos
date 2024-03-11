@@ -1,0 +1,21 @@
+<script>
+
+    let lista = new Array(5);
+    let maior = 0;
+    let menor = 0;
+
+    for(let i = 0; i < lista.length; i++){
+        lista[i] = parseInt(prompt("Valor"));
+
+        if(i == 0 || lista[i] > maior){
+            maior = lista[i];
+        }
+        if(i == 0 || lista[i] < menor){
+            menor = lista[i];
+        }
+    }
+
+    alert("Maior = " + maior);
+    alert("Menor = " + menor);
+
+</script>

@@ -1,0 +1,39 @@
+<meta charset="utg-8 ">
+
+<script>
+
+    let x;
+    let y;
+
+    x = Number(prompt("Informe o valor de x: "));
+
+    // verifica se o valor de x e valido
+    if(x >= 6 || x <= -6){
+        y = (x - 8) / Math.sqrt(x * x - 25);
+        alert("y = " + y.toFixed(3));
+        document.write("y = " + y.toFixed(3));
+    } else {
+        document.write("valor de x invalido pra essa expressão")
+    }
+
+    // verifica se o valor de x e invalido
+    if(x >= -5 && x <= 5){
+        document.write("valor de x invalido para essa expressão")
+    } else {
+        y = (x - 8) / Math.sqrt(x * x -25)
+        alert("y = " + y.toFixed(3));
+    }
+    
+
+    // Prof
+
+    // let n, cont = 1, y = 0;
+
+    // n = Number(prompt("Valor de n: "));
+
+    // while(cont <= n){
+    //     y += cont / Math.sqrt(cont);
+    //     cont++
+    // }
+    // alert("y = " + y.toFixed(3));
+</script>

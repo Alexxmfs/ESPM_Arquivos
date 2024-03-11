@@ -1,0 +1,66 @@
+# ATIVIDADE SURIAN INNER JOIN 
+
+-- 47. Desenvolva uma instrução SQL que exiba os seguintes dados dos itens
+-- de pedidos de locação: número do pedido, número do item de pedido de
+-- locação, quantidade de dias de locação, valor de locação , data do
+-- pedido, valor total do pedido, número da placa do veículo, modelo do
+-- veículo e nome do proprietário do veículo. Classifique a consulta em
+-- ordem de número de pedido de locação
+
+SELECT item.Nr_Pedido, ped.Qt_Dias, ped.Vl_Total, item.Nr_Placa, Nm_Modelo, Nm_Proprietario, Dt_Locacao
+  FROM loc_item_locacao as item
+  INNER JOIN loc_pedido_locacao ped ON item.Nr_Pedido = ped.Nr_Pedido
+  INNER JOIN loc_veiculo v ON item.Nr_Placa = v.Nr_Placa
+  INNER JOIN loc_modelo m ON v.cd_Modelo = m.cd_Modelo
+  INNER JOIN loc_proprietario p ON v.cd_proprietario = p.cd_proprietario
+  ORDER BY Nr_Pedido;
+
+-- 48.Listar todos os dados dos veículos, de seus modelos e de seus
+-- fabricantes.
+-- Usar as tabelas Loc_Veiculo, Loc_Modelo e Loc_Fabricante
+-- Sugestão: Fazer join simultaneamente com 3 tabelas, usando os pares
+-- de chaves estrangeira e primária existentes
+
+SELECT * 
+FROM loc_veiculo v
+INNER JOIN loc_modelo m ON v.cd_Modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante;
+
+-- 57.Listar Códigos e Nomes de Funcionários e de seus chefes (gerentes).
+  SELECT f.cd_Func, f.Nm_Func, g.Cd_Gerente
+  FROM loc_funcionario f
+  INNER JOIN loc_funcionario g ON f.Cd_Gerente = g.cd_gerente;
+  
+-- 58. Listar Códigos e Nomes de Funcionários, seus cargos e seus
+-- departamentos, além dos nomes e dos salários de seus gerentes
+  SELECT f.cd_Func, f.Nm_Func, Nm_Depto, f.Vl_Salario, g.cd_Gerente, Nm_Cargo
+  FROM loc_funcionario f
+  INNER JOIN loc_funcionario g ON f.Cd_Gerente = g.Cd_Gerente
+  INNER JOIN loc_depto d ON f.Cd_Depto = d.Cd_Depto
+  INNER JOIN loc_cargo c ON f.cd_cargo = c.cd_cargo;
+  
+-- 67. Elabore instrução SQL que apresente Nr da Placa dos Veículos e o nome
+-- do grupo a que o veículo pertence.
+SELECT Nr_Placa, Nm_grupo
+FROM loc_veiculo v
+INNER JOIN loc_grupo g ON v.cd_Grupo = g.cd_Grupo;
+  
+-- 68. Elabore instrução SQL que apresente Nr da Placa dos Veículos e o nome
+-- do grupo a que o veículo pertence, mas que tenham a palavra “Carro”.  
+
+SELECT Nr_Placa, Nm_grupo
+FROM loc_veiculo v
+INNER JOIN loc_grupo g ON v.cd_Grupo = g.cd_Grupo
+WHERE Nm_Grupo LIKE "%Carro%";
+
+
+
+
+  
+  
+
+
+  
+  
+  
+  

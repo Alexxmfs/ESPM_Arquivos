@@ -1,0 +1,44 @@
+<script>
+
+  let idade = Number(prompt("Digite a idade do nadador:"));
+
+  switch (true) {
+    case idade >= 5 && idade <= 7:
+      document.write("Infantil A");
+      break;
+
+    case idade >= 8 && idade <= 10:
+      document.write("Infantil B");
+      break;
+
+    case idade >= 11 && idade <= 13:
+      document.write("Juvenil A");
+      break;
+
+    case idade >= 14 && idade <= 18:
+      document.write("Juvenil B");
+      break;
+
+    default:
+      document.write("Adulto");
+      break;
+  }
+</script>
+
+<!-- <script>
+  let idade;
+
+  idade = parseInt(prompt("Digite a sua idade: "));
+
+  if (idade >= 5 && idade <= 7) {
+    console.log("INFANTIL A");
+  } else if (idade >= 8 && idade <= 10) {
+    console.log("INFANTIL B");
+  } else if ((idade) => 11 && idade <= 13) {
+    console.log("JUVENIL A");
+  } else if (idade >= 14 && idade <= 18) {
+    console.log("JUVENIL B");
+  } else {
+    console.log("Adulto");
+  }
+</script> -->

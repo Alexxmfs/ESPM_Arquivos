@@ -1,0 +1,27 @@
+<script>
+
+    // let dia = prompt("Digite o dia em que você nasceu: ");
+    // let numeroMes = prompt("Digite o número do mês em que você nasceu: ");
+    // let ano = prompt("Digite o ano em que você nasceu: ");
+
+    // let meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+    // if (numeroMes >= 1 && numeroMes <= 12) {
+    //     let nomeMes = meses[numeroMes - 1]; 
+    //     document.write("Você nasceu em " + dia + "de " + nomeMes + "de " + ano);
+    // } else {
+    //     document.write("Mês inválido. Por favor, insira um número de mês válido (1 a 12).");
+    // }
+
+    
+    
+    // Sellmini
+    let meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    let data = prompt("Informe a data no padrão dd/mm/aaaa");
+    let temp = data.split("/"); 
+    let dataCompleta = "";
+
+    dataCompleta = temp[0] + " de " + temp[1] - 1 + " de " + temp[2];
+    alert(dataCompleta);
+
+</script>

@@ -1,0 +1,18 @@
+<script>
+    function calcularExpressao(x){
+        if(x <= 4){
+            console.log("O valor de x ser maior que 4 para evitar divisão por zero.");
+            return;
+        }
+
+        let y = (5 * x + 3) / Math.sqrt(x ** 2 - 16);
+        return y;
+    }
+
+    let valorX = 6;
+    let resultado = calcularExpressao(valorX);
+
+    if(resultado !== 0){
+        console.log("Para x = " + valorX + ", y = " + resultado.toFixed(2));
+    }
+</script>

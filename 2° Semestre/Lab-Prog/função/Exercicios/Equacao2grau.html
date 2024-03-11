@@ -1,0 +1,65 @@
+<script>
+
+// function calcularDelta(a, b, c) {
+//     let resultado = b * b - 4 * a * c;
+//     return resultado;
+// }
+
+// function calcularRaiz(a, b, c) {
+//     let delta = calcularDelta(a, b, c);
+
+//     if (delta < 0) {
+//         return "Equação não possui raiz real";
+//     } else if (delta == 0) {
+//         let raizUnica = -b / (2 * a);
+//         return "A equação possui uma raiz real: " + raizUnica;
+//     } else {
+//         let raiz1 = (-b + Math.sqrt(delta)) / (2 * a);
+//         let raiz2 = (-b - Math.sqrt(delta)) / (2 * a);
+//         return "A equação possui duas raízes reais: Raiz 1 = " + raiz1 + ", Raiz 2 = " + raiz2;
+//     }
+// }
+
+// let a = parseInt(prompt("Digite o valor de a: "));
+// let b = parseInt(prompt("Digite o valor de b: "));
+// let c = parseInt(prompt("Digite o valor de c: "));
+
+// let resultadoRaiz = calcularRaiz(a, b, c);
+// console.log(resultadoRaiz);
+
+
+
+
+
+// Sellmini
+
+     let a, b, c, delta;
+
+     a = Number(prompt("Valor de a: "));
+     b = Number(prompt("Valor de b: "));
+     c = Number(prompt("Valor de c: "));
+
+    delta = calcularDelta(a, b, c)
+    if(delta < 0){
+        alert("a equação não tem raiz real");
+    } else {
+        raiz = calcularRaiz(a, b, delta);
+        alert("x1 = " + raiz[0] + "\nx2 = " + raiz[1]);
+    }
+
+    // função para calcular e retornar o delta
+    function calcularDelta(a, b, c){
+        return (b * b - 4 * a * c);
+    }
+
+    // função para calcular e retornar as raizes da equação
+    function calcularRaiz(a, b, delta){
+        let raiz = new Array(2);
+        raiz[0] = (-b + Math.sqrt(delta)) / (2 * a)
+        raiz[1] = (-b - Math.sqrt(delta)) / (2 * a)
+        return raiz;
+    }
+
+
+
+</script>

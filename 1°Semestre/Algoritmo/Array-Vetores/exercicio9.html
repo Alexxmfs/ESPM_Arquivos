@@ -1,0 +1,61 @@
+<meta charset="utf-8">
+
+<!-- Escreva um programa em JavaScript que preencha um vetor de 10 posições 
+com números aleatórios (você define o intervalo de valores). O seu programa 
+deverá colocar os elementos do array em ordem crescente. Observação: para 
+esse exercício você deverá desenvolver a lógica e não poderá nenhuma função 
+da linguagem para ordenar os valores. -->
+
+<script>
+    // let vetor = [];
+    // let tamanhoVetor = new Array(10);
+    // let valorMinimo = 1;
+    // let valorMaximo = 100;
+    // let valorTemp;
+
+    // for(let i = 0; i < tamanhoVetor.length; i++){
+    //     vetor.push(Math.floor(Math.random() * 101));  
+    // }
+
+    // console.log("Vetor final:  " + vetor);
+
+    // for(let i = 0; i < tamanhoVetor - 1; i++){
+    //     for(let j = 0; j < tamanhoVetor - i - 1; j++){
+    //         if(vetor[j] > vetor[j + 1]){
+    //             valorTemp = vetor[j];
+    //             vetor[j] = vetor[j + 1]
+    //             vetor[j + 1] = valorTemp;
+    //         }
+    //     }
+    // }
+
+    // console.log("Em ordem: " + vetor);
+    
+
+
+    // Prof
+
+    // preenche e imprime os dados
+    let lista = new Array(5);
+
+    for(let i = 0; i < lista.length; i++){
+        lista[i] = parseInt(Math.random() * 50);
+    }
+    console.log(lista);
+
+    // ordem --> ordem crescente
+    for(let j = 0; j < lista.length; j++){
+        for(let i = 0; i < lista.length - 1; i++){
+            if(lista[i] > lista[i + 1]){
+                aux = lista[i];
+                lista[i] = lista[i + 1];
+                lista[i + 1] = aux;
+            }
+        }
+}
+    // Impressão apís a ordenação
+    console.log(lista);
+
+
+    
+</script>

@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+
+<script>
+
+  let resp1;
+  let pagamento;
+  let result = 0;
+
+  do{
+
+  valor = parseInt(prompt("Insira o valor do produto:  "));
+  cont = 0;
+
+  while(cont <= 10){
+
+    result = result + valor
+
+    cont++;
+  }
+  resp = prompt("Você comprou outro item (s ou n)?");
+  } while(resp == "s")
+
+  pagamento = prompt("Qual e a sua forma de pagamento? À vista com 10% de desconto  Em duas vezes com um acréscimo de 15.5%.");
+
+
+  if(pagamento == "1"){
+    result = result * 0.9;
+    document.write("O valor total a vista é: " + result);
+  } else if(pagamento == "2"){
+    result = result * 1.155;
+    document.write("O valor total com duas vezes com acrescimo: " + result);
+  }
+
+
+
+
+</script>

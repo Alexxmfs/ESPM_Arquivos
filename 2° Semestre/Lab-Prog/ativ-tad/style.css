@@ -1,0 +1,17 @@
+.button-menu{
+    padding: 8px 13px;
+    background-color: #52a2d1;
+    border-radius: 7px;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: 600;
+    border: none;
+}
+
+.button-menu:hover{
+    padding: 7px 13px;
+    background-color: #;
+    border-radius: 7px;
+    text-decoration: none;
+    color: #FFFFFF;
+}

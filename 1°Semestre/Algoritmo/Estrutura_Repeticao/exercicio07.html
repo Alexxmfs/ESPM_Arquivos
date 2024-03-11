@@ -1,0 +1,32 @@
+<meta charset="utf-8" />
+
+<script>
+  let num;
+
+  num = parseInt(prompt("Digite um numero: "));
+
+  document.write("Divisores de " + num + ":" + "<br>");
+
+  for (let contador = num; contador >= -num; contador--) {
+    if (contador != 0 && num % contador == 0) {
+      document.write(contador + "<br>");
+    }
+  }
+
+  // prof
+
+  // let valor, cont;
+
+  // valor = Number(prompt("Valor inteiro positivo: "));
+
+  // if (valor <= 0) {
+  //   alert("O valor deve ser positivo");
+  // } else {
+  //   cont = -valor;
+  //   for (; cont <= valor; cont++) {
+  //     if(cont != 0 && valor % cont == 0){
+  //       document.write(cont);
+  //     }
+  //   }
+  // }
+</script>

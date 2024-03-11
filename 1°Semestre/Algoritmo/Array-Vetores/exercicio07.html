@@ -1,0 +1,26 @@
+<meta charset="utf=8">
+<script>
+
+//Escreva um programa em JavaScript que preencha um vetor de 10 posições
+//com números aleatórios inteiros não duplicados.
+
+let lista = new Array(10)
+let achei 
+
+for(let i = 0; i < lista.length; ) {
+    lista[i] = parseInt(Math.random() * 11)
+    achei = false
+    for(let j = 0; j < i; j++) {
+        if(lista[i] === lista[j]) {
+            achei = true
+            break
+        }
+    }
+    if(achei == false) {
+        i++
+    }
+}
+
+alert(lista)
+
+</script>

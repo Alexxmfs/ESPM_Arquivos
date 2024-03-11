@@ -1,0 +1,26 @@
+input {
+    border-radius: 8px;
+    width: 190px;
+    padding: 5px;
+    border-style: solid;
+    border-color: #b66cfc;
+    background-color: rgb(216, 216, 216);
+    margin-top: -22px;
+}
+
+button {
+    background-color: rgb(158, 66, 245);
+    border-radius: 10px;
+    border: none;
+    width: 80px;
+}
+
+.text-button{
+    font-size: 12px;
+    color: #FFF;
+    font-weight: 600;
+}
+
+label{
+    font-weight: bold;
+}

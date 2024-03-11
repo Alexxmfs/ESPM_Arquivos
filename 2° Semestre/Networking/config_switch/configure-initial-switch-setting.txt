@@ -1,0 +1,10 @@
+!S1
+!show running-config
+!existem 24 interfaces FastEthernet (100Mbs)
+!existem 2 Gibabit Ethernet (1gb ou 1000Mbps)
+!VTY (virtual terminal ou conexão telnet / ssh)
+! line vty 0 4 (5 acessos simultâneos)
+! login
+!line vty 5 15 (10 acessos simultâneos)
+! login
+

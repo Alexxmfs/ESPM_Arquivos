@@ -1,0 +1,86 @@
+<!-- <script>
+    class Aluno {
+
+    constructor(ra, nome, nota1, nota2, media) {
+        this.ra = ra;
+        this.nome = nome;
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.media = media;
+    }
+
+    calcularMedia() {
+        this.media = (this.nota1 + this.nota2) / 2;
+        if (this.media >= 7) {
+            console.log("APROVADO!");
+        } else {
+            console.log("REPROVADO!");
+        }
+    }
+}
+
+let alunos = []; 
+
+let quantidadeAlunos = prompt('Digite o número de alunos:');
+
+for (let i = 0; i <= quantidadeAlunos; i++) {
+    let ra = prompt('Digite o RA do aluno:');
+    let nome = prompt('Digite o nome do aluno:');
+    let nota1 = parseFloat(prompt('Digite a nota 1 do aluno:'));
+    let nota2 = parseFloat(prompt('Digite a nota 2 do aluno:'));
+
+    let aluno = new Aluno(ra, nome, nota1, nota2);
+    
+    console.log(aluno)
+    aluno.calcularMedia(aluno);
+
+    alunos.push(aluno);
+}
+
+</script> -->
+
+
+
+<!-- Sellmini -->
+<script>
+    
+    class Aluno {
+        
+        constructor(ra, nome, nota1, nota2){
+            this.ra = ra;
+            this.nome = nome;
+            this.nota1 = nota1;
+            this.nota2 = nota2;
+        };
+
+        calcularMedia() {
+            return (this.nota1 + this.nota2) / 2;
+        }
+
+        verificar(){
+            return this.calcularMedia() >= 7 ? "APROVADO!" : "REPROVADO!";
+    }
+}
+    
+    // declaração de vairaveis
+    let lista = [];
+
+    let ra, nome, nota1, nota2;
+
+    // entrada de dados
+    for(let i = 1; i <= 3; i++){
+        ra = parseInt(prompt("RA:"));
+        nome = prompt("Nome:");
+        nota1 = parseFloat(prompt("nota1:"));
+        nota2 = parseFloat(prompt("nota2:"));
+        lista.push(new Aluno(ra, nome, nota1, nota2));
+    };
+
+        for(let aluno of lista) {
+            console.log(aluno.nome);
+            console.log(aluno.calcularMedia());
+            console.log(aluno.verificar());
+        }
+
+
+</script>

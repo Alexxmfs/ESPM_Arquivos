@@ -1,0 +1,27 @@
+<script>
+    function celsiusToFahrenheit(celsius){
+        return (celsius * 9 / 5) + 32;
+    }
+
+    function main() {
+        let valorInicial = parseFloat(prompt("Digite o valor inicial em Celsius: "));
+        let valorFinal = parseFloat(prompt("Digite o valor final em Celsius: "));
+        let incremento = parseFloat(prompt("Digite o incremento em Celsius: "));
+
+        if(valorInicial >= valorFinal){
+            console.log("O valor inicial deve ser menor que o valor final");
+            return;
+        }
+
+        console.log("Conversão da Temperatura")
+
+        console.log("Celsius | Fahrenheit");
+
+        for(let celsius = valorInicial; celsius <= valorFinal; celsius = celsius + incremento){
+            let fahreinheit = celsiusToFahrenheit(celsius);
+            console.log(celsius.toFixed(2) + "        " + fahreinheit.toFixed(2));
+        }
+    }
+
+    main();
+</script>

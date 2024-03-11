@@ -1,0 +1,27 @@
+<script>
+    
+    let m = new Array(3);
+    let maior = 0;
+
+    for(let i = 0; i < m.length; i++) {
+        m[i] = new Array(3);
+        for(let j = 0; j < m[i].length; j++){
+            m[i][j] = Math.round(Math.random() * 30);
+            if(m[i][j] > maior){
+                maior = m[i][j];
+            }
+        }
+    }
+
+    console.table(m);
+    console.log("maior = " + maior);
+
+    // impressão  da localização do maior elemento
+    for(let i = 0; i < m.length; i++){
+        for(let j = 0; j < m.length; j++){
+            if(m[i][j] == maior){
+                console.log("linha = " + i + ", coluna = " + j); 
+            }
+        }
+    }
+</script>

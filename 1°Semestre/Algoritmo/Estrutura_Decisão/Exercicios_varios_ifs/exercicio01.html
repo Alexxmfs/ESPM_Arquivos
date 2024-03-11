@@ -1,0 +1,25 @@
+<meta charset="utf8">
+
+<script>
+    
+    // declaração de variaveis utilizando let 
+    let diaria;
+    let conta;
+    let tarifa;
+
+    // entrada de dados 
+    diaria = parseInt(prompt("Informe o numero de diaria: "));
+
+    // processamento
+    if(diaria > 15){
+        tarifa = 22.50;
+    } else if(diaria == 15){
+        tarifa = 56;
+    } else {
+        tarifa = 88;
+    }
+
+    conta = diaria * (250 + tarifa);
+    document.write("<h2>Conta = R$" + conta.toFixed(2) + "</h2>");
+
+</script>

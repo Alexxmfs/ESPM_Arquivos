@@ -1,0 +1,27 @@
+<meta charset="utf-8s">
+
+<script>
+
+    let valorHoraAula;
+    let numHorasTrabalhadas;
+    let porcentagemDescontoINSS;
+
+    let salarioBruto;
+    let valorDescontoINSS;
+    let salarioLiquido;
+
+    valorHoraAula = parseFloat(prompt("Digite o valor da hora-aula:"));
+    numHorasTrabalhadas = parseFloat(prompt("Digite o número de horas trabalhadas no mês: "));
+    porcentagemDescontoINSS = parseFloat(prompt("Digite a porcentagem de desconto do INSS: "));
+
+    salarioBruto = valorHoraAula * numHorasTrabalhadas;
+
+    valorDescontoINSS = (porcentagemDescontoINSS / 100) * salarioBruto;
+
+    salarioLiquido = salarioBruto - valorDescontoINSS;
+
+    console.log("O valor do salario liquído mensal é de R$" + salarioLiquido.toFixed(2));
+
+    document.write("<h1>O valor do salario liquído mensal é de R$" + salarioLiquido.toFixed(2) + "</h1>");
+
+</script>

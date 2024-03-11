@@ -1,0 +1,72 @@
+<meta charset="utf-8">
+
+<script>
+
+	let votos = [0, 0, 0, 0, 0, 0];
+	let opcoes = ["Windows Server", "Unix", "Linux", "Netware", "Mac OS", "Outro"];
+	let totalVotos = 0;
+    let maiorVotos;
+    let empates = [];
+	let vencedor;
+    let percentual;
+    let voto;
+
+	    voto = parseInt(prompt("Informe o voto (1 a 6) ou digite zero '0' para encerrar o programa\n1: Windows Server\n2: Unix\n3: Linux\n4: Netware\n5: Mac OS\n6: Outro"));
+
+	while (voto != 0) {
+		if (voto >= 1 && voto <= 6) {
+			votos[voto - 1]++;
+			totalVotos++;
+		}
+
+		voto = parseInt(prompt("Informe o voto (1 a 6) ou digite zero '0' para encerrar o programa\n1: Windows Server\n2: Unix\n3: Linux\n4: Netware\n5: Mac OS\n6: Outro"));
+
+    }
+
+	maiorVotos = votos[0];
+    
+	for (let i = 1; i < votos.length; i++) {
+		if (votos[i] > maiorVotos) {
+			maiorVotos = votos[i];
+		}
+	}
+
+	
+	for (let i = 0; i < votos.length; i++) {
+		if (votos[i] == maiorVotos) {
+			empates.push(i);
+		}
+	}
+
+	console.log("Sistema Operacional   Votos   %");
+	console.log("-------------------   -----   ---");
+
+	for(let i = 0; i < votos.length; i++) {
+
+		let espacos = "";
+        percentual = (votos[i] / totalVotos) * 100;
+		
+        for(let j = 0; j < 23 - opcoes[i].length; j++) {
+			espacos = espacos +  " ";
+		}
+
+		console.log(opcoes[i] + espacos + votos[i] + "      " + percentual.toFixed(2) + "%");
+        
+	}
+
+	console.log("-------------------   -----");
+	console.log("Total                  " + totalVotos);
+
+	if (empates.length > 1) {
+		console.log("Empate entre os seguintes sistemas operacionais:");
+		for (let i = 0; i < empates.length; i++) {
+			console.log(opcoes[empates[i]]);
+		}
+	} else if (empates.length == 1) {
+		vencedor = opcoes[empates[0]];
+		console.log("O Sistema Operacional mais votado foi o " + vencedor);
+	} else {
+		console.log("Nenhum voto registrado");
+	}
+
+</script>

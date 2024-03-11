@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+
+<script>
+
+	let binario;
+	let bitValue = 1;
+	let bit = 0;
+	let decimal = 0;
+
+	binario = prompt("Digite um número binário:");
+
+	for (let i = 0; i < binario.length; i++) {
+		bit = binario[i];
+		if (bit != "0" && bit != "1") {
+			document.write("<Center><h3>O valor informado não e um valor binario</h3></Center><br>");
+			break;
+		} else {
+			if (bit) {
+				for (let i = binario.length - 1; i >= 0; i--) {
+					bit = parseInt(binario[i]);
+					decimal = decimal + bit * bitValue;
+					bitValue = bitValue * 2;
+				}
+				document.write("<Center><h3>O número em decimal é: " + decimal + "</h3></Center><br>");
+			} else {
+				document.write("<Center><h3>O número informado não está em base binária.</h3></Center>");
+			}
+		}
+		break;
+	}
+
+</script>

@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+
+<script>
+
+	// No último final de semana foi realizado um campeonato de jogos digitais entre os alunos da
+	// faculdade. Para cada aluno foi registrado seu nome e a pontuação obtida. Escreva um programa
+	// em JavaScript que permita ler e armazenar os nomes e a pontuação de cada um dos
+	// competidores. Em seguida, o seu programa deverá imprimir uma lista dos competidores em
+	// ordem decrescente de pontuação (da maior pontuação para a menor).
+
+	let jogadores = [];
+	let numCompetidores;
+	let NmAluno;
+	let pontuacao;
+	let competidor;
+
+	numCompetidores = prompt("Digite o número de competidores: ");
+
+	// lendo o nome e a pontuação de cada jogador
+	for(let i = 0; i < numCompetidores; i++) {
+		NmAluno = prompt("Digite o nome do jogador " + (i + 1) + ": ");
+
+		pontuacao = parseInt(prompt("Digite a pontuacao do jogador " + NmAluno));
+
+		jogadores.push({ NmAluno, pontuacao });
+	}
+
+	for(let i = 0; i < jogadores.length - 1; i++) {
+		for (let j = 0; j < jogadores.length - 1 - i; j++) {
+			// verifica se o jogador atual tem uma pontuação menor que o próximo jogador é vai atribuindo ao array jogadores.
+			if (jogadores[j].pontuacao < jogadores[j + 1].pontuacao) {
+				[jogadores[j], jogadores[j + 1]] = [jogadores[j + 1], jogadores[j]];
+			}
+		}
+	}
+
+	document.write("<h2>Lista dos Jogadores em ordem decrescente de pontuação: </h2>");
+	
+	// pontuações dos jogadores em ordem decrescente
+	for(let i = 0; i < jogadores.length; i++) {
+		document.write("<h3>" + jogadores[i].NmAluno + " Pontuação: " + jogadores[i].pontuacao + "</h3>");
+	}
+
+</script>

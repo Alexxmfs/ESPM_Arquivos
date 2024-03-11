@@ -1,0 +1,76 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.limitador{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-01{
+    background-image: url('https://i.pinimg.com/originals/40/0c/be/400cbecec307111f8790d2afc20110cf.jpg');
+    background-size: cover;
+}
+
+.caixa-1{
+    padding: 200px 0 150px 40px;
+}
+
+.freelance-digital-text{
+    letter-spacing: 7px;
+}
+
+.titulo-1{
+    font-size: 4.5rem;
+    max-width: 550px;
+}
+
+.pink{
+    color: #F9004D;
+}
+
+.img-woman {
+    width: 1200px;
+    height: 400px;
+    max-width: 100%; 
+}
+
+.container-02 {
+    padding: 50px;
+    justify-content: center; 
+}
+
+.texts-about {
+    padding-top: 40px;
+    padding-left: 20px;
+}
+
+.container-03{
+    margin: 0 auto;
+    background-color: #ededed;
+}
+
+.cards{
+    background-color: gray;
+    padding: 30px;
+}
+
+.container-03{
+    padding: 50px 0 50px 0px;
+}
+
+.container-cards{
+    padding: 10px;
+}
+
+.texts{
+    align-items: center;
+    text-align: center;
+}
+
+.frase-service{
+    padding-top: 10px;
+    padding-bottom: 80px;
+    max-width: 500px;
+    margin: 0 auto;
+}

@@ -1,0 +1,315 @@
+use carloca;
+
+-- --------------  LISTA DE EXERCICIOS ---------------------- --
+
+#Exercicio 01
+SELECT Cd_Func, Nm_Func, Vl_Salario FROM loc_funcionario;
+
+#Exercico 02
+SELECT * FROM loc_proprietario ORDER BY Nm_Proprietario;
+
+#Exercicio 03
+SELECT * FROM loc_banco ORDER BY Nm_Banco;
+
+#Exercicio 04
+SELECT * FROM loc_grupo;
+
+#EXERCICIO 5
+SELECT *
+ FROM Loc_Pedido_Locacao
+ order by Vl_Total desc;
+ 
+ #Exercicio 06
+ SELECT * FROM loc_cliente ORDER BY Cd_Tp_Cliente;
+ 
+ #Exercicio 07
+ SELECT * FROM loc_cliente ORDER BY Nr_Estrelas;
+ 
+-- Decrescente
+ SELECT *
+ FROM Loc_Cliente
+ order by Nr_Estrelas desc;
+ 
+ # Exercicio 08
+ SELECT * FROM loc_estado ORDER BY Sigla_Estado;
+ 
+ # Exercicio 09
+ SELECT Nm_Func, Cd_Depto, Vl_Perc_Comissao, Dt_Inicio FROM loc_funcionario ORDER BY Nm_func;
+ 
+ # Exercicio 10
+ SELECT * FROM loc_cidade ORDER BY Cd_Estado;
+ 
+ # Exercicio 11
+ SELECT * FROM loc_cidade WHERE Nm_Cidade LIKE '% %' ORDER BY Cd_Estado;
+ 
+ # Exercicio 12
+ SELECT Nm_Func, Nr_CPF, Cd_Depto
+  FROM Loc_Funcionario
+  WHERE nr_CPF IS NOT NULL;
+ 
+ -- 13 Exercicio
+ SELECT Cd_Func, Nm_Func, Vl_Salario, Vl_Perc_Comissao
+ FROM loc_funcionario;
+ 
+ -- 14 Exercicio
+ SELECT Nr_Placa, Nr_Chassis 
+ FROM loc_veiculo;
+ 
+ -- 15 Exercicio
+ SELECT * FROM loc_cidade
+ WHERE Nm_Cidade
+ LIKE "%Z%" OR Nm_Cidade LIKE "%B%" AND Cd_Estado = 3;
+ 
+ -- 16 Exercicio
+ SELECT Cd_Func, Nm_Func, Cd_Depto, Vl_Salario, Vl_Perc_Comissao, Dt_Inicio
+ FROM loc_funcionario
+ WHERE Cd_Func % 2 = 0 ORDER BY Cd_Func DESC;
+
+-- 17 Exercicio
+SELECT Cd_Func, Nm_Func, Cd_Depto, Vl_Salario, Vl_Perc_Comissao, Dt_Inicio
+ FROM loc_funcionario
+ WHERE Cd_Func % 2 = 1 ORDER BY Cd_Func DESC;
+
+-- 18 Exercicio
+ SELECT Nm_Func, Vl_Salario 
+ FROM loc_funcionario ORDER BY Nm_Func;
+ 
+ -- 19 Exercicio
+ SELECT Dt_Retirada, Dt_Entrega 
+ FROM loc_pedido_locacao WHERE Dt_Entrega > Dt_Retirada;
+ 
+ -- 20 Exercicio
+ Select *
+  FROM Loc_Pedido_Locacao
+  WHERE Dt_Locacao > Dt_Entrega OR Dt_Locacao > Dt_Retirada OR Vl_Total = 0;
+
+ -- 21 Exercicio
+SELECT cd_Operadora, Nm_Operadora FROM loc_operadora 
+WHERE LENGTH(Nm_Operadora) > 5;
+
+-- 22 Exercicio
+SELECT Nm_Cliente FROM loc_cliente 
+WHERE LENGTH(Nm_Cliente) > 15 AND Nm_Cliente LIKE "%i%";
+
+-- 23 Exercicio
+SELECT Nm_Cliente, Cd_Tp_Cliente 
+FROM Loc_Cliente; 
+ 
+ -- 24 Exercicio 
+ SELECT Nm_Depto, Vl_Orc_Depto
+ FROM loc_depto WHERE Vl_Orc_Depto > 20000;
+
+ -- 25 exercicio
+ SELECT *
+	FROM Loc_Pedido_Locacao
+    WHERE Nr_Pedido = 10;
+
+-- 26 Exercicio
+SELECT Cd_cliente, Nm_Cliente, Nr_Habilitacao, Cd_Tp_Cliente
+FROM loc_cliente ORDER BY Cd_cliente;
+
+-- 27 exercicio
+SELECT cd_func, Nm_Func, Vl_Salario 
+	FROM loc_funcionario
+	WHERE mod(cd_func, 2) = 1;
+
+-- 28 Exercicio
+SELECT Nm_Func, Vl_Salario 
+	FROM loc_funcionario
+	WHERE Vl_Salario > 7000;
+ 
+-- Surja Salario entre 6000 e 20000
+SELECT Nm_Func, Vl_Salario 
+	FROM loc_funcionario
+	WHERE Vl_Salario >= 6000 AND Vl_Salario <= 20000;
+
+-- 29 Exercicio
+SELECT Nr_Placa, Vl_Diaria 
+FROM loc_veiculo
+WHERE Vl_Diaria > 300 ORDER BY Vl_Diaria DESC;
+
+-- 30 Exercicio
+SELECT Nr_Placa, Vl_Diaria 
+FROM loc_veiculo
+WHERE Vl_Diaria > 300 ORDER BY Vl_Diaria;
+
+-- 31 Exercicio
+SELECT lower(Nm_Func), UPPER(Nm_Func) AS Nm_Func,
+ SUBSTRING(Nm_Func, 3, 8) FROM loc_funcionario;
+
+-- 32 Exercicio 
+SELECT
+  loc_pedido_locacao.Nr_Pedido, 
+  loc_pedido_locacao.Dt_Locacao, 
+  loc_pedido_locacao.Vl_Total, 
+  loc_pedido_locacao.Status, 
+  loc_funcionario.Cd_Func, 
+  loc_funcionario.Nm_Func, 
+  loc_cliente.Cd_cliente, 
+  loc_cliente.Nm_Cliente, 
+  CASE 
+    WHEN loc_cliente.Nr_Estrelas IS NULL THEN 'Sem estrelas'
+    WHEN loc_cliente.Nr_Estrelas <= 1 THEN 'Estrela de Papel'
+    WHEN loc_cliente.Nr_Estrelas = 2 THEN 'Estrela de Lata'
+    WHEN loc_cliente.Nr_Estrelas = 3 THEN 'Estrela de Bronze'
+    WHEN loc_cliente.Nr_Estrelas = 4 THEN 'Estrela de Prata'
+    WHEN loc_cliente.Nr_Estrelas = 5 THEN 'Estrela de Ouro'
+  END AS Nr_Estrelas
+FROM 
+  loc_pedido_locacao 
+  JOIN loc_funcionario ON loc_pedido_locacao.Cd_Func = loc_funcionario.Cd_Func 
+  JOIN loc_cliente ON loc_pedido_locacao.Cd_cliente = loc_cliente.Cd_cliente;
+
+-- 33 Exercicio 
+SELECT Nm_Func
+  FROM Loc_Funcionario
+  WHERE Nm_Func LIKE '%A';
+  
+-- 37 Exercicio
+SELECT Nm_Func
+  FROM Loc_Funcionario
+  WHERE Nm_Func lIKE '%si%';
+
+-- 47 Exercicio
+SELECT item.Nr_Pedido, ped.Qt_Dias, ped.Vl_Total, item.Nr_Placa, Nm_Modelo, Nm_Proprietario, Dt_Locacao
+  FROM loc_item_locacao as item
+  INNER JOIN loc_pedido_locacao ped ON item.Nr_Pedido = ped.Nr_Pedido
+  INNER JOIN loc_veiculo v ON item.Nr_Placa = v.Nr_Placa
+  INNER JOIN loc_modelo m ON v.cd_Modelo = m.cd_Modelo
+  INNER JOIN loc_proprietario p ON v.cd_proprietario = p.cd_proprietario
+  ORDER BY Nr_Pedido;
+
+-- 48 Exercicio
+SELECT *
+  FROM loc_veiculo v
+  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_modelo
+  INNER JOIN loc_fabricante f ON m.cd_modelo = f.cd_fabricante;
+
+-- 57 Exercicio
+SELECT f.cd_Func, f.Nm_Func, g.Cd_Func, g.Nm_Func
+  FROM loc_funcionario f
+  INNER JOIN loc_funcionario g ON f.cd_gerente = g.cd_func;
+
+-- 58 Exercicio
+SELECT f.cd_Func, f.Nm_Func, Nm_Cargo, Nm_Depto, g.Nm_Func, g.Vl_Salario
+  FROM loc_funcionario f
+  INNER JOIN loc_funcionario g ON f.cd_gerente = g.cd_func
+  INNER JOIN loc_cargo c ON f.cd_cargo = c.cd_cargo
+  INNER JOIN loc_depto d ON f.cd_depto = d.cd_depto;
+
+-- 67 Exercicio
+SELECT Nr_Placa, Nm_Grupo
+    FROM loc_veiculo v
+    INNER JOIN loc_grupo g ON v.cd_grupo = g.cd_grupo;
+
+-- 68 Exercicio
+SELECT Nr_Placa, Nm_Grupo
+    FROM loc_veiculo v
+    INNER JOIN loc_grupo g ON v.cd_grupo = g.cd_grupo;
+
+-- 69 Exercicio
+-- Elabore instrução SQL que apresente Nr da Placa dos Veículos e o
+-- nome do grupo a que o veículo pertence e o nome do modelo do veículo.
+SELECT * FROM loc_modelo;
+SELECT Nr_Placa, Nm_Grupo, Nm_Proprietario, Nm_Modelo
+FROM loc_veiculo v
+INNER JOIN loc_grupo g ON v.cd_grupo = g.cd_Grupo
+INNER JOIN loc_proprietario p ON v.cd_proprietario = p.cd_proprietario
+INNER JOIN loc_modelo m ON v.cd_Modelo = m.cd_Modelo;
+
+-- 70 Exercicio
+-- Elabore instrução SQL que apresente Nr da Placa dos Veículos e o 
+-- nome do grupo a que o veículo pertence e o nome do tipo de combustível.
+SELECT Nr_Placa, Nm_Grupo, Nm_Proprietario, Nm_Tp_Combustivelcol
+FROM loc_veiculo v
+INNER JOIN loc_grupo g ON v.cd_grupo = g.cd_Grupo
+INNER JOIN loc_proprietario p ON v.Cd_Proprietario = p.cd_proprietario
+INNER JOIN loc_tp_combustivel c ON v.tp_combustivel = c.cd_Tp_Combustivel;
+
+-- 71 Exercicio
+-- Listar os nomes dos departamentos e o maior salário pago pelo departamento.
+SELECT Nm_depto, MAX(Vl_Salario) 
+FROM loc_funcionario f
+INNER JOIN loc_depto d ON f.cd_depto = d.Cd_Depto
+GROUP BY d.Nm_Depto;
+
+-- 100 Exercicio
+SELECT Cd_Cliente, SUM(Vl_Total), COUNT(Nr_Pedido) AS QTD_LOCACOES_REALIZADAS
+FROM loc_pedido_locacao
+GROUP BY CD_CLIENTE;
+
+-- 101 Exercicio
+-- Quantos carros temos de cada cor, ornados alfabeticamente pelo nome da cor?
+-- Usar as tabelas Loc_Veiculo e Loc_Cor
+-- Sugestão: Cláusulas Group By e join entre tabelas
+SELECT Desc_Cor, COUNT(Nr_Placa)
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON V.cd_Cor = c.cd_Cor
+GROUP BY c.cd_Cor
+ORDER BY Desc_Cor;
+
+-- 103 Exercicio
+-- Quantos carros temos de cada cor, ornados alfabeticamente pelo nome da cor, desde que a cor tenha ao menos uma letra “e”
+-- no seu nome, mas descarte cores com 5 ou menos veículos?
+-- Usar as tabelas Loc_Veiculo e Loc_Cor
+-- Sugestão: Cláusulas Group By e Having,  join entre tabelas e use também like.
+SELECT Desc_Cor, COUNT(v.Nr_Placa) 
+FROM Loc_Veiculo v
+INNER JOIN loc_cor c ON v.cd_Cor = c.cd_Cor
+WHERE Desc_Cor LIKE '%e%'
+GROUP BY c.Desc_Cor
+HAVING COUNT(v.Nr_Placa) > 5
+ORDER BY c.Desc_Cor;
+
+-- 98 Exercicio
+-- Monte uma consulta que exiba a quantidade de cidades agrupadas por estado. Exiba somente os estados que contém mais de 5 cidades
+SELECT Nm_Estado, COUNT(Cd_Cidade) 
+FROM loc_Cidade c
+INNER JOIN loc_Estado e ON c.cd_Estado = e.cd_Estado
+GROUP BY Nm_Estado
+HAVING COUNT(Cd_Cidade) > 5;
+
+-- 111 Exercicio
+-- Desenvolva uma instrução SQL que exiba os dados dos veículos que não tenham pedido de locação feito até o momento. 
+SELECT *
+FROM loc_veiculo 
+WHERE Nr_Placa NOT IN (
+    SELECT Nr_Placa
+    FROM loc_pedido_locacao
+);
+
+-- 112 Exercicio
+-- Desenvolva uma instrução SQL que exiba os seguintes os nomes e salários dos funcionários que
+-- tenham salários maior que a média salarial de algum departamento. 
+SELECT Nm_func, Vl_salario
+FROM loc_funcionario 
+WHERE Vl_salario > ANY (
+  SELECT AVG(Vl_Salario)
+  FROM loc_funcionario f
+  INNER JOIN loc_depto d ON f.Cd_Depto = d.Cd_Depto
+  GROUP BY f.Cd_Depto
+);
+
+-- 113 Exercicio
+-- Desenvolva uma instrução SQL que exiba os seguintes os nomes e salários dos funcionários
+-- que tenham salários maior que a média salarial de algum departamento. 
+SELECT f.Nm_Func, f.Vl_salario
+FROM loc_funcionario f
+WHERE f.Vl_salario > (
+    SELECT AVG(VL_salario)
+    FROM loc_funcionario
+    WHERE cd_Depto = f.cd_Depto
+    GROUP BY Cd_Depto
+);
+
+-- 114 Exercicio
+-- Desenvolva uma instrução SQL que exiba os seguintes os nomes e salários dos funcionários que
+-- tenham salários maior que a média salarial de todos departamento. 
+SELECT NomeFuncionario, Salario
+FROM Funcionarios
+WHERE Salario > (SELECT AVG(Salario) FROM Funcionarios);
+
+SELECT Nm_Func, Vl_salario 
+FROM loc_Funcionario
+WHERE Vl_Salario > (SELECT AVG(vl_Salario) 
+							FROM loc_funcionario);

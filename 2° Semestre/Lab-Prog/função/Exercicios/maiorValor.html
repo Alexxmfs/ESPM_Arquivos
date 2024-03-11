@@ -1,0 +1,26 @@
+<script>
+
+    let x = new Array(3);
+
+    // ler os dados
+    for(let i = 0; i < x.length; i++) {
+        x[i] = parseInt(prompt("valor: "));
+    }
+
+    // chamar a função para descobrir o maior valor
+    let maior = acharMaior()
+    alert("maior valor = " + maior)
+
+    // codificação da função
+    function acharMaior(){
+        let aux = x[0];
+        for(let i = 0; i < x.length; i++){
+            if(x[i] > aux){
+                aux = x[i];
+            }
+        }
+        return aux;
+    }
+
+
+</script>

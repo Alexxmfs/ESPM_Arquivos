@@ -1,0 +1,329 @@
+.limitador{
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+nav {
+    color: rgb(232, 230, 227); 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra */
+    padding: 1px;
+    position: relative; 
+}
+
+nav ul {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 6px 0;
+}
+
+nav li {
+    text-align: center;
+    margin: 10px 15px 0;
+    list-style-type: none;
+}
+
+nav .logo {
+    text-align: center;
+    align-items: center;
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+}
+
+nav .logo img {
+    margin-right: 10px;
+}
+
+nav a {
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+}
+
+nav a:hover {
+    color: #ff4500;
+}
+
+.APPZINA{
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+    color: #5c668a;
+}
+
+.container-1{
+    background-image: url(./img/background-1.png);
+    padding-bottom: 30px;
+}
+
+
+.titulo-1{
+    font-size: 4rem;
+    padding: 100px 0 30px 30px;
+    max-width: 400px;
+}
+
+.desc-1{
+    max-width: 500px;
+    padding: 0px 0 20px 30px;
+
+}
+
+.img-celular{
+    max-width: 100%;
+    height: auto;
+    padding-top: 20px;
+    margin-left: 120px;
+}
+
+.button-2{
+    background-image: linear-gradient(to bottom right, #84C9FF, #7DACFF, #717CFF);
+    padding: 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: #FFF;
+    font-weight: 500;
+}
+
+.button-1{
+    background-image: linear-gradient(to bottom right, #84C9FF, #7DACFF, #717CFF);
+    margin-left: 30px;
+    padding: 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: #FFF;
+    font-weight: 500;
+}
+
+.special-feat {
+    padding-top: 100px;
+    height: 100px; 
+    margin: 0 auto;
+}
+
+.container-2{
+    padding: 100px 0 100px 0;
+}
+
+.desc-2{
+    max-width: 300px;
+}
+
+.learn-more{
+    padding: 30px 0 0 30px;
+}
+
+.learn-more2{
+    padding: 30px 0 0 0px;
+    color: #f2a829;
+}
+
+.read-more{
+    padding-top: 30px;
+}
+
+.container-3{
+    padding: 30px 0 0 30px;
+}
+
+.container-4{
+    padding: 30px 0 30px 100px;
+}
+
+.check{
+    padding-bottom: 20px;
+}
+
+.centro{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.Our-Princing-Plan{
+    padding: 30px 0 130px 0;
+}
+
+.background-azul{
+    padding: 30px;
+    color: #FFF;
+    background-image: linear-gradient(to right, #83C6FF, #758BFF , #7075FF);
+}
+
+.background-verde{
+    padding: 30px;
+    color: #FFF;
+    background-image: linear-gradient(to right, #75CBF4, #5BCBE0, #1CCAB0);
+}
+
+.background-laranja{
+    padding: 30px;
+    color: #FFF;
+    background-image: linear-gradient(to bottom right, #EC7967, #F28967, #FDA766);
+}
+
+.free-plan{
+    padding: 15px;
+    background: -webkit-linear-gradient(#83C6FF, #758BFF, #7075FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.paid-plan{
+    padding: 15px;
+    background-image: linear-gradient(to bottom right, #75CBF4, #5BCBE0, #1CCAB0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.paid-plan-2{
+    padding: 15px;
+    background-image: linear-gradient(to bottom right, #EC7967, #F28967, #FDA766);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fundo-plano{
+    padding: 20px 0 20px 0;
+}
+
+.fundo-plano-azul{
+    padding: 15px 0 15px 0;
+    background-color: #f2f7ff;
+}
+
+.fundo-plano-verde{
+    padding: 15px 0 15px 0;
+    background-color: #f2f7ff;
+}
+
+.fundo-plano-laranja{
+    padding: 15px 0 15px 0;
+    background-color: #f2f7ff;
+}
+
+.sign-up-azul{
+    border-radius: 30px;
+    background-image: linear-gradient(to bottom right, #84C9FF, #7DACFF, #717CFF);
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.sign-up-verde{
+    border-radius: 30px;
+    background-image: linear-gradient(to bottom right, #75CBF4, #5BCBE0, #1CCAB0);
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.sign-up-laranja{
+    border-radius: 30px;
+    background-image: linear-gradient(to bottom right, #EC7967, #F28967, #FDA766);
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+    color: #FFF;
+    text-decoration: none;
+}
+
+
+.col-sm-3 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .borda-sombra {
+    padding-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+  }
+
+
+
+.button-signUp{
+    padding-top: 8px;
+}
+
+.button-signUp-laranja{
+    padding-top: 15px;
+}
+
+.desc-pricing{
+    max-width: 180px;
+    padding-bottom: 40px;
+}
+
+.plan-type{
+    background: -webkit-linear-gradient(#83C6FF, #758BFF, #7075FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-bottom: 30px;
+}
+
+.analitics{
+    padding-bottom: 30px;
+    color: #94908e;
+}
+
+.linha-azul{
+    color: #001eff;
+    width: 100px;
+    border-width: 3px;
+}
+
+.linha-azul-home{
+    color: #001eff;
+    width: 100px;
+    margin-left: 30px;
+    border-width: 3px;
+}
+
+.container-5{
+    padding: 150px 0 100px 0;
+    background-image: url(./img/test-bg.png);
+}
+
+.circle {
+    width: 110px;
+    height: 110px;
+    border: 2px dashed #000; /* Define a largura da borda e o estilo (tracejado) */
+    border-radius: 50%; /* Define um raio de borda de 50% para tornar o elemento circular */
+    padding: 7px;
+    border-color: blue;
+}
+
+.What-our{
+    max-width: 300px;
+}
+
+.desc-container-5{
+    /* padding-top: 100px; */
+    /* max-width: 280px; */
+}
+
+.card-person-1{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 0px 70px 0px;
+    background: rgba(255, 255, 255, 0.8); /* Cor de fundo com 80% de opacidade */
+    margin:auto 80px auto 80px;
+}
+
+.desc-person-1{
+    padding: 30px;
+}
+
+.container-frase{
+    padding-top: 40px;
+    padding-left: 50px;
+}

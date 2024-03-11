@@ -1,0 +1,374 @@
+use carloca;
+
+-- LISTANDO SALÁRIOS DA TURMA
+SELECT Vl_Salario FROM loc_funcionario;
+
+-- QUAL  A SOMA SALARIAL DA CARLOCA
+SELECT SUM(Vl_Salario) FROM loc_funcionario;
+
+-- AGORA QUERO SOMA E MEDIA 
+SELECT SUM(Vl_Salario), AVG(Vl_Salario)
+FROM loc_funcionario;
+
+SELECT Vl_Salario
+FROM loc_funcionario
+ORDER BY Vl_Salario;
+
+-- QUAL MENOR SALARIO DO FUNCIONARIO
+SELECT MIN(Vl_Salario)
+FROM loc_funcionario;
+
+-- ARITMETICO
+SELECT Vl_Salario + 1,  Vl_Salario - 1,  Vl_Salario * 2,  Vl_Salario / 2
+FROM loc_funcionario;
+
+SELECT cd_func, mod(cd_func, 2), mod(vl_salario,2)
+FROM loc_funcionario;
+
+SELECT Nm_Func, SUBSTR(Nm_Func, 4,5), LENGTH(Nm_Func), INSTR(Nm_Func, 'm')
+FROM loc_funcionario;
+
+ -- Qual a soma de salarios por departamento
+SELECT cd_cargo, SUM(Vl_Salario)
+FROM loc_funcionario
+GROUP BY cd_cargo;
+
+-- QUAL A SOMA DE SALARIOS POR CARGO
+
+
+SELECT cd_func, SUM(Vl_Salario)
+FROM loc_funcionario
+GROUP BY cd_func;
+
+-- Medias e Somas de salarios por departamento
+SELECT Nm_depto, SUM(Vl_Salario), AVG(Vl_Salario)
+FROM loc_funcionario f
+INNER JOIN loc_depto d on f.Cd_Depto = d.Cd_Depto
+GROUP BY Nm_Depto;
+
+-- Medias e Somas salariais apenas que paga muito ( acima de 5000 )
+SELECT Nm_depto, SUM(Vl_Salario), AVG(Vl_Salario)
+FROM loc_funcionario f
+INNER JOIN loc_depto d on f.Cd_Depto = d.Cd_Depto
+WHERE Vl_Salario > 5000
+GROUP BY Nm_Depto;
+
+-- Medias e Somas salariais apenas de departamentos cuja media seja superior ( acima de 5000 )
+SELECT Nm_depto, SUM(Vl_Salario), AVG(Vl_Salario)
+FROM loc_funcionario f
+INNER JOIN loc_depto d on f.Cd_Depto = d.Cd_Depto
+GROUP BY Nm_Depto
+HAVING AVG(Vl_Salario) > 5000;
+
+-- Medias e Somas salariais apenas de departamentos cuja media seja superior ( acima de 5000 )
+-- Descontados todos os funcionario que ganham menos de 7000
+-- Ordenados em forma crescente  por valor
+SELECT Nm_depto, SUM(Vl_Salario), AVG(Vl_Salario)
+FROM loc_funcionario f
+INNER JOIN loc_depto d on f.Cd_Depto = d.Cd_Depto
+WHERE Vl_Salario > 7000
+GROUP BY Nm_Depto
+HAVING AVG(Vl_Salario) > 5000
+ORDER BY AVG(Vl_Salario);
+
+-- Geral Veiculo, fabricante, cor e modelo
+SELECT *
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_Cor
+INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante;
+
+-- Apenas Nomes, chapa e diária
+SELECT Nr_Placa, Desc_Cor, Nm_Modelo, Nm_Fabricante, Vl_Diaria
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_Cor
+INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante;
+
+-- Valor médio das locações
+SELECT avg(Vl_Diaria) FROM loc_veiculo;
+
+-- Valor médio das locações, por cor
+SELECT Nr_Placa, Desc_Cor, Nm_Modelo, Nm_Fabricante, Vl_Diaria
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_Cor
+INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+GROUP BY Desc_Cor;
+
+-- Incluir cor na bagunca
+ SELECT SUM(Vl_Diaria), AVG(Vl_Diaria), Desc_Cor, Nm_Modelo, Nm_Fabricante, Vl_Diaria, count(*)
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_Cor
+INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+GROUP BY Desc_Cor, Nm_Fabricante, Nm_Modelo
+ORDER BY Nm_Fabricante, Nm_Modelo;
+
+-- Quem ganha mais que a Adriana Doretto
+SELECT cd_func, nm_func, vl_salario
+FROM loc_funcionario
+WHERE cd_func = 4;
+
+SELECT cd_func, nm_func, vl_salario
+FROM loc_funcionario
+WHERE cd_func = 4;
+
+-- SubQuery
+SELECT cd_func, nm_func, vl_salario
+FROM loc_funcionario
+WHERE Vl_Salario > (SELECT vl_salario
+						FROM loc_funcionario
+						WHERE cd_func = 4);
+
+-- VALOR MÉDIO E SOMA DE VALORES DE DIÁRIA POR FABRICANTE QUEBRADO POR 
+-- MODELO
+ SELECT SUM(Vl_Diaria), AVG(Vl_Diaria), Desc_Cor, Nm_Modelo, Nm_Fabricante, Vl_Diaria, count(*)
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_Cor
+INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+GROUP BY Desc_Cor, Nm_Fabricante, Nm_Modelo
+ORDER BY Nm_Fabricante, Nm_Modelo;
+
+
+-- Relatorio de Locações de Veiculos da CARLOCA
+-- No transacao Nome do Modelo Nome do Fabricante Valor
+SELECT Nr_Pedido, i.Nr_Placa, Nm_Modelo, Nm_Fabricante, i.Vl_Diaria
+ FROM loc_Item_locacao i
+ INNER JOIN loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+ INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_modelo
+ INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante;
+
+
+
+
+-- VALOR MÉDIO E SOMA DE VALORES DE DIÁRIA POR FABRICANTE QUEBRADO POR 
+-- MODELO e contagem de carros, queremos somente carrros com valor de diaria maior que 120
+ SELECT SUM(Vl_Diaria), AVG(Vl_Diaria), Desc_Cor, Nm_Modelo, Nm_Fabricante, Vl_Diaria, count(*)
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_Cor
+INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+WHERE Vl_Diaria > 120
+GROUP BY Desc_Cor, Nm_Fabricante, Nm_Modelo, Desc_Cor
+ORDER BY Nm_Fabricante, Nm_Modelo;
+
+-- VALOR MÉDIO E SOMA DE VALORES DE DIÁRIA POR FABRICANTE QUEBRADO POR 
+-- MODELO e contagem de carros, queremos somente carrros com valor de diaria maior que 120
+-- Grupos com mais de 1 veiculo
+ SELECT SUM(Vl_Diaria), AVG(Vl_Diaria), Desc_Cor, Nm_Modelo, Nm_Fabricante, Vl_Diaria, count(*)
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_Cor
+INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+WHERE Vl_Diaria > 120
+GROUP BY Desc_Cor, Nm_Fabricante, Nm_Modelo
+HAVING count(*) > 1
+ORDER BY Nm_Fabricante, Nm_Modelo;
+
+-- VALOR MÉDIO E SOMA DE VALORES DE DIÁRIA POR FABRICANTE QUEBRADO POR 
+-- MODELO e contagem de carros, queremos somente carrros com valor de diaria maior que 120
+-- Grupos com mais de 1 veiculo
+ SELECT SUM(Vl_Diaria), AVG(Vl_Diaria), Desc_Cor, Nm_Modelo, Nm_Fabricante, Vl_Diaria, count(*)
+FROM loc_veiculo v
+INNER JOIN loc_cor c ON v.cd_cor = c.cd_Cor
+INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+WHERE f.cd_Fabricante = 2
+GROUP BY Desc_Cor, Nm_Fabricante, Nm_Modelo
+HAVING count(*) > 1
+ORDER BY Nm_Fabricante, Nm_Modelo;
+
+SELECT f.Nm_Func, g.Nm_Func
+FROM  loc_funcionario f
+INNER JOIN loc_funcionario g 
+ON f.Cd_Gerente = g.Cd_Func;
+
+-- Máximo Valor por Fabricante -- > Modelo
+SELECT Nm_Modelo, Nm_Fabricante, max(i.Vl_Diaria)
+ FROM loc_Item_locacao i
+ INNER JOIN loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+ INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_modelo
+ INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+ GROUP BY Nm_Fabricante, Nm_Modelo
+ ORDER BY Nm_Fabricante, Nm_Modelo;
+ 
+-- Máximo, MINIMO E MÉDIA Valor por Fabricante -- > Modelo
+ SELECT Nm_Modelo, Nm_Fabricante, MAX(i.Vl_Diaria), 
+		MIN(i.Vl_Diaria), AVG(i.Vl_Diaria)
+ FROM loc_Item_locacao i
+ INNER JOIN loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+ INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_modelo
+ INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+ GROUP BY Nm_Fabricante, Nm_Modelo
+ ORDER BY Nm_Fabricante, Nm_Modelo;
+
+-- MÉDIA Valor por Fabricante --> Modelo de carros caors (acima de 500)
+ SELECT Nm_Modelo, Nm_Fabricante, AVG(i.Vl_Diaria)
+ FROM loc_Item_locacao i
+ INNER JOIN loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+ INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_modelo
+ INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+ WHERE i.Vl_Diaria > 500
+ GROUP BY Nm_Fabricante, Nm_Modelo
+ ORDER BY Nm_Fabricante, Nm_Modelo;
+ 
+-- MÉDIA Valor por Fabricante --> Modelo de carros caors (acima de 500)
+-- ORDENADOS POR VALOR
+ SELECT Nm_Modelo, Nm_Fabricante, AVG(i.Vl_Diaria)
+ FROM loc_Item_locacao i
+ INNER JOIN loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+ INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_modelo
+ INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+ WHERE i.Vl_Diaria > 500
+ GROUP BY Nm_Fabricante, Nm_Modelo
+ ORDER BY AVG(i.Vl_Diaria);
+ 
+-- MÉDIA Valor por Fabricante --> Modelo de carros caors (acima de 500)
+-- ORDENADOS POR VALOR, mas apenas para Fabricantes --> Modelos com valores 
+-- acima de 10.000
+ SELECT Nm_Modelo, Nm_Fabricante, AVG(i.Vl_Diaria)
+ FROM loc_Item_locacao i
+ INNER JOIN loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+ INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_modelo
+ INNER JOIN loc_fabricante f ON m.cd_Fabricante = f.cd_Fabricante
+ WHERE i.Vl_Diaria > 500
+ GROUP BY Nm_Fabricante, Nm_Modelo
+ HAVING AVG(i.Vl_Diaria) > 10000
+ ORDER BY AVG(i.Vl_Diaria);
+ 
+ SELECT * FROM loc_modelo;
+ 
+ 
+ -- Que modelos tem valores de locação maiores que a locação média do Fiesta
+ 
+-- PART 1 --> Valor médio do Fiesta
+ SELECT Nm_Modelo, AVG(i.Vl_Diaria) 
+  FROM loc_item_locacao i
+  INNER JOIN loc_veiculo v ON i.Nr_Placa = v.Nr_Placa
+  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+  WHERE m.cd_Modelo = 10;
+ 
+  -- Part 2 --> Valor médio  de todo mundo
+   SELECT Nm_Modelo, AVG(i.Vl_Diaria) 
+  FROM loc_item_locacao i
+  INNER JOIN loc_veiculo v ON i.Nr_Placa = v.Nr_Placa
+  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+  GROUP BY Nm_Modelo; 
+  
+-- Parte 3 --> tá funcionando na mao
+   SELECT Nm_Modelo, AVG(i.Vl_Diaria) 
+  FROM loc_item_locacao i
+  INNER JOIN loc_veiculo v ON i.Nr_Placa = v.Nr_Placa
+  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+  GROUP BY Nm_Modelo
+  HAVING AVG(i.Vl_Diaria) > 2267;
+  
+  -- Resolvendo o exercício
+     SELECT Nm_Modelo, AVG(i.Vl_Diaria) 
+  FROM loc_item_locacao i
+  INNER JOIN loc_veiculo v ON i.Nr_Placa = v.Nr_Placa
+  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+  GROUP BY Nm_Modelo
+  HAVING AVG(i.Vl_Diaria) > (SELECT AVG(i.Vl_Diaria) 
+							  FROM loc_item_locacao i
+								  INNER JOIN loc_veiculo v ON i.Nr_Placa = v.Nr_Placa
+								  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+								  WHERE m.cd_Modelo = 10);
+  
+  -- Que modelos tem valores de locação maiores que a locação média dos modelos Ford
+ 
+-- Quem é a Ford
+  SELECT * FROM loc_fabricante;
+  -- é o 3
+  
+-- Pt 2 MONSTRANDO NA CONSULTA 2 CARROS DA FORD
+ SELECT Nm_Modelo, AVG(i.Vl_Diaria) 
+  FROM loc_item_locacao i
+  INNER JOIN loc_veiculo v ON i.Nr_Placa = v.Nr_Placa
+  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+  WHERE m.cd_Fabricante = 3
+  GROUP BY Nm_Modelo;
+  
+  -- FINAL
+     SELECT Nm_Modelo, AVG(i.Vl_Diaria) 
+  FROM loc_item_locacao i
+  INNER JOIN loc_veiculo v ON i.Nr_Placa = v.Nr_Placa
+  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+  GROUP BY Nm_Modelo   
+  HAVING AVG(i.Vl_Diaria) > ALL (SELECT AVG(i.Vl_Diaria) 
+							  FROM loc_item_locacao i
+								  INNER JOIN loc_veiculo v ON i.Nr_Placa = v.Nr_Placa
+								  INNER JOIN loc_modelo m ON v.cd_modelo = m.cd_Modelo
+								  WHERE m.cd_Fabricante = 3
+								  GROUP BY Nm_Modelo);
+                                  
+-- Pessoa e salarios anuais que ganham mais que orçamento mensal de um departamento
+SELECT Vl_Orc_Depto
+	FROM loc_depto;
+    
+SELECT Nm_Func, Vl_Salario * 12 Salario_Anual
+ FROM loc_funcionario;
+ 
+ SELECT Nm_Func, Vl_Salario * 12 Salario_Anual
+   FROM loc_funcionario
+   WHERE Vl_Salario * 12 > any (SELECT Vl_Orc_Depto
+	                              FROM loc_depto);
+                                  
+-- Pessoa e salarios anuais que ganham mais que orçamento mensal de todos departamento
+ SELECT Nm_Func, Vl_Salario * 12 Salario_Anual
+   FROM loc_funcionario
+   WHERE Vl_Salario * 12 > all (SELECT Vl_Orc_Depto
+	                              FROM loc_depto);
+                                  
+                                  
+ SELECT Nm_Func, Vl_Salario * 12 Salario_Anual
+   FROM loc_funcionario
+   WHERE Vl_Salario * 12 in (SELECT Vl_Orc_Depto
+	                              FROM loc_depto);
+                              
+                              
+SELECT * FROM loc_funcionario;
+
+-- Listar Nomes e Salários de funcionarios que ganham mais que a média
+-- do cargo 3 e que sejam do cargo 7
+
+SELECT * FROM loc_cargo;
+
+SELECT Nm_Func, Nm_Cargo, Vl_Salario
+FROM loc_funcionario f
+INNER JOIN loc_cargo c ON f.Cd_Cargo = c.Cd_Cargo;
+
+SELECT Nm_Func, Nm_Cargo, Vl_Salario
+FROM loc_funcionario f
+INNER JOIN loc_cargo c ON f.Cd_Cargo = c.Cd_Cargo
+WHERE Vl_Salario > (SELECT AVG(Vl_Salario)
+						FROM  loc_funcionario
+                        WHERE cd_cargo = 7) AND 
+											Nm_Cargo = (SELECT Nm_Cargo
+											FROM loc_cargo
+											WHERE Cd_Cargo = 3);
+
+SELECT Nm_Func, Nm_Cargo, Vl_Salario
+FROM loc_funcionario f
+INNER JOIN loc_cargo c ON f.Cd_Cargo = c.Cd_Cargo
+INNER JOIN loc_depto d ON f.Cd_Depto = d.Cd_Depto;
+
+-- CRIANDO VIEW DE DEPTO PESSOAL COM O SELECT ACIMA
+CREATE VIEW Depto_Pessoal 
+AS SELECT Nm_Func, Nm_Cargo, Vl_Salario, Nm_Depto
+		FROM loc_funcionario f
+		INNER JOIN loc_cargo c ON f.Cd_Cargo = c.Cd_Cargo
+		INNER JOIN loc_depto d ON f.Cd_Depto = d.Cd_Depto;
+        
+SELECT * FROM Depto_Pessoal;
+
+
+CREATE VIEW Teste AS SELECT * FROM loc_depto;
+
+SELECT *
+ FROM Teste;
+ 
+ DROP VIEW Teste;
+

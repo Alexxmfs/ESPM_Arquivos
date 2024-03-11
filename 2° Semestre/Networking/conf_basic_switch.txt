@@ -1,0 +1,29 @@
+!Configurando Switch S1
+enable
+configure terminal
+hostname S1
+enable secret class
+line console 0
+password cisco
+login
+exit
+ip address 192.169.1.1 255.255.255.0
+no shutdown
+banner motd #Acesso proibido#
+show running-config
+show ip int brief
+
+!Configurando Switch S2
+enable
+configure terminal
+hostname S1
+enable secret class
+line console 0
+password cisco
+login
+exit
+ip address 192.169.1.1 255.255.255.0
+no shutdown
+banner motd #Acesso proibido#
+show running-config
+show ip int brief

@@ -1,0 +1,55 @@
+<meta charset="utf-8" >
+
+<script>
+    
+//   Escreva um programa em JavaScript que leia o nome de cada produto comercializado por um
+//   vendedor, a respectiva quantidade em estoque e o valor unitário (todos esses valores devem ser
+//   armazenados). O seu programa deverá:
+//   a) Imprimir o nome do produto mais caro (considerar mais de um produto com o mesmo valor).
+//   b) Imprimir o valor total (em reais) de cada produto armazenado.
+//   c) Imprimir o valor total (em reais) armazenado em estoque
+
+    let qtdProduto;
+    let listaProduto = [];
+    let listaQuantidade = [];
+    let listaValor = [];
+
+    let maiorValor = 0;
+    let produtoCaro = "Produto(s) mais caro(s)\n";
+    let totalProduto = "";
+    let totalEstoque = 0;
+
+    // entra com a quantidade  de produtos
+    qtdProduto = parseInt(prompt("Informe a quantidade de produtos"));
+
+    // entra com os dados de cada produto
+    for(let i = 0; i < qtdProduto; i++) {
+        listaProduto.push(prompt("Nome do produto: "));
+        listaQuantidade.push(parseInt(prompt("Informe a quantidade do produto")));
+        listaValor.push(Number(prompt("Informe o valor unitario do produto")));
+        
+        if(listaValor[i] > maiorValor){
+            maiorValor = listaValor[i];
+        };
+    };
+
+    // percorrer as listas para determinar os itens a, b, e c
+    for(let i = 0; i < qtdProduto; i++){
+        // item a
+        if(listaValor[i] == maiorValor){
+            produtoCaro += listaProduto[i] + "\n";
+        } 
+
+    // item b
+    totalProduto += listaProduto[i] + " --> R$" + (listaQuantidade[i] * listaValor[i]) + "\n";
+
+    // item c
+    totalEstoque += listaQuantidade[i] * listaValor[i];
+}
+
+    // saída de dados 
+    alert(produtoCaro);
+    alert(totalProduto);
+    alert("Valor total em estoque R$ " + totalEstoque);
+
+</script>

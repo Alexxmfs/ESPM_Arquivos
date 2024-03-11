@@ -1,0 +1,75 @@
+.limitador{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-1{
+    padding: 200px 0 200px 0px;
+    background-size: cover;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/001/987/871/non_2x/abstract-black-stripes-diagonal-background-free-vector.jpg');
+}
+
+.caixa-1{
+    margin: 0 auto;
+    text-align: center;
+    max-width: 500px;
+}
+
+.titulo-1{
+    font-size: 5rem;
+    background: -webkit-linear-gradient(#e82020, #f02b52, #ba2b2b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-1{
+    color: #FFF;
+    padding-bottom: 20px;
+}
+
+.cards{
+    padding: 30px;
+    background-color: gray;
+}
+
+.container-cards{
+    padding: 10px;
+}
+
+.icon-tv{
+    width: 50px;
+    height: 50px;
+}
+
+.container-2{
+    padding: 50px 0 50px 0px;
+}
+
+
+
+.card-portfolio{
+    color: #FFF;
+    background-image: url('background-portfolio-1.jpg');
+    background-size: cover;
+    padding: 400px 20px 40px 20px;
+}
+
+.button-portfolio{
+}
+
+.titulo-portfolio{
+    padding-bottom: 10px;
+    padding-right: 20px
+}
+
+.desc-portfolio{
+    max-width: 500px;
+    padding: 10px;
+}
+
+.container-3{
+    padding-top: 20px;
+    padding-bottom: 0px;
+    background-color: gray;
+}
+

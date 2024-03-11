@@ -1,0 +1,38 @@
+<meta charset="utf-8">
+
+<script>
+  let a, b, c, a1
+
+  a = parseFloat(prompt("Insira o valor de a"))
+  b = parseFloat(prompt("Insira o valor de b"))
+  c = parseFloat(prompt("Insira o valor de c"))
+  a1 = a
+  if (a > b && a > c) {
+    a = a
+  } else if (a > b && a < c) {
+    a1 = c
+    c = a
+  } else if (a < b && b > c) {
+    a1 = b
+    b = a
+  } else {
+    a1 = c
+    c = a
+  }
+  switch (true) {
+    case a1 < b + c && b < a1 + c && c < a1 + b:
+      document.write("<Center><h2>Os valores representam os lados de um triangulo</h2></Center>")
+
+      if (a1 * a1 == b * b + c * c) {
+        document.write(" <Center><h2>e o triangulo é retangulo</h2</Center>>")
+      } else if (a1 * a1 < b * b + c * c) {
+        document.write(" <Center><h2>e o triangulo é Acutângulo</h2>")
+      } else {
+        document.write(" <Center><h2>e o triangulo é Obtusângulo</h2></Center>")
+      }
+      break;
+
+    default:
+      document.write("<Center><h2>Os valores não representam os lados de um triangulo</h2></Center>")
+  }
+</script>

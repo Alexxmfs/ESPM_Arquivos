@@ -1,0 +1,163 @@
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.limitador {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-1{
+    height: 80vh;
+    background-size: cover;
+    margin: 0 auto;
+    background-image: url('https://wallpapercave.com/wp/wp12475759.jpg');
+}
+
+.container{
+    margin-top: 30px;
+    padding: 60px;
+}
+
+.sub-container {
+    position: absolute; 
+    left: 50%; 
+    top: 35%;
+    text-align: center; 
+    transform: translate(-50%, -50%);
+    width: 100%; 
+}
+
+.titulo-1{
+    font-size: 6rem;
+    background: -webkit-linear-gradient(#e82020, #f02b52, #ba2b2b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    max-width: 100%;
+    text-align: center;
+    font-webkit: 800px;
+}
+
+.text-1{
+    color: #FFF;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.button-1{
+    padding: 10px;
+    color: #FFF;
+    background-color: transparent;
+    border-color: #FFF;
+    border-style: solid;
+    width: 150px;
+    transition: background-color 0.3s; 
+}
+
+.button-1:hover{
+    background-color: #FFF;
+    color: #000;
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.caixa {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #ededeb;
+    max-width: 900px;
+    padding-left: 20px;
+}
+
+.title-caixas{
+    padding-top: 10px;
+}
+
+.icon-camada{
+    width: 50px;
+}
+
+.container-3{
+    padding: 30px auto;
+    background-color: #F8F9FC;
+}
+
+.card-1{
+    color: #FFF;
+    background-image: url('./img/portfolio-1.png');
+}
+
+.card-2{
+    color: #FFF;
+    background-image: url('./img/portfolio-2.png');
+}
+
+.card-3{
+    color: #FFF;
+    background-image: url('./img/portfolio-3.png');
+}
+
+.items{
+    padding-top: 350px;
+    padding-left: 30px;
+    padding-bottom: 70px;
+}
+
+.button-case-study{
+    margin-top: 30px;
+    padding: 8px;
+    color: #FFF;
+    background-color: transparent;
+    border-color: #FFF;
+    border-style: solid;
+    width: 130px;
+    border-radius: 5px;
+    transition: background-color 0.3s; 
+}
+
+.button-case-study:hover {
+    background-color: #FFF;
+    color: #000; 
+}
+
+.container-fluid{
+    padding-bottom: 30px;
+}
+
+.title-portfolio{
+    padding-top: 20px;
+    padding-left: 15px;
+}
+
+.desc-portfolio{
+    padding-left: 15px;
+}
+
+
+.text-facts{
+    text-align: center;
+}
+
+
+
+.title-pink{
+    padding-top: 30px;
+    font-weight: 700;
+    color: #F9004D;
+}
+
+.container-4{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.Our-Fun-Facts{
+    text-align: center;
+}

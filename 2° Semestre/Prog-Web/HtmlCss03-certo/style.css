@@ -1,0 +1,107 @@
+.limitador{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-1{
+    padding: 200px 0 200px 0px;
+    background-size: cover;
+    background-image: url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+}
+
+.caixa-1{
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.container-2{
+    padding: 200px 0 200px 0px;
+    background-size: cover;
+    background-image: url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+}
+
+.caixa-2{
+    max-width: 500px;
+    margin: 0 100px;
+}
+
+.container-3{
+    padding: 200px 0 200px 0px;
+    background-size: cover;
+    background-image: url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+
+}
+
+.caixa-3{
+    max-width: 500px;
+    padding: 0 0 0 45%;
+}
+
+.container-4{
+    padding: 200px 0 200px 0px;
+    background-size: cover;
+    background-image: url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+
+}
+
+.caixa-4{
+    max-width: 500px;
+    margin: 0 100px;
+}
+
+h1{
+    font-size: 3rem;
+}
+
+.titulo-1{
+    color: #FFF;
+}
+
+.desc-1{
+    color: #FFF;
+}
+
+
+.button-1{
+    background-color: #7ED11F;
+    color: #FFF;
+    border-radius: 10px;
+    width: 120px;
+    padding: 10px;
+    border: none;
+    box-shadow: 0 0 5px #7ED11F, 0 0 25px #7ED11F;
+}
+
+.button-1:hover{
+    box-shadow: 0 0 5px #7ED11F, 0 0 100px #7ED11F;
+}
+
+.button-2{
+    box-shadow: 0 0 5px #0674FF, 0 0 25px #0674FF;
+    background-color: #0674FF;
+    color: #FFF;
+    border-radius: 10px;
+    width: 120px;
+    padding: 10px;
+    border: none;
+}
+
+.button-2:hover{
+    box-shadow: 0 0 5px #0674FF, 0 0 100px #0674FF;
+}   
+
+.button-3{
+    box-shadow: 0 0 5px #00bef2, 0 0 25px #00bef2;
+    background-color: #00bef2;
+    color: #FFF;
+    border-radius: 10px;
+    width: 120px;  
+    padding: 10px;
+    border: none;
+}
+
+.button-3:hover{
+    box-shadow: 0 0 5px #00bef2, 0 0 100px #00bef2;
+}  
+

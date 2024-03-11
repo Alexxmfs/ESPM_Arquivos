@@ -1,0 +1,30 @@
+<meta charset="utf-8">
+
+<script>
+  let x, y;
+
+  x = parseFloat(prompt("Insira o valor de x"));
+  y = parseFloat(prompt("Insira o valor de y"));
+  
+    if ((x == 0 && y == 0)) {
+    document.write("<Center><h2>Os pontos estão na Origem")
+
+    } else if (x == 0 && y != 0) {
+    document.write("<Center><h2>Os pontos estão localizados na linha das abscissas e no ponto y " + y + "</h2></Center>");
+  
+    } else if (y == 0 && x != 0) {
+    document.write("<Center><h2>Os pontos estão localizados na linha das ordenadas e no ponto x " + x + "</h2></Center>");
+
+    } else if (x > 0 && y > 0) {
+    document.write("<Center><h2>Os pontos estão localizados no quadrante Q1 e nos pontos x " + x + " e  ponto y " + y + "</h2></Center>");
+
+    } else if (x > 0 && y < 0) {
+    document.write("<Center><h2>Os pontos estão localizados no quadrante Q4 e nos pontos x " + x + " e  ponto y " + y + "</h2></Center>");
+
+    } else if (x < 0 && y < 0) {
+    document.write("<Center><h2>Os pontos estão localizados no quadrante Q3 e nos pontos x " + x + " e  ponto y " + y + "</h2></Center>");
+    
+    } else if (x < 0 && y > 0) {
+    document.write("<Center><h2>Os pontos estão localizados no quadrante Q2 e nos pontos x " + x + " e  ponto y " + y + "</h2></Center>");
+}
+</script>

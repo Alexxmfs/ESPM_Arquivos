@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+
+<script>
+
+  let valor, cont, resultado;
+  let resp;
+
+  do{
+
+  valor = parseInt(prompt("Qual é o valor? "));
+  cont = 0;
+
+  while(cont <= 10){
+
+    resultado = valor * cont;
+
+    console.log(valor + " * " + cont + " = " + resultado + "\n");
+    cont = cont + 1;
+  }
+  resp = prompt("Deseja outra tabuada: (s ou n)? \n");
+  } while(resp == "s");
+
+</script>

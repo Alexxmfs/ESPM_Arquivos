@@ -1,0 +1,25 @@
+<script>
+    
+    let h;
+    let r;
+    let area;
+    let qtd;
+    let custo;
+
+    h = parseInt(prompt("Digite o valor da altura: "));
+
+    r = parseInt(prompt("Digite o valor do raio: "));
+
+    area = 2 * Math.PI * r * (h+r);
+
+    qtd = Math.ceil(area / 15);
+
+    custo = qtd * 220.00;
+
+    document.write("<h1>A quantidade de latas de tinta foi: " + qtd + "</h1>")
+    
+    document.write("<h1>Area: " + area.toFixed(4) + "</h1>")
+    
+    document.write("<h1>O Custo foi: " + custo + "$</h1>");
+
+</script>

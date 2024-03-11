@@ -1,0 +1,55 @@
+
+
+#main{
+    width: 70%;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.logoTudoGostoso{
+    width: 280px;
+    height: 62px;
+}
+
+.container-logo{
+    background-color: #a3b7ff;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.centraliza{
+    text-align: center;
+}
+
+.comidas{
+    color: #a6a6a6;
+    text-align: center;
+}
+
+h3{
+    background-color: #dbdbdb;
+    padding: 12px;
+    margin-top: 10px;
+    font-weight: normal;
+}
+
+.titulo-receita{
+    color:#F7A71E;
+    text-align: center;
+}
+
+h1{
+    color:#F7A71E;
+}
+
+.img-bolo{
+    width: 310px;
+    height: 230px;
+}
+
+h2{
+    color:#F7A71E;
+    font-weight: normal;
+}
+

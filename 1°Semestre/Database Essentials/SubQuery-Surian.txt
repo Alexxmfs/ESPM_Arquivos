@@ -1,0 +1,308 @@
+use carloca;
+
+-- Qual a soma dos salarios
+Select sum(Vl_Salario) from loc_funcionario;
+
+-- Qual a media e a soma salarial
+Select sum(Vl_Salario), avg(vl_salario) 
+   from loc_funcionario;
+
+-- O que faz isso
+Select min(vl_salario) from loc_funcionario;
+
+Select Vl_Salario
+  from loc_funcionario
+  order by vl_salario;
+-- Descobre o menor salário  
+  
+-- Aritmética  
+Select Vl_Salario + 1, Vl_Salario - 1, Vl_Salario * 2, Vl_Salario / 2
+  from loc_funcionario;
+  
+ Select cd_func, mod(cd_func,2)
+   from loc_funcionario;
+
+Select Nm_Func, substr(Nm_Func,4,5), length(Nm_Func), instr(Nm_Func,'m')
+  from loc_funcionario;
+  
+ -- Qual a somo de salarios por departamento
+ Select cd_depto, sum(Vl_Salario)
+   from loc_funcionario
+   group by cd_depto;
+  
+  -- Qual a soma de salarios por cargo
+Select cd_cargo, sum(Vl_Salario)
+   from loc_funcionario
+   group by cd_cargo;
+
+Select cd_func, sum(Vl_Salario)
+   from loc_funcionario
+   group by cd_func;  
+ -- Medias e Somas de salarios por departamento  
+ Select nm_depto, sum(Vl_Salario), avg(Vl_Salario)
+   from loc_funcionario f
+   inner join loc_depto d on f.cd_depto = d.cd_depto
+   group by nm_depto;  
+   
+-- Medias e Somas salarias apenas de qujem paga muito (acima de 5000)
+Select nm_depto, sum(Vl_Salario), avg(Vl_Salario)
+   from loc_funcionario f
+   inner join loc_depto d on f.cd_depto = d.cd_depto
+   where Vl_Salario > 5000
+   group by nm_depto;
+   
+ -- Medias e Somas salarias apenas de Departamentos cuja média seja acim a de 5000 
+Select nm_depto, sum(Vl_Salario), avg(Vl_Salario)
+   from loc_funcionario f
+   inner join loc_depto d on f.cd_depto = d.cd_depto
+   group by nm_depto
+   having avg(vl_salario) > 5000;
+   
+ -- Medias e Somas salarias apenas de Departamentos cuja média seja acim a de 5000
+ --    descontados todos os funcionários que ganham mais de 7000
+ --    ordenados em forma crescente por valor 
+ Select nm_depto, sum(Vl_Salario), avg(Vl_Salario)
+   from loc_funcionario f
+   inner join loc_depto d on f.cd_depto = d.cd_depto
+   where Vl_Salario > 7000
+   group by nm_depto
+   having avg(vl_salario) > 5000
+   order by avg(vl_salario);
+   
+ -- Geral Veículo, fabricante, cor e modelo
+ Select * 
+   from loc_veiculo v
+   inner join loc_cor c on v.cd_cor = c.cd_cor
+   inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+   inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante;
+   
+-- Apenas nomes, chapa e diária
+ Select Nr_Placa, Desc_Cor, Nm_Modelo, Nm_Fabricante, Vl_Diaria
+   from loc_veiculo v
+   inner join loc_cor c on v.cd_cor = c.cd_cor
+   inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+   inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante;
+   
+  -- Valor médio das locações
+  Select avg(Vl_Diaria)
+    from loc_veiculo v
+   inner join loc_cor c on v.cd_cor = c.cd_cor
+   inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+   inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante;
+   
+  -- Valor médio das locações, por Modelo
+  Select Nm_Modelo, avg(Vl_Diaria)
+    from loc_veiculo v
+    inner join loc_cor c on v.cd_cor = c.cd_cor
+    inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+    inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+    group by Nm_modelo;
+    
+   -- Valor médio das locações, por Cor
+  Select Desc_Cor, avg(Vl_Diaria)
+    from loc_veiculo v
+    inner join loc_cor c on v.cd_cor = c.cd_cor
+    inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+    inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+    group by Desc_Cor; 
+    
+   -- Valor Médio e Soma de Valores de Diária por Fabricante quebrado por
+   --     modelo e contagem de carros
+   Select Nm_Fabricante, Nm_Modelo, avg(Vl_Diaria), sum(Vl_diaria), count(*)
+    from loc_veiculo v
+    inner join loc_cor c on v.cd_cor = c.cd_cor
+    inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+    inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+    group by Nm_Fabricante, Nm_Modelo
+    order by Nm_Fabricante, Nm_Modelo; 
+    
+-- Valor Médio e Soma de Valores de Diária por Fabricante quebrado por
+--     modelo e contagem de carros, queremos somente carros com valor
+--     de diaria superior a 120     
+  Select Nm_Fabricante, Nm_Modelo, avg(Vl_Diaria), sum(Vl_diaria), count(*)
+    from loc_veiculo v
+    inner join loc_cor c on v.cd_cor = c.cd_cor
+    inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+    inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+    where Vl_Diaria > 120
+    group by Nm_Fabricante, Nm_Modelo
+    order by Nm_Fabricante, Nm_Modelo; 
+
+-- Valor Médio e Soma de Valores de Diária por Fabricante quebrado por
+--     modelo e contagem de carros, queremos somente grupos com mais de 
+--     1 veículo
+Select Nm_Fabricante, Nm_Modelo, avg(Vl_Diaria), sum(Vl_diaria), count(*)
+    from loc_veiculo v
+    inner join loc_cor c on v.cd_cor = c.cd_cor
+    inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+    inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+    group by Nm_Fabricante, Nm_Modelo
+    having count(*) > 1
+    order by Nm_Fabricante, Nm_Modelo; 
+
+-- Valor Médio e Soma de Valores de Diária por Fabricante quebrado por
+--     modelo e contagem de carros, queremos somente grupos com mais de 
+--     1 veículo e que seja da marca Fiat  (código 2)
+
+Select * from loc_fabricante;
+
+Select Nm_Fabricante, Nm_Modelo, avg(Vl_Diaria), sum(Vl_diaria), count(*)
+    from loc_veiculo v
+    inner join loc_cor c on v.cd_cor = c.cd_cor
+    inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+    inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+    where f.cd_fabricante = 2
+    group by Nm_Fabricante, Nm_Modelo
+    having count(*) > 1
+    order by Nm_Fabricante, Nm_Modelo; 
+   
+  -- Incluir cor na bagunca 
+   Select Nm_Fabricante, Nm_Modelo, Desc_Cor, 
+          avg(Vl_Diaria), sum(Vl_diaria), count(*)
+    from loc_veiculo v
+    inner join loc_cor c on v.cd_cor = c.cd_cor
+    inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+    inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+    group by Nm_Fabricante, Nm_Modelo, Desc_Cor
+    order by Nm_Fabricante, Nm_Modelo; 
+    
+  -- Quem ganha mais que a Adriana Doretto
+  Select cd_func,  nm_func, vl_salario
+    from loc_funcionario
+    where cd_func = 4;
+    
+  Select cd_func,  nm_func, vl_salario
+	   from loc_funcionario
+       where vl_salario > 7145.74;
+       
+   Select cd_func,  nm_func, vl_salario
+	   from loc_funcionario
+       where vl_salario > (7145.74);    
+       
+Select vl_salario
+    from loc_funcionario
+    where cd_func = 4;    
+    
+ -- SubQuery
+  Select cd_func,  nm_func, vl_salario
+	   from loc_funcionario
+       where vl_salario > (Select vl_salario
+                             from loc_funcionario
+							 where cd_func = 4);  
+                             
+ -- Relatório de Locacoes de Veiculos da CARLOCA
+ --   No Transacao Placa  Nomne do Modelo Nome do Fabricante Valor 
+ Select Nr_Pedido, i.Nr_Placa, Nm_Modelo, Nm_Fabricante, i.Vl_Diaria
+   from loc_item_locacao i
+   inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+   inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+   inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante;
+   
+-- Mãximo Valor por Fabricante --> Modelo   
+ Select Nm_Fabricante, Nm_Modelo, max(i.Vl_Diaria)
+   from loc_item_locacao i
+   inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+   inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+   inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+   group by Nm_Fabricante, Nm_Modelo
+   order by Nm_Fabricante, Nm_Modelo;
+ 
+ -- Mãximo, Mínimo e Média Valor por Fabricante --> Modelo   
+ Select Nm_Fabricante, Nm_Modelo, max(i.Vl_Diaria), 
+        min(i.Vl_Diaria), avg(i.Vl_Diaria)
+   from loc_item_locacao i
+   inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+   inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+   inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+   group by Nm_Fabricante, Nm_Modelo
+   order by Nm_Fabricante, Nm_Modelo;
+   
+  -- Média Valor por Fabricante --> Modelo de carros caros (acima de 500)
+  --    ordenados por valor
+ Select Nm_Fabricante, Nm_Modelo, avg(i.Vl_Diaria)
+   from loc_item_locacao i
+   inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+   inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+   inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+   where i.Vl_Diaria > 500
+   group by Nm_Fabricante, Nm_Modelo
+   order by avg(i.vl_Diaria); 
+ 
+   -- Média Valor por Fabricante --> Modelo de carros caros (acima de 500)
+  --    ordenados por valor, mas apenas para Fabricante-->Modelos com valores
+  --    acima de 10.000
+Select Nm_Fabricante, Nm_Modelo, avg(i.Vl_Diaria)
+   from loc_item_locacao i
+   inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+   inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+   inner join loc_fabricante f on m.cd_fabricante = f.cd_fabricante
+   where i.Vl_Diaria > 500
+   group by Nm_Fabricante, Nm_Modelo
+   having avg(i.vl_diaria) > 10000
+   order by avg(i.vl_Diaria); 
+   
+Select * from loc_modelo;   
+
+-- Que modelos tem valores de locacao maiores que a locacao média do Fiesta
+
+-- Parte 1 --> Valor médio do Fiesta
+Select Nm_modelo, avg(i.Vl_Diaria)
+  from loc_item_locacao i
+  inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+  inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+  where m.cd_modelo = 10;
+   
+-- Parte 2 --> Valor médio de todo mundo
+Select Nm_modelo, avg(i.Vl_Diaria)
+  from loc_item_locacao i
+  inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+  inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+  group by Nm_Modelo;
+  
+-- Parte 3 --> tá funcionando na mao
+Select Nm_modelo, avg(i.Vl_Diaria)
+  from loc_item_locacao i
+  inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+  inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+  group by Nm_Modelo
+  having avg(i.Vl_Diaria) > 2267;  
+  
+-- Resolvendo o exercício 
+Select Nm_modelo, avg(i.Vl_Diaria)
+  from loc_item_locacao i
+  inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+  inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+  group by Nm_Modelo
+  having avg(i.Vl_Diaria) > (Select avg(i.Vl_Diaria)
+							   from loc_item_locacao i
+                                 inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+                                 inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+                               where m.cd_modelo = 10);  
+  
+ -- Que modelos tem valores de locacao maiores que a locacao média dos modelos Ford
+ 
+ -- Quem é a Ford
+ Select * from loc_fabricante;
+ --  é o 3
+ 
+ -- Pt 2
+ Select Nm_modelo, avg(i.Vl_Diaria)
+  from loc_item_locacao i
+  inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+  inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+  where m.cd_fabricante = 3
+  group by Nm_Modelo;
+ 
+ -- Final
+ Select Nm_modelo, avg(i.Vl_Diaria)
+  from loc_item_locacao i
+  inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+  inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+  group by Nm_Modelo
+  having avg(i.Vl_Diaria) > all ( Select avg(i.Vl_Diaria)
+                                    from loc_item_locacao i
+                                    inner join loc_veiculo v on i.Nr_Placa = v.Nr_Placa
+                                    inner join loc_modelo m on v.cd_modelo = m.cd_modelo
+                                    where m.cd_fabricante = 3
+                                    group by Nm_Modelo);  
+    

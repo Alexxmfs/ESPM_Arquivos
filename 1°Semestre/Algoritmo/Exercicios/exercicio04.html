@@ -1,0 +1,29 @@
+<meta charset="utf-8s">
+
+<script>
+
+    let salarioMinimo;
+    let qtdKw;
+    let valorTotal;
+    let valorKw;
+    let valorDesconto
+
+    salarioMinimo = parseFloat(prompt("Digite o valor do salario minimo: "));
+    qtdKw = parseFloat(prompt("Digite a quantidade de quilowatts consumido: "));
+
+    valorKw = salarioMinimo / 7 / 100;
+
+    valorTotal = valorKw * qtdKw;
+
+    valorDesconto =  valorTotal * 0.9;
+
+
+    console.log("O valor de cada quilowatts é de R$" + valorKw.toFixed(2));
+    console.log("O valor a ser pago pela residência é: R$" + valorTotal.toFixed(2));
+    console.log("Com desconto de 10% o valor ficaria: R$" + valorDesconto.toFixed(2));
+
+    document.write("<h3>O valor de cada quilowatts é de R$" + valorKw.toFixed(2) + "</h3>");
+    document.write("<h4>O valor a ser pago pela residência é: R$" + valorTotal.toFixed(2) + "</h4>");
+    document.write("<h5>Com desconto de 10% o valor ficaria: R$" + valorDesconto.toFixed(2) + "</h5>");
+
+</script>

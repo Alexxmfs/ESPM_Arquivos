@@ -1,0 +1,42 @@
+{
+	"format_version": 2,
+	"metadata": {
+		"authors": [
+			"Alex Macedo"
+		],
+		"generated_with": {
+			"bridge": [
+				"2.6.0"
+			],
+			"dash": [
+				"0.10.8"
+			]
+		}
+	},
+	"header": {
+		"name": "ProjAlex",
+		"description": "",
+		"min_engine_version": [
+			1,
+			18,
+			0
+		],
+		"uuid": "af17e0ff-4dc1-4f94-aa2c-6a17675430f5",
+		"version": [
+			1,
+			0,
+			0
+		]
+	},
+	"modules": [
+		{
+			"type": "data",
+			"uuid": "98975706-ad21-4f02-b45b-bc6917e391a7",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	]
+}

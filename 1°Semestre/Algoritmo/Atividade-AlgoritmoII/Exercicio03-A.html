@@ -1,0 +1,14 @@
+<meta charset="utf-8">
+
+<script>
+	// 3A)
+	let alunos = parseInt(prompt("Quantos alunos foram entrevistados"));
+	let x = new Array(alunos);
+
+	for (let i = 0; i < x.length; i++) {
+		x[i] = prompt(
+			"O alunio " + x[i] + " é a favor da estação de bike? (s ou n)"
+		);
+	}
+	document.write("<Center><h3>" + x + "</h3></Center>");
+</script>

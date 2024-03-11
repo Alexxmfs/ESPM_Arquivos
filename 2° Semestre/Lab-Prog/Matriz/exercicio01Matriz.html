@@ -1,0 +1,58 @@
+<script>
+  // Alek
+  // somando valores da diagonal de um quadrado de 3 por 3
+  let m = new Array(3);
+
+  for(let i = 0; i < m.length; i++) {
+    m[i] = new Array(3);
+
+    for(let j = 0; j < m.length; j++) {
+      m[i][j] = Math.floor(Math.random() * 11);
+    }
+  }
+
+  let diagonalPrincipal = 0;
+  let diagonalSecundaria = 0;
+
+  for(let i = 0; i < m.length; i++) {
+    diagonalPrincipal = diagonalPrincipal + m[i][i];
+    diagonalSecundaria += m[i][m.length - 1 - i];
+  }
+
+  console.table(m);
+  console.log("Soma da diagonal principal: " + diagonalPrincipal);
+  console.log("Soma da diagonal segundaria: " + diagonalSecundaria);
+
+
+
+  // Sellmini
+//   let dp = 0;
+//   let ds = 0;
+//   let m = new Array(3);
+
+//   for (let i = 0; i < m.length; i++) {
+//     m[i] = new Array(3);
+//     for (let j = 0; i < m.length; j++) {
+//       m[i][j] = parseInt(Math.random() * 11);
+
+//         // if(i == j) --> verificar se é a diagonal princiapl
+//         // if(i + j) == m.length - 1) -- verificar se é a diagonal secundaria
+//     }
+//   }
+
+//   // soma dos elementos da diagonal principal
+//   for(let i = 0; i < m.length; i++) {
+//     dp = dp + m[i][i];
+//   }
+
+//   // soma dos elementos da diagonal secundaria
+//   for(let i = 0, j = m.length - 1; i < m.length; i++, j--){
+//     ds = ds + m[i][j];
+//     ds = ds + m[i][m.length - 1 - i]
+//   }
+
+//   console.log(m);
+//   console.log("Diagonal principal: " + dp);
+//   console.log("Diagonal segundaria: " + ds);
+
+</script>

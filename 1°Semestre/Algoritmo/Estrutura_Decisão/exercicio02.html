@@ -1,0 +1,52 @@
+<meta charset="utf-8">
+
+<script>
+
+    let prova1;
+    let prova2;
+    let trabalho1;
+    let trabalho2;
+    let media;
+
+    prova1 = parseFloat(prompt("Digite a nota da prova de 0 a 10: "));
+
+    prova2 = parseFloat(prompt("Digite a nota da segunda prova de 0 a 10: "));
+
+    trabalho1 = parseFloat(prompt("Digite a nota da primeiro trabalho de 0 a 10: "));
+
+    trabalho2 = parseFloat(prompt("Digite a nota do segundo trabalho de 0 a 10: "));
+
+    media = (prova1 + prova2 + trabalho1+ trabalho2)/4;
+
+    if(media >= 7){
+        document.write("<h1>Aprovado sua media foi: " + media + "</h1>");
+    } else{
+        document.write("<h1>Você foi reprovado sua media: " + media + "</h1>");
+    }
+
+
+    // --------------------------------------------------------
+
+    // Algoritmo Prof
+
+    // let nota1, nota2;
+    // let trabalho1, trabalho2;
+    // let mediaFinal, mediaProva, mediaTrabalho;
+    
+    // nota1 = parseFloat(prompt("nota 1"));
+    // nota2 = parseFloat(prompt("nota 2"));
+    // trabalho1 = parseFloat(prompt("trabalho 1"));
+    // trabalho2 = parseFloat(prompt("trabalho 2"));
+
+    // mediaProva = (nota1 + nota2) / 2;
+    // mediaTrabalho = (trabalho1 + trabalho2) / 2;
+    // mediaFinal = mediaProva * 0.7 + mediaTrabalho * 0.3;
+
+    // document.write("<h1>Media Final " + mediaFinal.toFixed(2) + "</h1>");
+
+    // if(mediaFinal >= 7.0){
+    //     document.write("<h1>Aprovado!" + "</h1>")
+    // } else {
+    //     document.write("<h1>Reprovado" + "</h1>")
+    // }
+</script>

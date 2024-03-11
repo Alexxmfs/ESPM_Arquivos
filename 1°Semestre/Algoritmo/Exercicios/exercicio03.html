@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+
+<script>
+
+    let tempo;
+    let velocidade;
+    let distancia;
+    let consumo;
+    
+    tempo = parseFloat(prompt("Digite o tempo gasto na viagem: "));
+
+    velocidade = parseFloat(prompt("Digite a velocidade média (km/h) da viagem: "));
+
+    distancia  = tempo * velocidade;
+
+    consumo = distancia / 10.5;
+
+    console.log("A quantidade de litros de combustivel gasta na viagem foi: " + consumo);
+    alert("A quantidade de litros de combustivel gasta na viagem foi: " + consumo);
+    document.write("<h1>A quantidade de litros de combustivel gasta na viagem foi: " + consumo + "km/l</h1>");
+    document.write("<h1>Distancia percorrida: " + distancia + "km</h1>");
+
+</script>

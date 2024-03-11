@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+#principal {
+    width: 70%;
+    height: 100vh;
+    margin: 0 auto; /*centralização na horizontal */
+}
+
+h1{
+    background: #4880f0;
+    color: white;
+    text-align: center;
+    font-family: 'Poppins', sans-serif; 
+    padding: 5px;
+    margin-top: 10px;
+}
+
+h2{
+    background: #4880f0;
+    color: white;
+    font-family: 'Poppins', sans-serif; 
+    padding: 5px;
+    /* margin-top: 10px; */
+}
+
+.centraliza{
+    text-align: center;
+}
+
+.foto{
+    margin-top: 20px;
+    border-radius: 100%;
+}
+
+h2{
+    background: #db5139;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    padding: 5px;
+}
+
+
+.empresa{
+    background-color: #000;
+}
+
+
+.textoEmpresa{
+    font-weight: normal;
+    font-style: italic;
+}

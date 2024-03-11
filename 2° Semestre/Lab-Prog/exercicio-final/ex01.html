@@ -1,0 +1,70 @@
+<script>
+    // Escreva um programa em JavaScript para processar uma lista de objetos representando produtos.
+    // O programa deverá filtrar os produtos a partir de um preço mínimo. Em seguida, imprima os
+    // produtos filtrados.
+
+//     class SistemaDeProdutos {
+//     constructor() {
+//         this.produtos = [];
+//     }
+
+//     adicionarProduto() {
+//         const produto = {};
+//         produto.nome = prompt('Informe o nome do produto:');
+//         produto.preco = parseFloat(prompt('Informe o preço do produto:'));
+//         this.produtos.push(produto);
+//     }
+
+//     filtraProdutos(precoMinimo) {
+//         return this.produtos.filter(produto => produto.preco >= precoMinimo);
+//     }
+
+//     executarSistema() {
+//         for (let i = 0; i < 3; i++) {
+//             this.adicionarProduto();
+//         }
+
+//         let precoMinimo = parseFloat(prompt('Informe o preço mínimo: '));
+
+//         console.log('Lista de Produtos:');
+//         console.log(this.produtos);
+
+//         let produtosFiltrados = this.filtraProdutos(precoMinimo);
+
+//         console.log('Produtos com preço maior ou igual ao mínimo:');
+//         console.log(produtosFiltrados);
+//     }
+// }
+
+//     let sistema = new SistemaDeProdutos();
+//     sistema.executarSistema();
+
+
+
+// Sellmini
+let x = [
+    {nome: 'arroz', valor: 5.5},
+    {nome: 'feijao', valor: 10.5},
+    {nome: 'batata', valor: 15.5},
+    {nome: 'carne', valor: 25.5},
+];
+
+// function filtrar(lista, valorMinimo){
+//     for(let elemento of lista){
+//         if(elemento.valor > valorMinimo){
+//             console.log(elemento);
+//         }
+//     }
+// }
+
+// filtrar(x, Number(prompt("Informe um valor mínimo")));
+
+function filtrar(lista, valorMinimo) {
+    return lista.filter(produto => produto.valor >= valorMinimo);
+}
+
+let resultadoFiltrado = filtrar(x, Number(prompt("Informe um valor mínimo")));
+
+console.log(resultadoFiltrado);
+
+</script>

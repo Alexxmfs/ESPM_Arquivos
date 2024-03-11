@@ -1,0 +1,1 @@
+URL = 'https://www.folha.uol.com.br/'

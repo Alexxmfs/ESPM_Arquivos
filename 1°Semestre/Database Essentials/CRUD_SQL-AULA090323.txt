@@ -1,0 +1,66 @@
+USE mydb;
+
+SELECT * FROM ssp;
+
+--  Quero saber de que estado é a SSP codigo 2
+SELECT *
+ FROM ssp
+ WHERE SSPCodi = 2;
+ 
+ -- Erramos, não é mMG, mas MT no código 3
+ UPDATE ssp 
+ SET SSPNome = "SSP-MT"
+ WHERE sspcodi = 3;
+ 
+  SELECT * FROM ssp
+  WHERE sspcodi = 3;
+
+ -- Excluir código 4
+DELETE FROM ssp
+  WHERE sspcodi = 3;
+ 
+ -- Insert MG código 4
+ INSERT INTO ssp 
+	(SSPCodi, SSPNome)
+VALUES
+	(4, 'SSP-MG');
+    
+ INSERT INTO ssp 
+	(SSPCodi, SSPNome)
+VALUES
+	(5, 'SSP-MT');
+    
+-- Vamos cadastrar o cliente José Urso
+INSERT INTO pessoa
+	(PesCodi, PesNome, PesCPF_, SSPCodi)
+VALUES
+	(1, 'José Urso', '9999999999', 5);
+-- ERRO nãoo pode inserir com chave estrangeira inexistente
+
+INSERT INTO pessoa
+	(PesCodi, PesNome, PesCPF_, SSPCodi)
+VALUES
+	(1, 'José Urso', '9999999999', 4);
+    
+SELECT * FROM pessoa;
+-- Mostra todos os campos
+
+Select PesNome
+from Pessoa;
+-- Mostra somente nomes
+
+INSERT INTO pessoa
+	(PesCodi, PesNome, PesCPF_, SSPCodi)
+VALUES
+	(2, 'João Coelho', '9999999999', 1);
+    
+INSERT INTO pessoa
+	(PesCodi, PesNome, PesCPF_, SSPCodi)
+VALUES
+	(3, 'João Leão', '9999999999', 2);
+
+INSERT INTO pessoa
+	(PesCodi, PesNome, PesCPF_, SSPCodi)
+VALUES
+	(1, 'José Tigrão', '9999999999', 4);
+ 

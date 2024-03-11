@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+
+<script>
+
+// Declaração de variavel
+	let comeco;
+	let fim;
+	let count = 0;
+	let count2 = 0;
+
+  // Pegando valores do prompt
+	do {
+		comeco = parseInt(prompt("Digite um valor inicial do intervalo: "));
+		fim = parseInt(prompt("Digite o valor final do intervalo: "));
+
+    // Testando pra ver se o valor e inteiro e positvo
+		if (comeco <= 0 || fim <= 0) {
+			alert("Você deve inserir um valor inteiro e positivo");
+		} // Definindo começo e fim do contador
+	} while (comeco <= 0 || fim <= 0);
+
+  // O código verifica se o número "num" é igual a 1 e incrementa o count2 em 1
+	for (let num = comeco; num <= fim; num++) {
+		if (num == 1) {
+			count2++;
+		}
+
+		let total = 0;
+    // O código verifica se o número num é divisível por i 
+		for (let i = 2; i <= num; i++) {
+			if (num % i == 0) {
+				total++;
+			}
+		}
+    // Verifica se a variável total é igual a 1 e eles mesmo.
+		if (total == 1) {
+			count++;
+		}
+	}
+
+  // Saída de dados do count
+	document.write("<Center><h3>A quantidade de números primos no intervalo é: " + count + "</h3></Center>");
+
+</script>

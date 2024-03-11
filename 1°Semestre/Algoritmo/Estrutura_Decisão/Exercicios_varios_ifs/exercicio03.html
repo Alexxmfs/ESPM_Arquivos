@@ -1,0 +1,21 @@
+<script>
+    
+    let valor1, valor2, valor3;
+
+    valor1 = parseInt(prompt("Digite o primeiro valor: "));
+    valor2 = parseInt(prompt("Digite o segundo valor: "));
+    valor3 = parseInt(prompt("Digite o terceiro valor: "));
+
+    if(valor1 == valor2 || valor1 == valor3 || valor2 == valor3){
+        alert("Os valores devem ser diferentes");
+    } else {
+        if(valor1 < valor2 && valor1 < valor3){
+            alert("Menor = " + valor1);
+        } else if(valor2 < valor3){
+            alert("Menor = " + valor2);
+        } else {
+            alert("Menor = " + valor3);
+        }
+    }
+
+</script>

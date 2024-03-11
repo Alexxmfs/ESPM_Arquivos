@@ -1,0 +1,13 @@
+C:\>ping netacad.pka
+
+Pinging 10.0.0.254 with 32 bytes of data:
+
+Reply from 10.0.0.254: bytes=32 time=1ms TTL=126
+Reply from 10.0.0.254: bytes=32 time=13ms TTL=126
+Reply from 10.0.0.254: bytes=32 time=7ms TTL=126
+Reply from 10.0.0.254: bytes=32 time=1ms TTL=126
+
+Ping statistics for 10.0.0.254:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 13ms, Average = 5ms

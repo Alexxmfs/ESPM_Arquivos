@@ -1,0 +1,76 @@
+<script>
+
+    // function preencherLista(lista){
+    //     for(let i = 0; i < 10; i++){
+    //         lista.push(Math.floor(Math.random() * 100));
+    //     };
+    // };
+
+    // function ordernarLista(lista){
+    //     lista.sort(function (a, b) {
+    //         return a - b;
+    //     });
+    // };
+
+    // function imprimirLista(lista){
+    //     document.write("Ordem Crescente: ");
+    //     for(let i = 0; i < lista.length; i++){
+    //         document.write(lista[i] + ", ");
+    //     }
+    // }
+
+    // let vetor = [];
+    // preencherLista(vetor);
+    // document.write("Vetor Original: ");
+    // for(let i = 0; i < vetor.length; i++){
+    //     document.write(vetor[i] + ",");
+    // }
+    // document.write(vetor);
+
+    // ordernarLista(vetor);
+    // imprimirLista(vetor);
+
+
+
+
+
+
+
+
+    // Sellmini
+        
+    let lista = new Array(5)
+    
+    preencherLista(lista);
+    imprimir(lista);
+    // ordernar(lista)
+    imprimir(lista);
+
+    // função para preencher a  lista
+    function preencherLista(lista) {
+        for(let i = 0; i < lista.length; i++) {
+            lista[i] = parseInt(Math.random() * 15)
+        }
+    } 
+
+    function imprimir(lista) {
+        for(let i = 0; i < lista.length; i++) {
+            console.log(lista[i]);
+        }
+    }
+
+    // função para ordernar a lista em ordem crescente
+    function ordernar(lista){
+        let aux
+
+            for(let j = 0; j < lista.length; j++) {
+            for(let i = 0; i < lista.length; i++) {
+                if(lista[i] > lista[i + 1]){''
+                    aux = lista[i]
+                    lista[i] = lista[i + 1]
+                    lista[i + 1] = aux
+                }
+            }
+        }
+    }
+</script>

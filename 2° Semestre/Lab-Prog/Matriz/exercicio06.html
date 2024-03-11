@@ -1,0 +1,107 @@
+<script>
+  // Dadas as matrizes A3x2 e B2x3, gere C = A * B. Imprima no vídeo as matrizes A, B e C.
+
+//   let a = new Array(3);
+//   for (let i = 0; i < a.length; i++) {
+//     a[i] = new Array(2);
+//     for (let j = 0; j < a[i].length; j++) {
+//       // Valores aleatorios
+//       a[i][j] = parseInt(Math.random() * 3);
+//       // Valores inseridos
+//       // m[i][j] = parseInt(prompt("Insira o valor"));
+//     }
+//   }
+
+//   let b = new Array(2);
+//   for (let i = 0; i < b.length; i++) {
+//     b[i] = new Array(3);
+//     for (let j = 0; j < b[i].length; j++) {
+//       // Valores aleatorios
+//       b[i][j] = parseInt(Math.random() * 3);
+//       // Valores inseridos
+//       // m[i][j] = parseInt(prompt("Insira o valor"));
+//     }
+//   }
+//   console.table(a);
+//   console.table(b);
+//   let c = new Array(3);
+//   for (let i = 0; i < c.length; i++) {
+//     c[i] = new Array(3);
+//     for (let j = 0; j < c[i].length; j++) {
+//         multiplicarMatrizes();
+//     }
+//   }
+
+//   function multiplicarMatrizes() {
+
+//   for (let i = 0; i < a.length; i++) {
+//     c[i] = [];
+//     for (let j = 0; j < b[0].length; j++) {
+//       c[i][j] = 0;
+//       for (let k = 0; k < a[0].length; k++) {
+//         c[i][j] += a[i][k] * b[k][j];
+//       }
+//     }
+//   }
+
+//   return c;
+// }
+
+//   console.table(c);
+
+
+
+
+
+  // Sellmiini
+
+  let lin_a = parseInt(prompt("Total de linhas da matriz A"));
+
+  let col_a = parseInt(prompt("Total de colunas da matriz A"));
+
+  const lin_b = col_a;
+
+  let col_b = parseInt(prompt("Total de colunas da matriz B"));
+
+  const lin_c = lin_a;
+  const col_c = col_b;
+
+  // declaração das matrizes
+  let a = new Array(lin_a);
+  let b =  new Array(lin_b);
+  let c =  new Array(lin_c);
+  let soma;
+
+  preencher(a, lin_a, col_a);
+  console.table(a);
+  preencher(b, lin_b, col_b);
+  console.table(b);
+
+
+  // multiplicação da matriz A com a matriz B
+  for(let i = 0; i < lin_a; i++){
+    for(let j = 0; j < col_b; j++){
+      soma = 0;
+      c[i] = new Array(col_c);
+      for(k = 0; k < col_a; k++){
+        soma += a[i][k] * b[k][j];
+      }
+      c[i][j] = soma;
+    }
+  }
+
+  console.log()
+  console.table(c);
+
+  // função pra preencher a matriz
+  function preencher(m, lin, col){
+
+    for(let i = 0; i < lin; i++){
+      m[i] = new Array(col);
+      for(let j = 0; j < lin; j++){
+          m[i][j] = parseInt(Math.random() * 4);
+        }
+      }
+    }
+
+</script>

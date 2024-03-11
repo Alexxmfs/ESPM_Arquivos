@@ -1,0 +1,63 @@
+<script>
+
+//   Escreva um programa em JavaScript que leia uma palavra e imprima uma
+//   mensagem no vídeo (console) informando se a palavra é ou não um
+//   palíndromo.
+
+    // let palavra = prompt("Digite uma palavra: ");
+    // palavra = palavra.toLowerCase();
+
+    // for(let i = 0; i < palavra.length; i++){
+    //     for(let j = i < palavra.length; j--;){
+    //         if(palavra.charAt(i) == palavra.charAt(j)){
+    //             console.log("É um polimedro");
+    //         } else{
+    //             console.log("Não e um polimedro");
+    //         }
+    //     }
+    // }
+
+
+    // Sellmini
+    // let palavra;
+    // let palavraInvertida = '';
+
+    // palavra = prompt("Informe um palavra");
+    // palavra = palavra.toLowerCase();
+
+    // for(let i = palavra.length - 1; i >= 0; i--){
+    //     palavraInvertida += palavra.charAt(i)
+    // }
+
+    // if(palavra == palavraInvertida){
+    //     alert("A palavra digitada é um políndromo");
+    // }
+    // else{
+    //     alert("A palavra digitada não é um políndromo");
+    // }
+
+    // Outro Modo
+    let palavra;
+    let palindromo = true;
+    let j;
+
+    palavra = prompt("Informe um palavra");
+    palavra = palavra.toLowerCase();
+
+    j = palavra.length - 1;
+    for(let i = 0; i < palavra.length / 2; i++){
+        if(palavra.charAt(i) != palavra.charAt(j)){
+            palindromo = false;
+            break;
+        }
+        j--
+    }
+    
+    if(palindromo == true){
+        console.log("A palavra digitada é um palindromo");
+    } 
+    else {
+        console.log("A palavra digitada não é um palindromo");
+    }
+
+</script>

@@ -1,0 +1,47 @@
+<meta charset="utf-8">
+
+<script>
+
+//     let temperatura = new Array(7);
+//     let dias = ["segunda","terça","quarta","quinta","sexta","sabado","domingo"];
+//     let media;
+
+//     for(let i = 0; i < temperatura.length; i++) {
+//         temperatura[i] = parseFloat(prompt("Insira o valor da temperatura: " ));
+
+    
+//         media = (temperatura[0] + temperatura[1] + temperatura[2]+ temperatura[3] + temperatura[4] + temperatura[5] + temperatura[6]) / 7;
+// }
+
+//     for(let i = 0; i < temperatura.length; i++){
+//         if(temperatura[i] > media){
+//         console.log(dias[i] + " " + temperatura[i]);
+//         }
+//     }
+
+//         console.log("A temperatura média foi: " + media);
+
+
+
+// Estilo Prof
+
+    let dia = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"];
+
+    let temperatura = new Array(7);
+    let media = 0;
+
+    for(let i = 0; i < temperatura.length; i++) {
+        temperatura[i] = Number(prompt("Temperatura a do (a) " + dia[i]));
+        media = media + temperatura[i];
+    }
+
+    media = media / temperatura.length;
+    document.write("<h2>Temperatura média = </h2>" + media);
+    document.write("<h1>Dias com temperatura acima da média</h1><br>");
+
+    for(let i = 0; i < temperatura.length; i++) {
+        if(temperatura[i] > media){
+            document.write("<h3>" + dia[i] + "</h3>");
+        }
+    }
+</script>

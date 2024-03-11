@@ -1,0 +1,17 @@
+<script>
+
+    let m;
+    let c;
+    let t;
+    let i;
+
+    c = parseFloat(prompt("Digite o valor do Capital: "));
+    t = parseInt(prompt("Digite o valor do tempo (meses/anos) "));
+    i = parseFloat(prompt("Digite o valor dos juros: "));
+   
+    m = c * Math.pow(1 + i / 100, t);
+
+    document.write("<h1>O resultado do montante foi: R$" + m.toFixed(2) + "</h1>");
+
+
+</script>

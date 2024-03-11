@@ -1,0 +1,51 @@
+<meta charset="utf-8" />
+
+<script>
+
+	// 10 primeiros dias de um mês
+	let dias = 10;
+    let qtdConsumo;
+	let somaX = 0;
+	let somaY = 0;
+	let consumoAgua = [];
+	let mediaX;
+	let mediaY;
+	let numerador = 0;
+	let denominador = 0;
+	let m;
+	let b;
+	let valor;
+	let estimativaConsumo;
+   
+	// Dados de consumo diário de água nos 10 primeiros dias
+	for(let i = 1; i <= dias; i++) {
+
+		qtdConsumo = parseFloat(prompt("Informe o consumo de água no dia " + i + ":"));
+		
+        consumoAgua.push(qtdConsumo);
+	}
+
+	// Cálculo das médias
+	for (let i = 0; i < dias; i++) {
+        // Dia do mês
+		somaX += i + 1; 
+		somaY += consumoAgua[i];
+	}
+	mediaX = somaX / dias;
+	mediaY = somaY / dias;
+
+	// Cálculo dos coeficientes angular (m) e linear (b)
+	for (let i = 0; i < dias; i++) {
+		numerador += (i + 1 - mediaX) * (consumoAgua[i] - mediaY);
+		denominador += Math.pow(i + 1 - mediaX, 2);
+	}
+	m = numerador / denominador;
+	b = mediaY - m * mediaX;
+
+	// Valor estimado do consumo de água no 11º dia
+	valor = 11;
+	estimativaConsumo = b + m * valor;
+
+	document.write("<Center><h3>A estimativa do consumo de água no dia 11 é de: " + estimativaConsumo.toFixed(3) + " Litros</h3></Center>");
+
+</script>
