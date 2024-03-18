@@ -2,9 +2,11 @@ import java.util.UUID;
 
 public class Conta {
 
+    private static final double INITIAL_VALUE = 0;
+
     private String id = UUID.randomUUID().toString();
     private double limite = 50;
-    private double saldo = 0;
+    private double saldo = INITIAL_VALUE;
 
     public String getId(){
         return id;
