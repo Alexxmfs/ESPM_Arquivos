@@ -10,5 +10,7 @@ public class App {
 
         // System.out.println(lista.pesquisar(3));
         System.out.println(lista.remover(1));
+        System.out.println(lista.remover(3));
+        System.out.println(lista.remover(2));
     }
 }
