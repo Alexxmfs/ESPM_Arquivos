@@ -12,5 +12,6 @@ public class App {
         System.out.println(lista.remover(1));
         System.out.println(lista.remover(3));
         System.out.println(lista.remover(2));
+        System.out.println(lista.remover(20));
     }
 }
