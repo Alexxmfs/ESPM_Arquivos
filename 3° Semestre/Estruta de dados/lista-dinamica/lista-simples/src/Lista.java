@@ -49,6 +49,7 @@ public class Lista {
             if(aux.dado == valor){
                 return true;
             }
+            aux = aux.prox;
         }
         return false;
     }
