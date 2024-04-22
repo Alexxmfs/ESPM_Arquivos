@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\marco\\OneDrive\\Área de Trabalho\\ListaDuplaG.jar",
+        "c:\\Users\\Alex\\Desktop\\ESPM_Arquivos\\3° Semestre\\Estruta de dados\\api\\ListaDuplaGenerica.jar"
+    ]
+}
