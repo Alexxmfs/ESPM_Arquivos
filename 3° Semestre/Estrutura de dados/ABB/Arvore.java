@@ -3,28 +3,24 @@ public class Arvore<T  extends Comparable<T>> {
     No<T> raiz;
 
     public void inserir(T dado) {
-        No<T> aux = new No<>(dado);
-        if(raiz == null){
-            raiz = aux;
-        }
-        else {
-            inserirRecursivo(raiz, dado);
-        }
+        raiz = inserir(raiz, dado);
     }
 
     // método recursivo auxiliar para inserção na árvore
-    private void inserirRecursivo(No<T> ref, T dado){
+    private No<T> inserir(No<T> ref, T dado){
         if(ref == null){
-            ref = new No<>(dado);
+            return new No<>(dado);
         }
         
         if(dado.compareTo(ref.dado) > 0){
-            inserirRecursivo(ref.dir, dado);
+            ref.dir = inserir(ref.dir, dado);
         }
 
         if(dado.compareTo(ref.dado) < 0){
-            inserirRecursivo(ref.esq, dado);
+            ref.esq = inserir(ref.esq, dado);
         }
+
+        return ref;
     }
 
     // método para imprimir os valores usando o percurso em-ordem
