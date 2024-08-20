@@ -1,0 +1,63 @@
+---
+title: "Aula05"
+author: "Alex"
+date: "2024-08-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercícios
+
+1) Use o comando **select()** para criar um subconjunto dos dados que inclua somente as colunas: escolaridade (educational level), se o respondente tem algum financiamento educacional (educational loan), situação de trabalho (employment status), e aprovação ao Governo (Trump approval). Apresente o objeto. *Dica: consulte o dicionário de variáveis para identificar as variáveis corretas*.
+
+```{r, message = FALSE, include=FALSE}
+# setwd("Coloque o path")
+library(tidyverse)
+
+# Comentário continua aqui
+
+dados = read_csv("cces_sample.csv")
+dados = drop_na(dados)
+
+```
+
+Resposta
+
+```{r}
+library(knitr)
+ex1 = select(dados, educ, edloan, employ, CC18_308a)
+kable(head(ex1), caption = "Solução do exercício 1")
+```
+
+2) Use o comando **recode()** para criar uma nova coluna no objeto anterior chamada "trump_approve_disapprove" que recodifica a variável “President Trump's job approval”. Um valor igual a "1" deve significar que o respondente ou "strongly" ou "somewhat" aprova o Governo, e o valor "0" deve significar que o respondente ou "strongly" ou "somewhat" desaprova o Governo Trump. Apresente os resultados do objeto no console.
+
+Resposta
+
+```{r, echo = FALSE}
+ex1$trump_approve_disapprove = recode(ex1$CC18_308a, 
+                                      `1` = 1,
+                                      `2` = 1,
+                                      `3` = 0,
+                                      `4` = 0
+                                                       )
+ex2 = ex1
+kable(head(ex1), caption = "Solução do exercício 2")
+```
+
+3) Use summarise() para criar um sumário dos respondentes que estão empregados em tempo integral e são casados. A tabela deve apresentar a média e a mediana da importância dada a religião.
+
+Resposta
+
+```{r}
+ex3 = filter(dados, marstat == 1 & employ == 1)
+tabela = summarise(ex3, `media` = mean(pew_religimp), 
+                  mediana = median(pew_religimp))
+options(digits = 2)
+kable(head(tabela), caption = "Solução do exercício 3")
+```
+
+
+
