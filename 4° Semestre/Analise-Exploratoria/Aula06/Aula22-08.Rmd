@@ -1,0 +1,35 @@
+---
+title: "Aula22"
+author: "Alex"
+date: "2024-08-22"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## GGPLOT2
+
+Junto com muitas ferramentas de data wrangling, o pacote tidyverse também inclui um pacote extremamente poderoso de funções para visualização de dados, que é chamado de ggplot2.
+
+```{r}
+library(ggplot2)
+
+dados <- read_delim( "https://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt", delim = "\t")
+
+dados_2007 = filter(dados, year == 2007) 
+
+```
+
+
+### O gráfico de barras 
+
+```{r}
+ggplot(dados_2007, aes(y = continent)) +
+  geom_bar()
+
+```
+
+
