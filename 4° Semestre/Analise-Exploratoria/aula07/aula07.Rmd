@@ -1,0 +1,116 @@
+
+---
+title: "Aula07"
+author: "Cléber Figueiredo"
+date: "2024-08-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GGPLOT2
+
+Junto com muitas ferramentas de data wrangling, o pacote tidyverse também inclui um pacote extremamente poderoso de funções para visualização de dados, que é chamado de ggplot2.
+
+```{r, include=FALSE}
+library(tidyverse)
+
+dados <- read_delim( "https://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt", delim = "\t")
+
+dados_2007 = filter(dados, year == 2007) 
+
+```
+
+
+### O gráfico de barras
+
+```{r, echo = FALSE}
+
+library(ggthemes)
+
+ggplot(dados_2007, aes(x = continent, fill = continent)) +
+  geom_bar() +
+  guides(fill="none") +
+  labs(title = "Países por continente",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Quantidade de países",
+       x = "") +
+  scale_fill_brewer(palette = "Blues") +
+  theme_economist()
+
+```
+
+### O boxplot
+
+```{r}
+
+ggplot(dados_2007, aes(x= continent, y = lifeExp, fill = continent)) +
+  geom_boxplot() +
+  guides(fill="none") +
+  labs(title = "Expectativa de vida por continente",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Expectativa de vida em anos",
+       x = "") +
+  scale_fill_brewer(palette = "Blues") +
+  theme_economist() 
+  
+
+```
+
+### O diagrama de dispersão
+
+Dicionário
+
+gdpPercap = PIB per capita (será utilizada no eixo x)
+
+lifeExp = Expectativa de vida (será utilizada no eixo y)
+
+```{r}
+ggplot(dados_2007, aes(x = gdpPercap , y = lifeExp , color = continent )) +
+  geom_point() +
+  labs(title = "Expectativa de vida por PIB",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Expectativa de vida em anos",
+       x = "PIB per capita",
+       color = "Continente") +
+  theme_economist() +
+  theme(legend.position = "right") 
+
+```
+
+Para os gráficos ficarem juntos, podemos usar uma grade com o pacote gridExtra.
+
+```{r}
+library(gridExtra)
+
+objeto1 = ggplot(dados_2007, 
+                 aes(x = gdpPercap , y = lifeExp , color = continent )) +
+  geom_point() +
+  labs(title = "Expectativa de vida por PIB",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Expectativa de vida em anos",
+       x = "PIB per capita",
+       color = "Continente") +
+  theme_economist() +
+  theme(legend.position = "right") 
+
+objeto2 = ggplot(dados_2007, aes(x= continent, y = lifeExp, fill = continent)) +
+  geom_boxplot() +
+  guides(fill="none") +
+  labs(title = "Expectativa de vida por continente",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Expectativa de vida em anos",
+       x = "") +
+  scale_fill_brewer(palette = "Blues") +
+  theme_economist()
+
+# ncol é a quantidade de colunas
+grid.arrange(objeto1, objeto2, ncol = 1)
+
+# nrow é o número de linhas
+grid.arrange(objeto1, objeto2, nrow = 1)
+
+```
+

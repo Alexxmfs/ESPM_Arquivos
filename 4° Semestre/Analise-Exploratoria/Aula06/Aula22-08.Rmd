@@ -14,8 +14,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Junto com muitas ferramentas de data wrangling, o pacote tidyverse também inclui um pacote extremamente poderoso de funções para visualização de dados, que é chamado de ggplot2.
 
-```{r}
+```{r, include=FALSE}
 library(ggplot2)
+library(tidyverse)
+library(ggthemes)
 
 dados <- read_delim( "https://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt", delim = "\t")
 
@@ -27,9 +29,16 @@ dados_2007 = filter(dados, year == 2007)
 ### O gráfico de barras 
 
 ```{r}
-ggplot(dados_2007, aes(y = continent)) +
-  geom_bar()
-
+ggplot(dados_2007, aes(x = continent, fill = continent)) +
+  geom_bar() + 
+  guides(fill="none") + 
+  labs(title = "Países por continente",
+       subtitle = "Dados de 2007 - GapMinder",
+       x = "",
+       y= "Quantidade de países",
+  ) + 
+  scale_fill_brewer(palette = "Purples") + 
+  theme_bw() + theme_solarized()
 ```
 
 
