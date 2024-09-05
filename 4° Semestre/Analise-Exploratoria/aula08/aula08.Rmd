@@ -1,0 +1,72 @@
+---
+title: "Gap Minder"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+<style>
+body {
+  background-color: 000;
+}
+</style>
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(ggthemes)
+
+dados <- read_delim( "https://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt", delim = "\t")
+
+dados_2007 = filter(dados, year == 2007) 
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+###  Diagrama de Dispersão
+
+```{r}
+ggplot(dados_2007, aes(x = gdpPercap , y = lifeExp , color = continent )) +
+  geom_point() +
+  labs(title = "Expectativa de vida por PIB",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Expectativa de vida em anos",
+       x = "PIB per capita",
+       color = "Continente") +
+  theme_economist() +
+  theme(legend.position = "right") 
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Boxplot
+
+```{r}
+ggplot(dados_2007, aes(x= continent, y = lifeExp, fill = continent)) +
+  geom_boxplot() +
+  guides(fill="none") +
+  labs(title = "Expectativa de vida por continente",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Expectativa de vida em anos",
+       x = "") +
+  scale_fill_brewer(palette = "Blues") +
+  theme_economist() 
+```
+
+### Gráfico de Barras
+
+```{r}
+ggplot(dados_2007, aes(x = continent, fill = continent)) +
+  geom_bar() +
+  guides(fill="none") +
+  labs(title = "Países por continente",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Quantidade de países",
+       x = "") +
+  scale_fill_brewer(palette = "Blues") +
+  theme_economist()
+```
+

@@ -1,0 +1,122 @@
+---
+title: "Quality Alloys"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+runtime: shiny
+---
+
+```{r global, include=FALSE}
+# load data in 'global' chunk so it can be shared by all users of the dashboard
+
+library(flexdashboard)
+library(ggthemes)
+
+# a
+library(readxl)
+dados = read_excel("Lista_de_exercicios_1.xlsx")
+
+library(tidyverse)
+dados1 = dados %>%
+  select(`Week (2008-2009)`, Period, `Avg. Time on Site (secs.)`, Profit)
+
+# b
+dados2 = dados1 %>%
+                rename(
+                Semana = `Week (2008-2009)`, 
+                Periodo = Period,
+                Tempo_no_site = `Avg. Time on Site (secs.)`,
+                Lucro = Profit)
+# c
+dados2$Periodo = factor(dados2$Periodo, levels = c(
+  "Shakedown",
+  "Analysis 1",
+  "Promotion",
+  'Analysis 2'
+  
+))
+
+
+
+```
+
+
+```{r}
+# Reactive that returns the whole dataset if there is no brush
+selectedData <- reactive({
+  data <- brushedPoints(dados2, input$plot_brush)
+  if (nrow(data) == 0)
+    data <- dados2
+  data
+})
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Tempo no site versus Lucro {data-width=600}
+
+```{r}
+# d
+library(ggplot2)
+renderPlot({
+  
+  
+ggplot(dados2, aes(x = Tempo_no_site , 
+                   y = Lucro , 
+                   color = Periodo)) +
+  geom_point() +
+  labs(title = "Tempo no site versus Lucro",
+       subtitle = "Web Analytics - Quality Alloys",
+       y = "Lucro",
+       x = "Tempo no site",
+       color = "") +
+  theme_economist()
+  
+
+  }, outputArgs = list(brush = brushOpts(id = "plot_brush")))
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Lucro por período
+
+```{r}
+# e: trocar dados 2 por selectedData()
+renderPlot({
+  
+  
+  ggplot(selectedData(), aes(x = Periodo , 
+                   y = Lucro , 
+                   fill = Periodo)) +
+  geom_boxplot() +
+  labs(title = "Lucro por período",
+       subtitle = "Web Analytics - Quality Alloys",
+       y = "Lucro",
+       x = "",
+       fill = "") +
+  guides(fill = "none") +
+  scale_fill_brewer(palette = "Blues") + 
+  theme_economist()
+  
+
+})
+```
+
+
+
+### Detalhes da tabela {data-width=400}
+
+```{r}
+renderTable({
+  
+  selectedData()
+  
+})
+```
+
+
+

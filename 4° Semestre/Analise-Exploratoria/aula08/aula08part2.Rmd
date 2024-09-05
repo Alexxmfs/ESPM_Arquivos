@@ -1,0 +1,83 @@
+---
+title: "ggplot2 Brushing"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+runtime: shiny
+---
+
+```{r global, include=FALSE}
+# load data in 'global' chunk so it can be shared by all users of the dashboard
+library(flexdashboard)
+library(tidyverse)
+library(ggthemes)
+
+dados <- read_delim( "https://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt", delim = "\t")
+
+dados_2007 = filter(dados, year == 2007) 
+
+dados2 = select(dados_2007, country, continent, lifeExp, gdpPercap)
+```
+
+
+```{r}
+# Reactive that returns the whole dataset if there is no brush
+selectedData <- reactive({
+  data <- brushedPoints(dados2, input$plot_brush)
+  if (nrow(data) == 0)
+    data <- dados2
+  data
+})
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Miles Per Gallon vs. Weight {data-width=600}
+
+```{r}
+library(ggplot2)
+renderPlot({
+  
+  ggplot(dados_2007, aes(x = gdpPercap , y = lifeExp , color = continent )) +
+  geom_point() +
+  labs(title = "Expectativa de vida por PIB",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Expectativa de vida em anos",
+       x = "PIB per capita",
+       color = "Continente") +
+  theme_economist()
+}, outputArgs = list(brush = brushOpts(id = "plot_brush")))
+
+```
+
+### Boxplot
+
+```{r}
+renderPlot({
+ggplot(selectedData(), aes(x= continent, y = lifeExp, fill = continent)) +
+  geom_boxplot() +
+  guides(fill="none") +
+  labs(title = "Expectativa de vida por continente",
+       subtitle = "Dados de 2007 - GapMinder",
+       y = "Expectativa de vida em anos",
+       x = "") +
+  scale_fill_brewer(palette = "Blues") +
+  theme_economist()
+  
+  
+})
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Car Details {data-width=400}
+
+```{r}
+renderTable({
+  selectedData()
+})
+```

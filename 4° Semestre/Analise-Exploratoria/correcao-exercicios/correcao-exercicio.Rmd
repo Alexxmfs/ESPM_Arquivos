@@ -1,0 +1,94 @@
+---
+title: "correcao"
+author: "Alex"
+date: "2024-09-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Correção - Lista 01
+a. Gere um subconjunto da base apenas com as variáveis Week, Period, Average Time on Site e Profit.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+library(readxl)
+dados = read_excel("Lista_de_exercicios_1.xlsx")
+
+library(tidyverse)
+dados1 = dados %>%
+  select(`Week (2008-2009)`, Period, `Avg. Time on Site (secs.)`, Profit)
+
+library(knitr)
+kable(head(dados1))
+```
+
+b. Renomeie as variaveis para Semana, Período, Tempo_no_site e Lucro
+
+```{r}
+dados2 = dados1 %>% 
+  rename(
+        Semana = `Week (2008-2009)`,
+        Periodo = Period,
+        Tempo_no_site = `Avg. Time on Site (secs.)`,
+        Lucro = Profit)
+kable(head(dados2))
+```
+
+c. Mude a classe da variavel periodo de "character" para "factor". A ordem dos fatores deve ser Shakedown, Analysis 1, Promotion e Analysis 2.
+
+```{r}
+# Qual o problema que será resolvido?
+# Trocar a ordem alfabetica para ordem natural da escala
+
+table(dados1$Period)
+
+dados2$Periodo = factor(dados2$Periodo, levels = c(
+  "Shakedown",
+  "Analysis 1",
+  "Promotion",
+  "Analysis 2"
+))
+
+table(dados2$Periodo)
+```
+
+d. Construa um diagrama de dispersão entre o tempo médio no site e o lucro. Use anotações, temas e coloração  com base no período.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+library(ggthemes)
+
+ggplot(dados2, aes(x = Tempo_no_site , 
+                   y = Lucro , 
+                   color = Periodo)) +
+  geom_point() +
+  labs(title = "Tempo no site versus Lucro",
+       subtitle = "Web Analytics - Quality Alloys",
+       y = "Lucro",
+       x = "Tempo no site",
+       color = "") +
+  theme_economist()
+
+```
+
+e. Construa um box plot para a variavel periodo lucro por periodo. Os graficos precisam apresentar sombreamento.
+
+```{r}
+ggplot(dados2, aes(x = Periodo,
+                   y = Lucro,
+                   fill = Periodo)) +
+  geom_boxplot() +
+  labs(title =  "Lucro por periodo",
+       subtitle = "Web nalytics - Quality Alloys",
+       y = "Lucro",
+       x = "",
+       fill = "") + 
+  guides(fill = "none") +
+  scale_fill_brewer(palette = "Blues") + 
+  theme_economist()
+```
+
+
+
+

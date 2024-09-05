@@ -1,0 +1,114 @@
+---
+title: "ggplot2 Brushing"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+runtime: shiny
+---
+
+```{r global, include=FALSE}
+# load data in 'global' chunk so it can be shared by all users of the dashboard
+
+library(flexdashboard)
+library(tidyverse)
+library(ggthemes)
+library(tidyverse)
+library(readxl)
+
+dados = read_xlsx("Lista_de_exercicios_1.xlsx")
+dados = drop_na(dados)
+
+library(knitr)
+ex1 = select(dados, `Week (2008-2009)`, `Period`, `Avg. Time on Site (secs.)`, `Profit`)
+kable(head(ex1), caption = "Solução da letra A")
+
+ex1 = rename(ex1, Semana = `Week (2008-2009)`,
+               Periodo = `Period`,
+               Tempo_no_site = `Avg. Time on Site (secs.)`, 
+               Lucro = `Profit`)
+
+ex1$Periodo <- factor(ex1$Periodo, 
+                        levels = c("Shakedown", "Analysis 1", "Promotion",
+                                   "Analysis 2"))
+
+str(ex1$Periodo)
+
+```
+
+
+```{r}
+# Reactive that returns the whole dataset if there is no brush
+selectedData <- reactive({
+  data <- brushedPoints(ex1, input$plot_brush)
+  if (nrow(data) == 0)
+    data <- ex1
+  data
+})
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Lucro de acordo com o tempo no site {data-width=600}
+
+```{r}
+library(ggplot2)
+renderPlot({
+  
+  ggplot(ex1, aes(x = Tempo_no_site, y = Lucro, color = Periodo)) +
+ geom_point() +
+  labs(title = "Lucro de acordo com o tempo no site",
+       subtitle = "Dados - CDN",
+       y = "Tempo no site",
+       x = "Lucro",
+       color = "Periodo") +
+  theme_gdocs() +
+  theme(
+    legend.position = "right",
+    legend.text = element_text(size = 10),
+    legend.title = element_text(size = 12),
+    axis.title.x = element_text(size = 11),
+    axis.title.y = element_text(size = 11),
+    axis.text.x = element_text(size = 10),
+    axis.text.y = element_text(size = 10) 
+  ) +
+  scale_color_manual(values = c("Shakedown" = "dark blue", 
+                                "Analysis 1" = "blue", 
+                                "Promotion" = "light blue", 
+                                "Analysis 2" = "gray"))
+  
+}, outputArgs = list(brush = brushOpts(id = "plot_brush")))
+```
+
+Column {data-width=350}
+
+### Distribuição do Lucro por Periodo {data-width=300}
+
+```{r}
+renderPlot({
+  
+  ggplot(ex1, aes(x = Periodo, y = Lucro, fill = Periodo)) +
+  geom_boxplot() +
+  guides(fill = "none") +
+  labs(
+    title = "Distribuição do Lucro por Periodo",
+    subtitle = "CDN",
+    y = "Lucro",
+    x = "Periodo"
+  ) +
+  scale_fill_brewer(palette = "Blues")
+  
+})
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+### Detalhes da Manufatura {data-width=400}
+
+``` {r}
+renderTable({
+  selectedData()
+})
+```
