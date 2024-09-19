@@ -1,0 +1,164 @@
+---
+title: "Análise Exploratória dos Dados de Tecnologia"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+runtime: shiny
+---
+
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(shiny)
+
+dados <- read_xlsx("Atividade1_TI4A-1.xlsx")
+dados <- rename(dados, idade = Q1, freqCell = Q7)
+legendas <- read_excel("Legenda_Tecnologia.xlsx")
+
+dados <- na.omit(dados)
+```
+
+```{r}
+selectedData <- reactive({
+  data <- brushedPoints(dados, input$plot_brush)
+  if (nrow(data) == 0) {
+    data <- dados  
+  }
+  data
+})
+```
+
+Dashboard
+=======================================================================
+
+<h3><strong>Introdução</strong></h3>
+
+Neste relatório, vamos analisar uma base de dados chamada <strong>Tecnologia.xlsx</strong>. Este relatório busca apresentar e analisar os dados obtidos a partir de um questionário sobre o uso de tecnologia por parte dos participantes. O objetivo é entender como a tecnologia está integrada ao dia a dia, quanto os participantes investem nela e o nível de dependência tecnológica que possuem. 
+
+A base de dados contém respostas de diversos participantes sobre seus hábitos de consumo, uso e dependência de tecnologia, cobrindo desde o número de aparelhos usados diariamente até quanto os participantes gastam em serviços tecnológicos mensalmente.
+
+Abaixo, apresentamos uma tabela que contém a descrição de cada variável da base de dados.
+
+<h3><strong>Legenda das Variáveis</strong></h3>
+
+A tabela abaixo apresenta as legendas e explicações sobre cada variável da base de dados:
+
+```{r, echo=FALSE}
+library(knitr)
+# kable(dados)
+kable(legendas)
+```
+
+<h3><strong>Descrição da Base de Dados</strong></h3>
+
+A base de dados foi coletada por meio de um questionário estruturado, aplicado a um grupo de indivíduos que relataram seus hábitos de uso e gastos relacionados à tecnologia. O questionário cobre diversos aspectos, incluindo:
+
+Perfil de Uso: Perguntas sobre quantos dispositivos eletrônicos os participantes utilizam diariamente e quanto tempo passam utilizando-os.
+Investimento em Tecnologia: Perguntas sobre quanto os participantes investem anualmente em tecnologia e quanto gastam mensalmente em serviços como jogos, filmes, compras online e assinaturas.
+Frequência de Uso: Várias perguntas sobre a frequência com que os participantes usam diferentes tipos de dispositivos, como celular, tablet, notebook, consoles e outros, bem como a frequência de uso de aplicativos de jogos, compras e redes sociais.
+Dependência Tecnológica: Uma escala de 1 a 100 que mede o quão dependente cada participante se considera em relação à tecnologia.
+Essa base de dados permite uma análise rica sobre como a tecnologia está presente na vida cotidiana das pessoas, bem como suas preferências e hábitos de consumo. O objetivo principal é construir uma narrativa com base nesses dados para entender o papel da tecnologia nas decisões de consumo e uso diário dos indivíduos.
+
+<strong>A seguir, apresentamos os gráficos que desenvolvemos para análises: </strong>
+
+Column {data-height=800, data-width=300}
+-----------------------------------------------------------------------
+
+<h3><strong>Distribuição de Idade dos Participantes</strong></h3>
+
+```{r, echo=FALSE}
+renderPlot({
+  ggplot(selectedData(), aes(x = idade, fill = factor(Q3))) + 
+    geom_bar() + 
+    labs(title = "Uso de Eletrônicos em Relação à Idade dos Participantes", 
+         x = "Idade (Q1)", 
+         y = "Número de Participantes",
+         fill = "Horas de Uso (Q3)") +
+    theme_minimal() +
+    theme(
+      axis.title.y = element_text(size = 10),
+      axis.title.x = element_text(size = 10),
+      plot.title = element_text(size = 14, face = "bold")
+    )
+})
+```
+
+Column {data-height=800, data-width=5}
+-----------------------------------------------------------------------
+
+Column {data-height=800, data-width=300}
+-----------------------------------------------------------------------
+<h3><strong>Frequência de Uso de Celular por Idade</strong></h3>
+
+```{r}
+dados$freqCell <- factor(dados$freqCell, levels = c("Quase nada", "As Vezes", "Com uma certa frequência", "Toda hora"))
+
+renderPlot({
+  ggplot(data = dados, aes(x = idade, y = freqCell, color = idade)) + 
+    geom_jitter(size = 3, alpha = 0.7) + 
+    labs(
+      title = "Frequência de uso de celular por idade",
+      x = "Idade",
+      y = "Frequência de uso de celular"
+    ) +
+    theme_minimal() +
+    theme(
+      axis.title.y = element_text(size = 8),
+      axis.title.x = element_text(size = 10),
+      plot.title = element_text(size = 14, face = "bold")
+    )
+}, outputArgs = list(brush = brushOpts(id = "plot_brush")))
+```
+
+<h3><strong>Frequência de Uso de Apps de Jogos</strong></h3>
+
+```{r}
+dados$Q14 <- factor(dados$Q14, levels = c("Sempre", "Frequentemente", "As vezes", "Quase Nunca", "Nunca"))
+
+renderPlot({
+  ggplot(selectedData(), aes(x = Q13, y = Q14, fill = Q14)) +
+    geom_boxplot(alpha = 0.7, color = "#007bff") +
+    labs(
+      title = "Frequência de Uso de Apps de Jogos", 
+      x = "Escala de 1 a 10",
+      y = "Frequência de Uso",
+      fill = NULL 
+    ) +
+    scale_fill_manual(values = c("Sempre" = "#007bff", 
+                                 "Frequentemente" = "#00bfae", 
+                                 "Quase Nunca" = "#d9534f", 
+                                 "As vezes" = "#ff6f61", 
+                                 "Nunca" = "#999999")) +
+    theme_minimal(base_size = 15) + 
+    theme(
+      panel.grid.major = element_line(color = "grey80", size = 0.5),  
+      panel.grid.minor = element_blank(),  
+      plot.title = element_text(face = "bold", size = 14),        
+      axis.title.x = element_text(size = 10),
+      axis.title.y = element_text(size = 10),
+      legend.title = element_blank(),
+      legend.position = "right"
+    )
+})
+```
+
+
+Análises dos Gráficos
+=======================================================================
+
+<h3><strong>Análises dos Gráficos</strong></h3>
+
+<h4><strong>Gráfico 1: Distribuição de Idade dos Participantes</strong></h4>
+
+Análise: Este gráfico de barras mostra a distribuição das idades dos participantes da pesquisa, segmentada pelo tempo que eles passam usando aparelhos eletrônicos diariamente. Podemos observar que a maioria dos participantes se concentra na faixa etária de 18 a 28 anos, com uma queda gradual à medida que a idade aumenta. Além disso, nota-se que a maioria dos participantes em todas as faixas etárias passa mais de 10 horas por dia usando eletrônicos. Esse dado sugere que o uso de tecnologia é predominante em todas as faixas etárias, mas especialmente entre os jovens adultos.
+
+<h4><strong>Gráfico 2: Frequência de Uso de Celular por Idade</strong></h4>
+
+Análise: Este diagrama de dispersão demonstra a relação entre a idade dos participantes e a frequência com que usam o celular. Podemos perceber que a grande maioria dos participantes, independentemente da idade, utiliza o celular com muita frequência, respondendo "Toda hora". A concentração dos pontos na parte superior do gráfico indica que o uso constante do celular é um padrão entre os participantes da pesquisa, com poucas exceções.
+
+<h4><strong>Gráfico 3: Frequência de Uso de Apps de Jogos</strong></h4>
+
+Análise: Este boxplot compara a frequência de uso de aplicativos de jogos com a autoavaliação da dependência de tecnologia (escala de 1 a 10) dos participantes. O gráfico revela que, em geral, participantes que se consideram mais dependentes de tecnologia (pontuação mais alta na escala) tendem a usar aplicativos de jogos com maior frequência. As medianas para as categorias "Sempre" e "Frequentemente" estão em níveis mais altos da escala de dependência, enquanto a categoria "Nunca" apresenta a mediana mais baixa. Isso indica uma possível correlação positiva entre a dependência de tecnologia e a frequência de uso de apps de jogos, embora mais análises sejam necessárias para confirmar essa relação.
