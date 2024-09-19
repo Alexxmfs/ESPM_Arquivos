@@ -1,0 +1,89 @@
+---
+title: "web-scraping"
+author: "Alex"
+date: "2024-09-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Web Scraping
+
+Para encontrar os nodes, vamos uar o seletor de Gadgets do Google Chrome.
+
+A coleta de dados web,  ou raspagem web, é uma forma de mineração que permite a extração de dados de sites da web convertendo-os em informação estrutura para posterior análise.
+
+### Exemplo 1
+
+```{r, include = FALSE}
+library(rvest)
+library(tidyverse)
+
+url = "https://impostometro.com.br/home/relacaoprodutos"
+tabela = read_html(url) %>% html_table()
+roupas = data.frame(tabela[[23]])
+
+roupas = rename(roupas, Tributação = X..Tributação)
+
+```
+
+Vamos fazer um gráfico para representar cada um dos tributos por tipo de roupa.
+
+```{r, echo = FALSE}
+# Vamos eliminar o sinal de % para mudarmos a classe
+# da colua Tributação de character para número.
+
+roupas$Tributação = gsub("%", "", roupas$Tributação, fixed = TRUE)
+roupas$Tributação = gsub(",", ".", roupas$Tributação, fixed = TRUE)
+roupas$Tributação = as.numeric(roupas$Tributação)
+  
+library(ggplot2)
+
+# Gráfico de barras
+ggplot(roupas, aes(x = Tributação,
+                   y = reorder(Vestuário, Tributação),
+                   fill = reorder(Vestuário, Tributação))) +
+  geom_col() +
+  guides(fill = "none") 
+
+```
+
+### Exemplo 2
+
+Vamos visitar a página da BBC News. 
+
+```{r, echo = FALSE}
+url2 = "https://www.bbc.com/"
+
+# Realizar o web scraping da pagina
+page = read_html(url2)
+
+# Extrair os titulos da noticias
+titles <- page %>%
+  html_nodes(c(".zTZri")) %>%
+  html_text()
+
+titles = data.frame(Temas = titles)
+
+# Eliminar os temas repetidos
+tabela = data.frame(unique(titles$Temas))
+
+# Renomear a coluna
+tabela = rename(tabela, Temas = unique.titles.Temas.)
+
+# Mostrar os temas
+library(knitr)
+kable(tabela)
+```
+
+
+
+
+
+
+
+
+
+
