@@ -1,0 +1,77 @@
+---
+title: "aula17"
+author: "Alex"
+date: "2024-10-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Refrigerantes
+
+Um estudo com algumas marcas de refrigerantes gostaria de identificar quais são os fatores que mais agradam o consumidor na hora da compra.
+
+```{r, echo=FALSE}
+library(readxl)
+dados = read_excel('Refrigerantes.xlsx')
+marcas = dados$MARCA
+refri = dados[3:9]
+
+# Padronização dos dados
+refri = scale(refri)
+options(digits=2)
+library(knitr)
+kable(head(refri))
+
+```
+
+Após a padronização, vamos utilizar um dendrograma para identificar os possiveis clusters.
+
+```{r, echo=FALSE}
+distancia = dist(refri)
+h = hclust(distancia, method = "complete")
+plot(h, ylab = "Distância", labels = marcas)
+rect.hclust(h,3)
+```
+
+O dendrograma mostra a proxidade entre as observações.
+É possivel notar a presença de três clusters e cada um deles tem a predominância de uma das marcas.
+
+Um mapa de calor pode facilitar a analise do dendrograma, quando temos poucas observações.
+
+```{r, echo = FALSE}
+heatmap(refri, labRow = marcas)
+```
+
+X7 e X3 (sede)
+
+X5 e X2 (saúde)
+
+X6, X4 e X1 (sabor)
+
+No mapa de calor, é possível identificar que o cluster com predominância de Sprite é bem avaliado em relação ao sabor e saúde.
+
+A marca Fanta é bem avaliada em relação à sede e à saúde.
+
+Já a marca Coca é bem avaliada em relação ao sabor.
+
+Para gerar uma coluna com a classificação de cada cluster, vamos utlizar o método das k-médias.
+
+```{r, echo=FALSE}
+library(cluster)
+set.seed(123)
+grupos = kmeans(refri,3)
+
+dados2 = cbind(dados, grupos$cluster)
+
+library(writexl)
+# write_xlsx(dados2, "Refri.xlsx")
+
+clusplot(refri, grupos$cluster, color=TRUE, shade=TRUE, labels=2, lines=0, main="Clustering")
+```
+
+
+
+
