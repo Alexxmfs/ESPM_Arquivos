@@ -1,0 +1,77 @@
+---
+title: "Aula 21"
+author: "Cléber Figueiredo"
+date: "2024-10-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Emissoras de TV aberta
+
+Desde a estreia da televisão no Brasil – em 1950, com a TV Tupi – várias emissoras passaram pelas telas dos brasileiros. Entre telenovelas, jornais e eventos esportivos, cada uma marcou a memória do audiovisual de alguma forma.
+
+Vamos fazer uma análise do posicionamento das emissoras de acordo com a percepção dos alunos da turma TI4A.
+
+```{r, include = FALSE}
+library(readxl)
+library(factoextra)
+
+dados = read_xlsx("TV_aberta.xlsx", sheet = "Tabela")
+dados = data.frame(dados, row.names = 1)
+
+```
+
+O primeiro mapa irá indicar o percentual de explicação e a proximidade das emissoras no plano bidimensional.
+
+```{r}
+res.pca <- prcomp(dados)
+
+fviz_pca_ind(res.pca,
+             col.ind = "cos2", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE
+)
+
+```
+
+A porcentagem de explicação é 38.4% + 51.5% = 89.9%. Que é um elevado grau de explicação.
+
+```{r, echo = FALSE}
+
+fviz_pca_biplot(res.pca, repel = TRUE,
+                col.var = "#2E9FDF", # Cor das variáveis
+                col.ind = "#696969"   # Cor dos indivíduos
+)
+
+```
+
+Record: lembrada pelo jornalismo sensacionalista.
+SBT: carisma do apresentador dos programas de auditórios, novelas e distribuição.
+
+Globo: ficou em segundo lugar em relação às novelas, distribuição e carisma.
+
+Band: percebida pelo apelo esportivo.
+
+O atributo que mais diferenccia as emissoras é o atributo esportes e o que o menos diferencia as emissoras é o sensacionalismo do jornalismo.
+Essa análise está relacionada ao desvio padrão das notas que é menor para o atributo sensacionalismo e maior para o atributo esportes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
