@@ -1,3 +1,5 @@
+# docker run --name meu-mysql-container -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=sakila -p 3307:3306 -d mysql:latest
+
 import mysql.connector
 
 def conectar():

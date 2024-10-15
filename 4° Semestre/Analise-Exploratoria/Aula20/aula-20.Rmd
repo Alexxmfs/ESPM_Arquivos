@@ -1,0 +1,61 @@
+---
+title: "Aula20"
+author: "Alex"
+date: "2024-10-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Companhias aéreas
+
+Vamos identificar quais são os atributos e as características que são relevantes e que podem gerar potencial de diferenciação para as companhias aéreas.
+
+Desafio: traduzir este conjunto de números num mapa que nos permita analisar a posição relativa de cada uma dessas empresas.
+
+```{r}
+library(readxl)
+dados = read_xlsx("companhias.xlsx")
+dados = data.frame(dados, row.names = 1)
+# Instalar o pacote factoextra
+library(factoextra)
+```
+
+Vamos construir o mapa que mostra as características estatísticas da técnica.
+
+```{r, echo = FALSE}
+res.pca <- prcomp(dados)
+
+fviz_pca_ind(res.pca,
+             col.ind = "cos2",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE 
+)
+
+```
+
+O percentual de explicação do mapa é a soma das porcentagens dos dois eixos: 66.3 + 24.5 = 91%
+
+Quanto mais laranja, mais a companhia aérea está próxima do plano de duas dimensões. No caso, Southwest, Continental e USAAirways são as companhias que estão mais próximas da projeção no plano.
+
+```{r, echo = FALSE}
+fviz_pca_biplot(res.pca, repel = TRUE,
+             col.var = "#2E9FDF",
+             col.ind = "#696969",
+)
+```
+
+O Atributo mais importante na análise é a conveniência.Já a marca mais bem posicionada é a southwest, seguida de United, American etc.
+
+Para pontualidade, os detaques seguem como na análise de conveniência. A marca mais bem posicionada é a Southwest, seguida da United, American etc.
+
+Em relação ao serviço, destaca-se a companhia United. American ocupa a segunda posição.
+
+Por fim, United se destaca em relação ao conforto, mas não sabemos ao certo se a diferença é tão grande em relação à Amercan Airlines.
+
+Continental e USAAirways não são percebidas como destaque em nenhum dos atributos. A forma de continuarem competitivas é diminuido o preço da passagem.
+
+
+
