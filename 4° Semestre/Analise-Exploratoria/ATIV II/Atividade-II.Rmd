@@ -1,0 +1,116 @@
+---
+title: "Atividade II"
+author: "Alex Macedo, Débora Duarte, Henrique Sardella, João Pedro, Pedro Lucas, Thiago Hilário"
+date: "2024-10-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<img src="https://img.freepik.com/fotos-gratis/vista-superior-lanchonetes-com-frutas-secas_23-2148582625.jpg?t=st=1729681306~exp=1729684906~hmac=cdb05d55b3806552d7128377c491cabee01ab57e99650a9e93587c1964011038&w=740" style="width: 100%; height: 300px" /> 
+
+## Posicionamento: Marcas Barrinha de Cereal
+
+  As barrinhas de cereal são populares pela praticidade e por serem vistas como opções saudáveis. Nesta análise, avaliamos o posicionamento de quatro marcas (Nutry, Trio, Supino, Sucrilhos) com base em atributos como agradabilidade, crocância, teor de fibras adequado e percepção de saudabilidade, conforme as respostas.
+<br>
+
+Formulário: https://forms.gle/TwWWqUtUJZBMueRB8
+
+<br>
+
+#### Pontos de paridade (atributos em comum entre as marcas):
+
+<li><b>Sabor agradável:</b> Todas as marcas buscam oferecer barras de cereal que sejam saborosas e atrativas ao paladar, independentemente das suas formulações nutricionais.</li>
+
+<br>
+
+<li><b>Textura:</b> Um ponto comum entre as barras de cereal é a textura crocante ou macia. Isso é fundamental para a experiência do consumidor e aparece de forma destacada em todas as avaliações das marcas no seu formulário.</li>
+
+<br>
+
+<li><b>Teor de fibras e proteínas:</b> As barras de cereal Nutry, Trio, Supino e Sucrilhos são amplamente reconhecidas por oferecer uma quantidade considerável de fibras e proteínas, o que as torna uma escolha saudável para consumo diário.</li>
+
+<br>
+
+<li><b>Conveniência e praticidade:</b> Outro ponto de paridade é o foco em serem produtos práticos para o consumo rápido, uma solução nutritiva para quem tem um estilo de vida corrido e precisa de energia ao longo do dia.</li>
+
+<br>
+
+```{r, include = FALSE}
+library(readxl)
+library(factoextra)
+
+dados = read_xlsx("Comparacao_Barrinhas.xlsx", sheet = "Tabela")
+dados = data.frame(dados, row.names = 1)
+
+```
+
+O primeiro mapa irá indicar o percentual de explicação do posicionamento das barrinhas no plano bidimensional.
+
+```{r, echo = FALSE}
+res.pca <- prcomp(dados)
+
+fviz_pca_ind(res.pca,
+             col.ind = "cos2", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE
+)
+
+```
+
+#### Análise dos Resultados
+
+<li><b>Nutry</b> se destacou como a barrinha mais bem avaliada, sendo considerada tanto agradável quanto crocante, além de ter um bom teor de fibras e ser vista como saudável.
+</li>
+<br>
+<li><b>Trio e Supino</b> apresentam resultados intermediários, com avaliações próximas nos atributos de agradabilidade e crocância, mas com uma leve vantagem para Supino na percepção de teor de fibras e saudabilidade.</li>
+<br>
+<li><b>Sucrilhos</b>, por outro lado, obteve as menores notas, especialmente em saudabilidade, sugerindo que os alunos a percebem mais como um produto voltado ao sabor do que à saúde.</li>
+<br>
+```{r, echo = FALSE}
+
+fviz_pca_biplot(res.pca, repel = TRUE,
+                col.var = "#2E9FDF", # Cor das variáveis
+                col.ind = "#696969"   # Cor dos indivíduos
+)
+
+```
+
+```{r, echo = FALSE}
+library(knitr)
+
+dados_barrinhas <- data.frame(
+  Barrinhas = c("Nutry", "Trio", "Supino", "Sucrilhos"),
+  Agradavel = c(3.81, 3.59, 3.41, 3.33),
+  Crocante = c(3.81, 3.44, 3.33, 3.00),
+  Teor_de_fibras_adequado = c(3.44, 3.19, 3.41, 2.81),
+  Saudavel = c(3.63, 3.19, 3.59, 2.63)
+)
+
+kable(dados_barrinhas, align = "c", col.names = c("Barrinhas", "Agradável", "Crocante", "Teor de Fibras Adequado", "Saudável"))
+```
+
+Com base nessas percepções, a Nutry parece ser a escolha preferida quando se busca um equilíbrio entre sabor e saúde, enquanto a Sucrilhos se posiciona mais para quem prioriza o prazer ao consumir o produto.
+
+### Marcas Utilizadas
+
+<div style="display: flex;">
+
+<img src="https://nutry.com.br/wp-content/uploads/2023/06/Nutry-logo-borda-branca.png" width="120px" height="100px" />
+
+<div style="padding-left: 30px;">
+<img src="https://pbs.twimg.com/profile_images/1187207959/ScreenShot430_400x400.jpg" width="120px" height="120px" />
+</div>
+
+<div style="padding-left: 30px;">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-zzyxvgH6o7diEeCji_ajSONydq0rywqWMQ&s" width="160px" height="90px" />
+</div>
+
+
+<div style="padding-left: 30px;">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-shLXXgTmON36bEsTp64oSRcZYtaNcpVJ5a1_iasc3_LQ_qAZgGC2kuk7L7znbotSXtY&usqp=CAU" width="180px" height="100px" />
+</div>
+
+</div>
