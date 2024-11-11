@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<img src="https://img.freepik.com/fotos-gratis/vista-superior-lanchonetes-com-frutas-secas_23-2148582625.jpg?t=st=1729681306~exp=1729684906~hmac=cdb05d55b3806552d7128377c491cabee01ab57e99650a9e93587c1964011038&w=740" style="width: 100%; height: 300px" /> 
+<img src="https://raw.githubusercontent.com/Alexxmfs/ESPM_Arquivos/refs/heads/master/4%C2%B0%20Semestre/Analise-Exploratoria/ATIV%20II/barrinhaBG.jpeg" style="width: 100%;" /> 
 
 ## Posicionamento: Marcas Barrinha de Cereal
 
