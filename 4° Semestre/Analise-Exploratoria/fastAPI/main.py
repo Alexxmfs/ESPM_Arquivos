@@ -34,6 +34,7 @@ Base.metadata.create_all(bind=engine)
 
 @app.post('/authors')
 def create_author(name: str, age: int):
+    status_code = 200
     
     if name is None:
         response = {'error': 'name is required'}
@@ -42,11 +43,15 @@ def create_author(name: str, age: int):
     if age is None:
         response = {'error': 'age is required'}
         status_code = 400
+    try:
         
-    author = Author(name=name, age=age)
-    session.add(author)
-    session.commit()
-    response = {'id': author.id, 'name': author.name, 'age': author.age}
-    status_code = 200
-    
-    return JSONResponse(content=response, status_code=status_code)
+        if status_code == 200:
+            author = Author(name=name, age=age)
+            session.add(author)
+            session.commit()
+            response = {'id': author.id, 'name': author.name, 'age': author.age}
+            status_code = 200
+            
+        return JSONResponse(content=response, status_code=status_code)
+    except Exception as e:
+        return JSONResponse(content={'error': str(e)}, status_code=500)
