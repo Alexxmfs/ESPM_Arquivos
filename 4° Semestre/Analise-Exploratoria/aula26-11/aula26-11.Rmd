@@ -1,0 +1,173 @@
+---
+title: "Logística"
+author: "Cléber Figueiredo"
+date: "26/11/2024"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Churn
+
+A ideia é se concentrar no churn voluntário, que ocorre devido a fatores do relacionamento empresa-cliente. Já que são variáveis controláveis pelas empresas.
+
+Identificar as causas do churn pode ajudar os gestores a tomar melhores decisões alinhadas com as estratégias para que depois o marketing trabalhe para reter o cliente ou mesmo atrair os novos.
+
+```{r, include = FALSE}
+library(readxl)
+library(ggplot2)
+library(gridExtra)
+library(caret)     # Instalar 
+library(knitr)
+library(MLmetrics) # Instalar
+library(classifierplots)
+
+dados1 <- read_excel("churn.xlsx",sheet = "churn-treino")
+
+# Eliminando a coluna CustomerID
+dados1 <- dados1[,-1]
+```
+
+### Etapa descritiva
+
+```{r descritiva, echo = FALSE}
+
+tabela1 <- table(dados1$Churn,dados1$`One year`)
+Cruzamento1 <- data.frame(tabela1)
+colnames(Cruzamento1)<-c("Churn", "One year","Freq")
+
+tabela2 <- table(dados1$Churn,dados1$gender)
+Cruzamento2 <- data.frame(tabela2)
+colnames(Cruzamento2)<-c("Churn", "Gender","Freq")
+
+
+# Gráficos de colunas empilhadas 100%
+graf1 <- ggplot(Cruzamento1, 
+                aes(fill=Churn, y=Freq, x=`One year`)) + 
+    geom_bar(position="fill", stat="identity") +
+    theme_bw()
+
+graf2 <- ggplot(Cruzamento2, 
+                aes(fill=Churn, y=Freq, x=Gender)) + 
+    geom_bar(position="fill", stat="identity") +
+    theme_bw()
+
+grid.arrange(graf1, graf2, nrow = 1)
+
+```
+
+O gráfico de colunas empilhadas mostra que a variável "contrato anual" é uma variável que diferencia os consumidores retidos e perdidos, enquanto que a variável sexo não parece discriminar os dois grupos.
+
+### O Modelo Logístico
+
+```{r modelagem, echo = FALSE}
+
+modelo1=glm(data=dados1, Churn~., family = binomial())
+resumo1 = summary(modelo1) 
+kable(round(resumo1$coefficients ,2), caption = "Modelo logístico preliminar")
+
+```
+
+A equação logística se escreve da seguinte maneira
+
+$$ log(sucesso/fracasso) = -4.39 -0.05* Gender -0.29*Dependents ...$$
+
+em que o log utilizado é o logaritmo natural e o quociente $sucesso/fracasso$ indica o quociente da probabilidade de sucesso **p** pela probabilidade de fracasso **1-p**.
+
+Os coeficientes negativos mostram que a probabilidade de churn diminui na ocorrência da variável dummy. Exemplo: ter dependentes diminui a probabilidade de churn.
+
+Coeficientes positivos indicam que a probabilidade de churn irá aumentar.
+
+A chance de churn, em média, dado que o cliente tem dependentes é dada pela expressão $exp(-0.29) = 0.75 = 75%$.
+
+O valor de comparação será sempre o valor 1. Nesse caso, ter dependentes diminui a chance de churn em 25%, em média.
+
+Outro exemplo, para os contratos de 1 ano $exp(1.37) = 3.94$ que subtraindo 1, leva a **294%**. Os contratos anuais aumentam a chance de churn em 294%, em média, quando comparados com os contratos bienais (referência).
+
+Essas análises supõem que as outras variáveis são constantes (ceteris paribus).
+
+### Como criar amostra de treino/aprendizado e teste
+
+```{r , include = FALSE}
+
+dados2 <- read_excel("churn.xlsx",sheet = "churn-teste")
+
+# Eliminando a coluna CustomerID
+dados2 <- dados2[,-1]
+
+# Agrupando as duas bases
+dados <- rbind(dados1,dados2) 
+
+```
+
+```{r particao, echo = FALSE}
+
+# Configurar uma semente para gerar resultados reproduzíveis
+set.seed(123)
+
+# Criando o sorteio da partição de acordo com uma proporção específica
+flag=createDataPartition(dados$Churn, p= 0.67, list = F)
+
+# 0.67 é mais ou menos 2/3 dos dados para a amostra de treino
+
+train=dados[flag,]
+kable(round(table(train$Churn) ,2), caption = "Quantidade de churns na amostra de treino")
+
+test=dados[-flag,]; dim(test)
+kable(round(table(test$Churn) ,2), caption = "Quantidade de churns na amostra de teste")
+
+```
+
+### Treinando o modelo
+
+```{r treino, echo = FALSE}
+
+modelo2=glm(data=train, Churn~., family = binomial())
+resumo2 = summary(modelo2) 
+kable(round(resumo2$coefficients ,2), caption = "Modelo logístico com a amostra de treino")
+```
+
+A tabela acima mostra outra modelagem para o problema com a partição (treino/teste), sendo realizada dentro da linguagem R. Isso explica porque esses coeficientes são diferentes dos coeficientes da primeira modelagem preliminar.
+
+```{r, echo = FALSE}
+modelo_otimo=step(modelo2, trace = 0) 
+resumo3=summary(modelo_otimo)
+kable(round(resumo3$coefficients ,2), caption = "Modelo logístico ótimo")
+```
+
+O modelo ótimo é o modelo sem as variáveis que não possuem relevância estatística. Sobraram apenas aquelas que realmente importam pro cálculo da probabilidade de churn.
+
+### Testando o modelo
+
+```{r teste, echo = FALSE}
+
+test$pchurn = predict(modelo_otimo, newdata = test, type='response')
+pcorte =0.5 
+test$classificacao = ifelse(test$pchurn > pcorte, 1 , 0)
+
+
+kable(ConfusionMatrix(y_pred = test$classificacao, 
+                y_true = test$Churn),
+      caption = "Matriz de confusão - Observados vs previstos")
+
+a = Accuracy(y_pred=test$classificacao, y_true=test$Churn)
+cat("A acurácia do modelo é de:",round(a,2)*100,"%.","\n")
+
+b = Recall(y_pred=test$classificacao, y_true=test$Churn, positive = 1)
+cat("A sensibilidade do modelo é de:",round(b,2)*100,"%.","\n")
+
+c = Precision(y_pred=test$classificacao, y_true=test$Churn, positive = 1)
+cat("A precisão do modelo é de:",round(c,2)*100,"%.","\n")
+```
+
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+
+roc_plot(test$Churn, test$pchurn)
+
+```
+
+Como a discriminação é 82.4% (realista), o modelo testado tem uma excelente discriminação dos clientes que cancelaram o contrato (churn) e dos que não cancelaram (retidos).
+A discriminação do modelo é algum valor entre 80.7% e 84% com 95% de confiança.

@@ -55,3 +55,72 @@ def create_author(name: str, age: int):
         return JSONResponse(content=response, status_code=status_code)
     except Exception as e:
         return JSONResponse(content={'error': str(e)}, status_code=500)
+    
+
+@app.put('/authors')
+def update_author(id: int, name: str, age: int):
+    status_code = 200
+    
+    if name is None:
+        response = {'error': 'name is required'}
+        status_code = 400
+
+    if age is None:
+        response = {'error': 'age is required'}
+        status_code = 400
+    try:
+        
+        if status_code == 200:
+            author = session.query(Author).filter(Author.id == id).first()
+            author.name = name
+            author.age = age
+            session.commit()
+            response = {'id': author.id, 'name': author.name, 'age': author.age}
+            status_code = 200
+            
+        return JSONResponse(content=response, status_code=status_code)
+    except Exception as e:
+        return JSONResponse(content={'error': str(e)}, status_code=500)
+    
+    
+@app.delete('/authors')   
+def delete_author(id: int):
+    status_code = 200
+    
+    if id is None:
+        response = {'error': 'id is required'}
+        status_code = 400
+    
+    try:
+        if status_code == 200:
+            author = session.query(Author).filter(Author.id == id).first()
+        
+        if author is None:
+            response = {'error': 'author not found'}
+            status_code = 404
+            
+        else:
+            session.delete(author)
+            session.commit()
+            response = {'message': 'author deleted'}            
+            
+        return JSONResponse(content=response, status_code=status_code)
+    except Exception as e:
+        return JSONResponse(content={'error': str(e)}, status_code=500)
+    
+
+@app.get('/authors')
+def get_authors():
+    try:
+        authors = session.query(Author).all()
+        author_list = []
+        authors_dict = {}
+        
+        for author in authors:
+            authors_dict = {'id': author.id, 'name': author.name, 'age': author.age}
+            author_list.append(authors_dict)
+            
+        return JSONResponse(content=author_list, status_code=200)
+    except Exception as e:
+        return JSONResponse(content={'error': str(e)}, status_code=500)
+    

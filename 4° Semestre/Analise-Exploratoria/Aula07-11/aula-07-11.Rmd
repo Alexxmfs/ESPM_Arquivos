@@ -1,0 +1,88 @@
+---
+title: "Aula28"
+author: "Cléber Figueiredo"
+date: "2024-11-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercício 2 - Emissão de moeda no Paraguai
+
+Você recebeu uma base monetária com o valor do papel-moeda emitido em milhões de guaranis e o valor dos depósitos que foram realizados no Banco Central do Brasil, Paraguai e Argentina. O problema aqui é estudar se a emissão de papel-moeda está gerando um aumento nos depósitos dos Bancos Centrais.
+
+Responda as perguntas apenas considerando os dados do Paraguai.
+
+a) Calcule a correlação para o problema e descreva a relação entre papel-moeda emitido e depósitos no Banco Central do Paraguai  através de um gráfico.
+
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+
+library(readxl)
+library(ggplot2)
+library(ggthemes)
+dados = read_excel("Aula 07 - regressão simples.xlsx",
+                   sheet = "Paraguai")
+
+x = dados$Emissão
+y = dados$Depósitos
+
+round(cor(x,y),2)
+
+ggplot(dados, aes(x = Emissão, y = Depósitos)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "Relação entre emissão e depósitos") +
+  theme_economist()
+
+```
+
+
+O gráfico mostra que a relação entre o papel-moeda emitido e os depósitos é linear. À medida que a emissão de moeda aumenta, os depósitos também aumentam.
+
+A correlação igual a 0,90 indica que o efeito da emissão de moeda sobre os depósitos é forte.
+
+b) Teste se há relação linear (apenas). Só transcreva a tabela com os resultados dos testes para os coeficientes de regressão e analise-a.
+c) Interprete os coeficientes de regressão, descrevendo os intervalos de variação dos coeficientes. 
+
+```{r, echo = FALSE}
+library(knitr)
+options(digits = 3)
+modelo = lm(y ~ x)
+resumo = summary(modelo)
+kable(resumo$coefficients)
+
+```
+
+O valor-p maior do que 5%, na última coluna, referente ao intercepto indica que a equação de regressão é do tipo y = b*x .
+
+As hipóteses são:
+
+Ho (hipótese nula): a reta passa pela origem e a equação fica y = b*x
+
+Ha (hipótese alternativa): a reta não passa pela origem e equação
+fica  y = a + b*x
+
+Nesse cenário, é preciso refazer a regressão, inserindo -1 dentro do modelo. 
+
+```{r, echo = FALSE}
+library(knitr)
+options(digits = 3)
+modelo = lm(y ~ x - 1 )
+resumo = summary(modelo)
+kable(resumo$coefficients)
+
+```
+
+A equação estimada é Depósitos = 0,57 * Emissão.
+
+```{r, echo = FALSE}
+kable(round(confint(modelo, level = 0.95),3))
+```
+
+O coeficiente angular igual a 0.57 indica o acréscimo médio dado aos depósitos quando a emissão de papel moeda aumenta em uma unidade, que
+pode ser qualquer valor no intervalo 0.55 e 0.58 com 95% de confiança.
+
+
+

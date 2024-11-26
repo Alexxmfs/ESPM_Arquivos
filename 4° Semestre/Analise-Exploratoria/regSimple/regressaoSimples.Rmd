@@ -1,0 +1,89 @@
+---
+title: "Aula 24 - Regressão simples"
+author: "Cléber Figueiredo"
+date: "2024-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercício 1
+
+a) Construa o diagrama de dispersão entre SAC (complaint handling) e confiança (trust).
+
+```{r, echo = FALSE}
+library(readxl)
+dados = read_excel("Aula 07 - regressão simples.xlsx",
+                   sheet = "TV por assinatura")
+
+library(ggplot2)
+library(ggthemes)
+
+set.seed(10)
+
+ggplot(dados, aes(x = SAC, y = CONFIANÇA)) +
+  geom_jitter() +
+  geom_smooth(method = "lm") +
+  labs(title = "Relação entre SAC e confiança") +
+  theme_economist()
+
+```
+
+O gráfico mostra que quanto maior a nota dada ao SAC, maior a 
+confiança do consumidor no serviço de TV por assinatura.
+
+b) Calcule a correlação e analise-a.
+
+```{r, echo = FALSE}
+x = dados$SAC
+y = dados$CONFIANÇA
+
+cor(x,y)
+```
+
+O efeito da nota dada ao SAC sobre a confiança é moderado, já que a correlação é igual a 0,56.
+
+c) Encontre a equação de regressão e interprete a inclinação da reta.
+
+```{r, echo = FALSE}
+library(knitr)
+modelo = lm(y ~ x)
+resumo = summary(modelo)
+kable(resumo$coefficients)
+
+```
+
+Na coluna estimate aparecem os valores dos coeficientes linear (1.40) e o angular (0.59).
+
+A equação fica $$ Confiança = 1.40 + 0.59*SAC.$$
+
+O coeficiente angular igual a 0.59 indica quando, em média, aumenta a nota da confiança por unidade de nota dada ao SAC.
+
+```{r, echo = FALSE}
+
+kable(round(confint(modelo, level = 0.95),2))
+
+```
+
+O valor do coeficiente angular 0.59 é uma média. Esse coeficiente pode ser qualquer valor entre 0.47 e 0.70 com 95% de confiança.
+
+d) Estime a confiança de um consumidor que dá nota 2 ao serviço de atendimento ao consumidor.
+
+```{r, echo = FALSE}
+
+# Previsão intervalar no modelo
+
+newdata = data.frame(x = c( 2)) # Insira o valor desejado de x no lugar de xp
+previsao = predict(modelo, newdata, interval = "confidence", level= 0.95)
+
+kable(previsao)
+
+```
+
+A previsão apresenta três valores
+
+fit (valor realista): é o valor que bastaria você substituir na equação. É o valor médio.
+lwr (lower - pessimista): é a pior confiança estimada para o consumidor que dá nota 2 ao SAC.
+upr (upper - otimista): é a melhor confiança estimada para o consumidor que dá nota 2 ao SAC.
