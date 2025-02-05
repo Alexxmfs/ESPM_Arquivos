@@ -1,0 +1,155 @@
+---
+title: "Análise Exploratória dos Dados do Arduino"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    social: menu
+    source_code: embed
+runtime: shiny
+---
+
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(shiny)
+
+# Carregar dados
+dados <- read_xlsx("leituras.xlsx")
+
+# Remover NA
+dados <- na.omit(dados)
+```
+
+<img src="https://orelfichman.com/wp-content/uploads/2020/02/arduino_banner.png" width="1335px" height="300px" />
+
+Dashboard
+=======================================================================
+
+<h3><strong>Introdução</strong></h3>
+
+Neste relatório, analisamos os dados de um sistema de automação para gerenciamento de consumo de energia. O sistema utiliza um sensor de luminosidade conectado a um Arduino para medir a intensidade de luz no ambiente. Quando o local está escuro, a lâmpada é acionada automaticamente e, quando o ambiente se ilumina, a lâmpada é desligada, promovendo economia de energia. 
+
+O objetivo deste relatório é explorar os padrões de consumo de energia, entender os períodos em que a lâmpada permanece acesa e identificar a eficiência do sistema em diferentes condições ambientais. A base de dados inclui registros de luminosidade, consumo energético e tempo de operação da lâmpada, permitindo uma análise detalhada do desempenho do sistema e do potencial de economia gerado.
+
+<h3><strong>Descrição da Base de Dados</strong></h3>
+
+A base de dados registra medições de consumo de energia e luminosidade de quatro dispositivos (identificados por id_dispositivo) em diferentes momentos entre 2022 e 2024. Cada leitura é identificada por um id_leitura único, e as variáveis incluem o consumo energético (consumo), a intensidade de luz ambiente (luminosidade) e o horário exato da medição (data). Os dados apresentam variações significativas tanto no consumo quanto na luminosidade, refletindo diferentes condições ambientais e padrões de uso. Essa estrutura permite análises como padrões de consumo por dispositivo, correlação entre consumo e luminosidade, evolução temporal e eficiência energética dos dispositivos.
+
+<strong>A seguir, apresentamos os gráficos que desenvolvemos para análises: </strong>
+
+```{r}
+# Input de data no painel
+dateInput(
+  "selected_date",
+  label = "Selecione a Data",
+  value = Sys.Date(),
+  min = min(dados$data),
+  max = max(dados$data),
+  format = "dd-mm-yyyy"
+)
+
+```
+
+Column {data-height=800, data-width=300}
+-----------------------------------------------------------------------
+
+```{r, echo=FALSE}
+# Dados filtrados dinamicamente com base na data selecionada
+filtered_data <- reactive({
+  req(input$selected_date)  # Garantir que o input está disponível
+  dados %>%
+    filter(as.Date(data) == as.Date(input$selected_date))
+})
+
+renderPlot({
+  ggplot(filtered_data(), aes(x = as.POSIXct(data), y = luminosidade, color = factor(id_dispositivo), group = id_dispositivo)) +
+    geom_line(size = 1) +
+    geom_point(size = 2) + # Adiciona pontos para destacar os valores
+    labs(
+      title = paste("Luminosidade ao Longo do Tempo em", input$selected_date),
+      x = "Horário",
+      y = "Luminosidade (%)",
+      color = "Dispositivo"
+    ) +
+    scale_color_viridis_d() +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+      axis.title.x = element_text(size = 14),
+      axis.title.y = element_text(size = 14),
+      legend.title = element_text(size = 12),
+      legend.text = element_text(size = 10)
+    )
+})
+
+```
+
+Column {data-height=800, data-width=5}
+-----------------------------------------------------------------------
+
+Column {data-height=800, data-width=300}
+-----------------------------------------------------------------------
+
+```{r}
+renderPlot({
+  ggplot(filtered_data(), aes(x = factor(id_dispositivo), y = consumo, fill = factor(id_dispositivo))) +
+    geom_boxplot() +
+    labs(
+      title = "Distribuição do Consumo por Dispositivo",
+      x = "Dispositivo",
+      y = "Consumo (kWh)",
+      fill = "Dispositivo"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+      axis.title.x = element_text(size = 14),
+      axis.title.y = element_text(size = 14),
+      legend.position = "none"
+    )
+})
+
+
+```
+
+```{r}
+# Gráfico de Consumo Total ao Longo do Tempo (Barras)
+renderPlot({
+  ggplot(filtered_data(), aes(x = factor(id_dispositivo), y = consumo, fill = factor(id_dispositivo))) +
+    geom_bar(stat = "identity", position = "dodge") +  # 'dodge' ajusta as barras lado a lado
+    labs(
+      title = paste("Consumo Total no Dia:", input$selected_date),
+      x = "ID do Dispositivo",
+      y = "Consumo (em kWh)",
+      fill = "Dispositivo"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 14, face = "bold"),
+      axis.title.x = element_text(size = 12),
+      axis.title.y = element_text(size = 12)
+    )
+})
+
+```
+
+
+Análises dos Gráficos
+=======================================================================
+
+<h3><strong>Análises dos Gráficos</strong></h3>
+
+<h4><strong>Gráfico 1: Consumo por Dispositivo</strong></h4>
+
+Análise: Este gráfico de barras apresenta o consumo de energia por dispositivo em uma data específica, destacando as diferenças no uso entre os dispositivos. Ele permite identificar quais dispositivos possuem maior demanda energética, possibilitando priorizar ações para otimizar o consumo. O padrão visual facilita a identificação de dispositivos com consumo atípico ou elevado.
+
+<h4><strong>Gráfico 2: Luminosidade por Dispositivo</strong></h4>
+
+Análise: O gráfico de barras exibe a intensidade de luminosidade ambiente captada por cada dispositivo em uma data selecionada. Isso permite verificar as condições ambientais e o comportamento dos sensores em diferentes dispositivos. Essa análise auxilia na identificação de padrões de iluminação que impactam o acionamento das lâmpadas, promovendo ajustes para maior eficiência.
+
+<h4><strong>Gráfico 3: Consumo Total ao Longo do Tempo</strong></h4>
+
+Análise: Este gráfico de barras empilhadas ou lado a lado demonstra o consumo total de energia por dispositivo ao longo do dia selecionado. Ele é útil para entender as flutuações no uso energético ao longo do tempo, oferecendo insights sobre picos de consumo e horários em que os dispositivos são mais demandados. Essa visão é essencial para estratégias de economia energética e planejamento.
+
+

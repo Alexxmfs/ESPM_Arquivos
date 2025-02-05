@@ -139,6 +139,8 @@ kable(round(resumo3$coefficients ,2), caption = "Modelo logístico ótimo")
 
 O modelo ótimo é o modelo sem as variáveis que não possuem relevância estatística. Sobraram apenas aquelas que realmente importam pro cálculo da probabilidade de churn.
 
+A variavel gender foi eliminada e a categoria tranferencia bancaria tambem saiu do modelo. Neste caso, a referencia que antes era "cartão de credito" passou a ser " cartão de credito e transferencia bancaria".
+
 ### Testando o modelo
 
 ```{r teste, echo = FALSE}
